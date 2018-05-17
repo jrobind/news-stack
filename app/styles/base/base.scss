@@ -31,6 +31,6 @@ button {
   }
 }
 
-html, body #app {
+html, body, :global(#app) {
     height: 100%;
 }
