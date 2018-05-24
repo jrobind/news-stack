@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import getWeather from '../utils/api';
+import storage from '../utils/storage';
 import Search from '../components/Search';
 
 class SearchContainer extends Component {
@@ -20,15 +22,17 @@ class SearchContainer extends Component {
     
     handleSubmission() {
         const { search } = this.state;
+        const { setStorage } = storage;
+        
         getWeather(search)
-            .then((data) => console.log(data))
+            .then((data) => setStorage(data));
     }
     
     render() {
         return <Search 
                     handleInput={this.handleInput}
                     handleSubmission={this.handleSubmission}
-                />;
+                />
     }
 }
 
