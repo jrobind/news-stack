@@ -5,7 +5,8 @@ module.exports = {
     entry: ['babel-polyfill', './app/index.jsx'],
     output: {
         path: '/',
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     resolve: {
         extensions: ['.js', '.jsx']
@@ -20,10 +21,12 @@ module.exports = {
             {test: /\.(png|jpg)$/, loader: 'url-loader?linit=8192'}
         ]
     },
+    devServer: {
+        historyApiFallback: true  
+    },
     plugins: [
         new htmlWebpackPlugin({
-            template: 'app/index.html',
-            inject: false
+            template: 'app/index.html'
         })
     ],
     mode: 'development'
