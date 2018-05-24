@@ -15,6 +15,10 @@ class SearchContainer extends Component {
         this.handleSubmission = this.handleSubmission.bind(this);
     }
     
+    componentDidMount() {
+        this.initialState = this.state;
+    }
+    
     handleInput(e) {
         const val = e.target.value;
         this.setState(() => ({search: val}));
@@ -26,12 +30,16 @@ class SearchContainer extends Component {
         
         getWeather(search)
             .then((data) => setStorage(data));
+        
+        // reset input
+        this.setState(this.initialState);
     }
     
     render() {
         return <Search 
                     handleInput={this.handleInput}
                     handleSubmission={this.handleSubmission}
+                    searchState={this.state}
                 />
     }
 }

@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles/components/Search.scss';
 
-const Search = ({ handleInput, handleSubmission }) => (
+const Search = ({ handleInput, handleSubmission, searchState: { search }}) => (
     <div className={styles.container}>
         <input 
-        placeholder="Paris, London, Rome..."
-        onChange={handleInput}
-        autoFocus
+            placeholder="Paris, London, Rome..."
+            onChange={handleInput}
+            value={search} 
+            autoFocus
         />
         <button
-        onClick={handleSubmission}    
+            onClick={handleSubmission}    
         >
-        Search Weather
+            Search Weather
         </button>
     </div>
 )
