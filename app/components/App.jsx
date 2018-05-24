@@ -5,7 +5,16 @@ import styles from '../styles/components/App.scss';
 
 class App extends Component {
     render() {
-        return <SearchContainer />;
+        return (
+            <Router>
+                <div className={styles.appContainer}>
+                    <Switch>
+                        <Route exact path='/' component={SearchContainer} />
+                        <Route render={() => (<p>Path not Found!</p>)} />
+                    </Switch>
+                </div>
+            </Router>
+        )
     }
 }
 
