@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import SearchContainer from '../containers/SearchContainer';
+import Search from './Search';
 import styles from '../styles/components/App.scss';
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
             <Router>
                 <div className={styles.appContainer}>
                     <Switch>
-                        <Route exact path='/' component={SearchContainer} />
+                        <Route exact path='/' component={Search} />
                         <Route render={() => (<p>Path not Found!</p>)} />
                     </Switch>
                 </div>

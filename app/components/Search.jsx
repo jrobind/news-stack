@@ -1,26 +1,70 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import getWeather from '../utils/api';
+import storage from '../utils/storage';
 import styles from '../styles/components/Search.scss';
 
-const Search = ({ handleInput, handleSubmission, searchState: { search }}) => (
+const renderFunc = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
     <div className={styles.container}>
-        <input 
-            placeholder="Paris, London, Rome..."
-            onChange={handleInput}
-            value={search} 
-            autoFocus
-        />
-        <button
-            onClick={handleSubmission}    
-        >
-            Search Weather
-        </button>
+        <div className={styles.autocompleteRoot}>
+            <input 
+                {...getInputProps({autoFocus: true, placeholder: "Paris, London, Rome..." })}
+            />
+            <div className={styles.autocompleteDropdownContainer}>
+                {suggestions.map((suggestion) => (
+                    <div {...getSuggestionItemProps(suggestion, {className: styles.suggestion})}>
+                        <span key={suggestion.id}>{suggestion.description}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
     </div>
 )
 
-Search.propTypes = {
-    handleInput: PropTypes.func.isRequired,
-    handleSubmission: PropTypes.func.isRequired
+class Search extends Component { 
+    constructor(props) {
+        super(props);
+        this.state = {
+            search: ''
+        }
+        
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmission = this.handleSubmission.bind(this);
+    }
+    
+    componentDidMount() {
+        this.initialState = this.state;
+    }
+    
+    handleChange(address) {
+        this.setState(() => ({search: address}));
+    }
+    
+    handleSubmission() {
+        const { search } = this.state;
+
+        geocodeByAddress(search)
+            .then((results) => getLatLng(results[0]))
+            .then(latLng => console.log('success', latLng))
+            .catch((error) => console.log(error));
+        
+        // reset input
+        this.setState(this.initialState);
+    }
+    
+    render() {
+        return(
+            <PlacesAutocomplete
+                value={this.state.search}
+                onChange={this.handleChange}
+                onSelect={this.handleSubmission}
+                renderFooter
+            >
+                {renderFunc}
+            </PlacesAutocomplete>
+        )
+    }
 }
 
 export default Search;
