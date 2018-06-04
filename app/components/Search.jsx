@@ -11,13 +11,14 @@ const renderFunc = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
             <input 
                 {...getInputProps({autoFocus: true, placeholder: "Paris, London, Rome..." })}
             />
-            <div className={styles.autocompleteDropdownContainer}>
+            {suggestions.length > 0 && <div className={styles.autocompleteDropdownContainer} styles={{display: suggestions.length ? 'inline' : 'none'}}>
                 {suggestions.map((suggestion) => (
                     <div {...getSuggestionItemProps(suggestion, {className: styles.suggestion})}>
                         <span key={suggestion.id}>{suggestion.description}</span>
                     </div>
                 ))}
-            </div>
+                <div className={styles.logoContainer}><img src={require('../images/powered_by_google_on_white.png')}/></div>
+            </div>}
         </div>
     </div>
 )
@@ -59,7 +60,6 @@ class Search extends Component {
                 value={this.state.search}
                 onChange={this.handleChange}
                 onSelect={this.handleSubmission}
-                renderFooter
             >
                 {renderFunc}
             </PlacesAutocomplete>
