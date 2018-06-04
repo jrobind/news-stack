@@ -5,6 +5,10 @@ import getWeather from '../utils/api';
 import storage from '../utils/storage';
 import styles from '../styles/components/Search.scss';
 
+const onError = (status, clearSuggestions) => {
+    clearSuggestions();
+}
+
 const renderFunc = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
     <div className={styles.container}>
         <div className={styles.autocompleteRoot}>
@@ -60,6 +64,7 @@ class Search extends Component {
                 value={this.state.search}
                 onChange={this.handleChange}
                 onSelect={this.handleSubmission}
+                onError={onError}
             >
                 {renderFunc}
             </PlacesAutocomplete>
