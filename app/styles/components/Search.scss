@@ -30,6 +30,12 @@
 
         .suggestion {
             cursor: pointer;
+
+            .locationIcon {
+                width: 17px;
+                margin-right: 5px;
+            }
+
             &:hover {
                 background: rgba(250, 250, 250, 0.4);
             }

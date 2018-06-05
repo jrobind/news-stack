@@ -18,7 +18,10 @@ const renderFunc = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
             {suggestions.length > 0 && <div className={styles.autocompleteDropdownContainer} styles={{display: suggestions.length ? 'inline' : 'none'}}>
                 {suggestions.map((suggestion) => (
                     <div {...getSuggestionItemProps(suggestion, {className: styles.suggestion})}>
-                        <span key={suggestion.id}>{suggestion.description}</span>
+                        <span key={suggestion.id}>
+                            <img className={styles.locationIcon} src={require('../images/location-icon.png')}/>
+                            {suggestion.description}
+                        </span>
                     </div>
                 ))}
                 <div className={styles.logoContainer}><img src={require('../images/powered_by_google_on_white.png')}/></div>
@@ -31,7 +34,8 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: ''
+            search: '',
+            loading: false
         }
         
         this.handleChange = this.handleChange.bind(this);
@@ -51,7 +55,7 @@ class Search extends Component {
 
         geocodeByAddress(search)
             .then((results) => getLatLng(results[0]))
-            .then(latLng => console.log('success', latLng))
+            .then((latLng) => console.log('success', latLng))
             .catch((error) => console.log(error));
         
         // reset input
