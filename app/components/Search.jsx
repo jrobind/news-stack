@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import Loading from './Loading';
 import getWeather from '../utils/api';
 import storage from '../utils/storage';
 import styles from '../styles/components/Search.scss';
@@ -9,71 +10,76 @@ const onError = (status, clearSuggestions) => {
     clearSuggestions();
 }
 
-const renderFunc = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
-    <div className={styles.container}>
-        <div className={styles.autocompleteRoot}>
-            <input 
-                {...getInputProps({autoFocus: true, placeholder: "Paris, London, Rome..." })}
-            />
-            {suggestions.length > 0 && <div className={styles.autocompleteDropdownContainer} styles={{display: suggestions.length ? 'inline' : 'none'}}>
-                {suggestions.map((suggestion) => (
-                    <div {...getSuggestionItemProps(suggestion, {className: styles.suggestion})}>
-                        <span key={suggestion.id}>
-                            <img className={styles.locationIcon} src={require('../images/location-icon.png')}/>
-                            {suggestion.description}
-                        </span>
-                    </div>
-                ))}
-                <div className={styles.logoContainer}><img src={require('../images/powered_by_google_on_white.png')}/></div>
-            </div>}
-        </div>
-    </div>
-)
-
 class Search extends Component { 
     constructor(props) {
         super(props);
         this.state = {
-            search: '',
+            address: '',
             loading: false
         }
         
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmission = this.handleSubmission.bind(this);
-    }
-    
-    componentDidMount() {
-        this.initialState = this.state;
+        this.handleSelect = this.handleSelect.bind(this);
     }
     
     handleChange(address) {
-        this.setState(() => ({search: address}));
+        this.setState(() => ({address}));
     }
     
-    handleSubmission() {
-        const { search } = this.state;
+    handleSelect(address) {
+        this.setState(() => ({address, loading: true}));
 
-        geocodeByAddress(search)
+        geocodeByAddress(address)
             .then((results) => getLatLng(results[0]))
-            .then((latLng) => console.log('success', latLng))
+            .then((latLng) => {
+                console.log(latLng)
+                getWeather(latLng)
+                    .then((weather) => {
+                        console.log(weather);
+                        this.setState(() => ({loading: false}));
+                    });
+            })
             .catch((error) => console.log(error));
-        
-        // reset input
-        this.setState(this.initialState);
     }
     
     render() {
+        const { loading } = this.state;
+
         return(
-            <PlacesAutocomplete
-                value={this.state.search}
-                onChange={this.handleChange}
-                onSelect={this.handleSubmission}
-                onError={onError}
-            >
-                {renderFunc}
-            </PlacesAutocomplete>
+            <div className={styles.container}>
+                <PlacesAutocomplete
+                    value={this.state.address}
+                    onChange={this.handleChange}
+                    onSelect={this.handleSelect}
+                    onError={onError}
+                >
+                    {({ getInputProps, getSuggestionItemProps, suggestions }) => {
+                        return (
+                            <div className={styles.autocompleteRoot}>
+
+                                {!loading ? <input 
+                                    {...getInputProps({autoFocus: true, placeholder: "Paris, London, Rome..."})}
+                                /> : 
+                                <Loading />}
+
+                                {suggestions.length > 0 && <div className={styles.autocompleteDropdownContainer} styles={{display: suggestions.length ? 'inline' : 'none'}}>
+                                    {suggestions.map((suggestion) => (
+                                        <div {...getSuggestionItemProps(suggestion, {className: styles.suggestion})}>
+                                            <span key={suggestion.id}>
+                                                <img className={styles.locationIcon} src={require('../images/location-icon.png')}/>
+                                                {suggestion.description}
+                                            </span>
+                                        </div>
+                                    ))}
+                                    <div className={styles.logoContainer}><img src={require('../images/powered_by_google_on_white.png')}/></div>
+                                </div>}
+                            </div>
+                        ) 
+                    }}
+                </PlacesAutocomplete>
+            </div>
         )
-    }
+    } 
 }
 
 export default Search;
