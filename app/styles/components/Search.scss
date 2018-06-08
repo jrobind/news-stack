@@ -4,20 +4,20 @@
 
     .autocompleteRoot {
         max-width: 400px;
-        margin: auto;  
+        margin: auto;
 
         input {
             margin-top: 100%;
-            width: 100%;
             background-color: transparent;
-            border-bottom: 2px solid white;
+            width: 100%;
+            border-bottom: 2px solid rgba(250, 250, 250, 0.85);
             caret-color: white;
             color: white;
             font-size: 1.9em;
             padding-bottom: 3px;
 
             &::placeholder {
-                color: rgba(250, 250, 250, 0.65);
+                color: rgba(250, 250, 250, 0.6);
                 font-weight: 300;
                 font-size: 1.1em;
             }
@@ -25,24 +25,24 @@
     }
 
     .autocompleteDropdownContainer {
-        background: rgba(250, 250, 250, 0.8);
-        width: 100%;
+        background: rgba(250, 250, 250, 0.85);
+
+        .suggestion,
+        .suggestionActive,
+        .logoContainer {
+            padding: 5px;
+        }
 
         .suggestion {
-            cursor: pointer;
-
-            .locationIcon {
-                width: 17px;
-                margin-right: 5px;
-            }
-
             &:hover {
-                background: rgba(250, 250, 250, 0.4);
+                background: rgba(233, 230, 230, 0.767);
+                cursor: pointer;
             }
         }
 
-        .logoContainer, .suggestion {
-            padding: 6px;
+        .suggestionActive {
+            cursor: pointer;
+            background: rgba(233, 230, 230, 0.767);
         }
 
         .logoContainer {

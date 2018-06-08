@@ -20,6 +20,11 @@ class Search extends Component {
         
         this.handleChange = this.handleChange.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+    }
+
+    onKeyDown(e) {
+        console.log(e);
     }
     
     handleChange(address) {
@@ -32,7 +37,6 @@ class Search extends Component {
         geocodeByAddress(address)
             .then((results) => getLatLng(results[0]))
             .then((latLng) => {
-                console.log(latLng)
                 getWeather(latLng)
                     .then((weather) => {
                         console.log(weather);
@@ -63,14 +67,18 @@ class Search extends Component {
                                 <Loading />}
 
                                 {suggestions.length > 0 && <div className={styles.autocompleteDropdownContainer} styles={{display: suggestions.length ? 'inline' : 'none'}}>
-                                    {suggestions.map((suggestion) => (
-                                        <div {...getSuggestionItemProps(suggestion, {className: styles.suggestion})}>
-                                            <span key={suggestion.id}>
-                                                <img className={styles.locationIcon} src={require('../images/location-icon.png')}/>
-                                                {suggestion.description}
-                                            </span>
-                                        </div>
-                                    ))}
+                                    {suggestions.map((suggestion) => {
+                                        const className = suggestion.active ? styles.suggestionActive : styles.suggestion;
+                                        
+                                        return (
+                                            <div {...getSuggestionItemProps(suggestion, { className })}>
+                                                <span key={suggestion.id}>
+                                                    <img className={styles.locationIcon} src={require('../images/location-icon.png')}/>
+                                                    {suggestion.description}
+                                                </span>
+                                            </div>
+                                        )
+                                    })}
                                     <div className={styles.logoContainer}><img src={require('../images/powered_by_google_on_white.png')}/></div>
                                 </div>}
                             </div>
