@@ -4,7 +4,10 @@ import styles from '../styles/components/WeatherHeader.scss';
 
 const WeatherHeader = ({ currentWeather, country, name, coord }) => (
     <div className={styles.container}>
-        <p>{country}</p>
+        <div className={styles.placeInfo}>
+            <p>{name}, {country}</p>
+            <p>{currentWeather.dt_txt}</p>
+        </div>
     </div>
 )
 
