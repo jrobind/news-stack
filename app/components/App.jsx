@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import DashboardContainer from '../containers/DashboardContainer';
 import Search from './Search';
 import styles from '../styles/components/App.scss';
 
@@ -10,6 +11,7 @@ class App extends Component {
                 <div className={styles.appContainer}>
                     <Switch>
                         <Route exact path='/' component={Search} />
+                        <Route exact path='/weather' component={DashboardContainer} />
                         <Route render={() => (<p>Path not Found!</p>)} />
                     </Switch>
                 </div>
