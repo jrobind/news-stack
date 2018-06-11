@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles/components/WeatherHeader.scss';
 
-const WeatherHeader = (props) => (
+const WeatherHeader = ({ currentWeather, country, name, coord }) => (
     <div className={styles.container}>
-        <p>WEATHER HEADER</p>
+        <p>{country}</p>
     </div>
 )
 
 
-WeatherHeader.PropTypes = {
-
+WeatherHeader.propTypes = {
+    currentWeather: PropTypes.object.isRequired,
+    country: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
 }
 
 export default WeatherHeader;

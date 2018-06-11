@@ -41,6 +41,10 @@ class Search extends Component {
                     .then((weather) => {
                         console.log(weather);
                         this.setState(() => ({loading: false}));
+                        // set weather data to localStorage
+                        storage.setStorage(weather);
+                        // redirect to dashboard
+                        this.props.history.push('/weather');
                     });
             })
             .catch((error) => console.log(error));
