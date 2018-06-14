@@ -35,16 +35,24 @@ class Search extends Component {
         this.setState(() => ({address, loading: true}));
 
         geocodeByAddress(address)
-            .then((results) => getLatLng(results[0]))
-            .then((latLng) => {
-                getWeather(latLng)
-                    .then((weather) => {
-                        console.log(weather);
-                        this.setState(() => ({loading: false}));
-                        // set weather data to localStorage
-                        storage.setStorage(weather);
-                        // redirect to dashboard
-                        this.props.history.push('/weather');
+            .then((results) => {
+                const { short_name } = results[0].address_components[0];
+                
+                // set placeName to localStorage
+                storage.setStorage(short_name, 'placeName');
+
+                getLatLng(results[0])
+                    .then((latLng) => {
+                        getWeather(latLng)
+                            .then((weather) => {
+                                const { placeName } = this.state;
+
+                                this.setState(() => ({loading: false}));
+                                // set weather data to localStorage
+                                storage.setStorage(weather, 'weather');
+                                // redirect to dashboard
+                                this.props.history.push('/weather');
+                            });
                     });
             })
             .catch((error) => console.log(error));

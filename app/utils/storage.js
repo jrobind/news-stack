@@ -1,13 +1,13 @@
 export default {
-    setStorage(data) {
-        if (!localStorage.getItem('weather')) {
-            localStorage.setItem('weather', JSON.stringify(data));
+    setStorage(data, key) {
+        if (!localStorage.getItem(key)) {
+            localStorage.setItem(key, JSON.stringify(data));
         } else {
-            localStorage.removeItem('weather');
-            localStorage.setItem('weather', JSON.stringify(data));
+            localStorage.removeItem(key);
+            localStorage.setItem(key, JSON.stringify(data));
         }
     },
-    getStorage() {
-        return JSON.parse(localStorage.getItem('weather'));
+    getStorage(key) {
+        return JSON.parse(localStorage.getItem(key));
     }
 }
