@@ -16,14 +16,15 @@ class DashboardContainer extends Component {
     }
 
     componentDidMount() {
-       const { city: { name, country, coord }, list } = storage.getStorage();
-
+       const { city: { name, country, coord }, list } = storage.getStorage('weather');
+       const  placeName = storage.getStorage('placeName');
+       
         this.setState(() => ({
             currentWeather: list[0],
-            weather: storage.getStorage(),
+            weather: storage.getStorage('weather'),
             coord,
             country,
-            name
+            name: placeName === name ? name : placeName
         }));
     }
 
