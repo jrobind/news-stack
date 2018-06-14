@@ -1,11 +1,28 @@
+@import '../utils/variables';
+
 .container {
     padding: 15px;
     background-color: rgba(25, 49, 91, 1);
     min-height: 100px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $primaryDashBlue;
 
     .placeInfo {
+        max-width: 300px;
+        border: 1px solid $primaryDashBlue;
+        padding: 15px;
+        margin: 10px 0;
+
+        h2, p {
+            color: $primaryDashBlue;
+        }
+
         p {
-            color: #9bc2cf;
+            text-align: center;
+            margin-top: 6px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid $DashLightGrey;
         }
     }
 
