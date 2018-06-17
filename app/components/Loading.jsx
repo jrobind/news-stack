@@ -8,7 +8,9 @@ class Loading extends Component {
 
     render() {
         return (
-            <div className={styles.loading}></div>
+            <div className={styles.container}>
+                <div className={styles.loading}></div>
+            </div>
         )
     }
 }
