@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import styles from '../styles/components/WeatherHeader.scss';
 import Moment from 'react-moment';
 import iconCodes from '../utils/iconCodes';
+import styles from '../styles/components/WeatherHeader.scss';
 
 const WeatherHeader = ({ currentWeather, country, name, coord }) => (
     <div className={styles.container}>
         <div className={styles.placeInfo}>
-            <p>{name}, {country}</p>
+            <h2>{name}, {country}</h2>
             <p>
                 <Moment format='LL'>{currentWeather.dt_txt}</Moment>
             </p>
+            <div>
+                <Link to='/'>Back to Search</Link>
+            </div>
         </div>
 
         <div className={styles.currently}>
@@ -19,6 +23,10 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
             <div className={styles.iconContainer}>
                 <img src={require(`../images/weatherIcons/${iconCodes[currentWeather.weather[0].icon]}`)} />
             </div>
+        </div>
+
+        <div className={styles.currently}>
+            <h2>Temperature</h2>
         </div>
     </div>
 )
