@@ -1,5 +1,17 @@
 @import '../utils/variables';
 
+.linkHome {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+
+    a {
+        color: $secondaryDashBlue;
+        text-decoration: none;
+        font-size: 0.8em;
+    }
+}
+
 .container {
     padding: 15px;
     background-color: rgba(25, 49, 91, 1);

@@ -12,7 +12,7 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
             <p>
                 <Moment format='LL'>{currentWeather.dt_txt}</Moment>
             </p>
-            <div>
+            <div className={styles.linkHome}>
                 <Link to='/'>Back to Search</Link>
             </div>
         </div>
