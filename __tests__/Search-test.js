@@ -1,7 +1,29 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import {  createMemoryHistory } from 'history';
 import Search from '../app/components/Search';
-import PlacesAutocomplete from 'react-places-autocomplete';
+import * as mapPlacesApi from 'react-places-autocomplete';
+import LocalStorageMock from '../testHelpers/mockLocalStorage';
+import { geocodeByAddressData, getLatLngData, apiFakeData } from '../testHelpers/fakeData';
+import * as getWeather from '../app/utils/api';
+
+// mocks
+
+getWeather.default = jest.fn(() => {
+    return new Promise((resolve) => resolve(apiFakeData));
+})
+
+// create localStorage mock
+global.localStorage = new LocalStorageMock;
+
+// mock async requests in react-places-autocomplete library
+mapPlacesApi.geocodeByAddress = jest.fn(() => {
+    return new Promise((resolve) => resolve(geocodeByAddressData))
+});
+
+mapPlacesApi.getLatLng = jest.fn(() => {
+    return new Promise((resolve) => resolve(getLatLngData))
+});
 
 // mock for google maps JavaScript api
 const setupGoogleMock = () => {
@@ -38,11 +60,13 @@ beforeAll(() => {
     setupGoogleMock();
 });
 
+// tests
+
 describe('<Search />', () => {
 
     it('should render <PlacesAutocomplete /> component', () => {
         const wrapper = shallow(<Search />);
-        expect(wrapper.find(PlacesAutocomplete)).toHaveLength(1);
+        expect(wrapper.find(mapPlacesApi.default)).toHaveLength(1);
     });
 
     it('should render a .container class', () => {
@@ -60,11 +84,12 @@ describe('<Search />', () => {
     });
 
     it('should update state loading value after input submission', () => {
-        const wrapper = mount(<Search />);
+        const history = createMemoryHistory('/')
+        const wrapper = mount(<Search history={history} />);
         const input = wrapper.find('input');
 
         input.simulate('keyDown', { key: 'Enter' });
-
+        console.log(wrapper.state('loading'))
         expect(wrapper.state('loading')).toBe(true);
     });
 
