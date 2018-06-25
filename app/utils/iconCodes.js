@@ -2,6 +2,7 @@ export default {
     '11d': 'Cloud-Lightning.svg',		
     '09d': 'Cloud-Drizzle.svg',
     '10d': 'Cloud-Rain.svg',
+    '10n': 'Cloud-Rain.svg',
     '13d': 'Cloud-Rain.svg',
     '09d': 'Cloud-Rain.svg',
     '13d': 'Cloud-Snow.svg',
