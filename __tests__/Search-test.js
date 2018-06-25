@@ -13,9 +13,6 @@ getWeather.default = jest.fn(() => {
     return new Promise((resolve) => resolve(apiFakeData));
 })
 
-// create localStorage mock
-global.localStorage = new LocalStorageMock;
-
 // mock async requests in react-places-autocomplete library
 mapPlacesApi.geocodeByAddress = jest.fn(() => {
     return new Promise((resolve) => resolve(geocodeByAddressData))
@@ -25,7 +22,9 @@ mapPlacesApi.getLatLng = jest.fn(() => {
     return new Promise((resolve) => resolve(getLatLngData))
 });
 
-// mock for google maps JavaScript api
+// mock for google maps JavaScript and localStorage api
+global.localStorage = new LocalStorageMock;
+
 const setupGoogleMock = () => {
     const google = {
         maps: {
@@ -89,8 +88,35 @@ describe('<Search />', () => {
         const input = wrapper.find('input');
 
         input.simulate('keyDown', { key: 'Enter' });
-        console.log(wrapper.state('loading'))
         expect(wrapper.state('loading')).toBe(true);
     });
+
+    it('should call getWeather() after valid input submission', () => {
+        const history = createMemoryHistory('/')
+        const wrapper = mount(<Search history={history} />);
+        const input = wrapper.find('input');
+
+        input.simulate('change', { target: { value: 'London' }});
+        input.simulate('keyDown', { key: 'Enter' });
+
+        expect(getWeather.default).toHaveBeenCalled();
+        expect(getWeather.default).toHaveBeenCalledTimes(1);
+        expect(typeof JSON.parse(localStorage.getItem('weather'))).toBe('object');
+        expect(JSON.parse(localStorage.getItem('weather')).city.name).toBe('London');
+    });
+
+    it('should update localStorage with weather data after valid input submission', () => {
+        const history = createMemoryHistory('/')
+        const wrapper = mount(<Search history={history} />);
+        const input = wrapper.find('input');
+
+        input.simulate('change', { target: { value: 'London' }});
+        input.simulate('keyDown', { key: 'Enter' });
+
+        expect(typeof JSON.parse(localStorage.getItem('weather'))).toBe('object');
+        expect(JSON.parse(localStorage.getItem('weather')).city.name).toBe('London');
+    });
+
+    
 
 });
