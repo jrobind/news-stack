@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import {  createMemoryHistory } from 'history';
+import { createMemoryHistory } from 'history';
 import Search from '../app/components/Search';
 import * as mapPlacesApi from 'react-places-autocomplete';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
@@ -83,7 +83,7 @@ describe('<Search />', () => {
     });
 
     it('should update state loading value after input submission', () => {
-        const history = createMemoryHistory('/')
+        const history = createMemoryHistory('/');
         const wrapper = mount(<Search history={history} />);
         const input = wrapper.find('input');
 
@@ -92,7 +92,7 @@ describe('<Search />', () => {
     });
 
     it('should call getWeather() after valid input submission', () => {
-        const history = createMemoryHistory('/')
+        const history = createMemoryHistory('/');
         const wrapper = mount(<Search history={history} />);
         const input = wrapper.find('input');
 
@@ -106,7 +106,7 @@ describe('<Search />', () => {
     });
 
     it('should update localStorage with weather data after valid input submission', () => {
-        const history = createMemoryHistory('/')
+        const history = createMemoryHistory('/');
         const wrapper = mount(<Search history={history} />);
         const input = wrapper.find('input');
 
@@ -116,7 +116,5 @@ describe('<Search />', () => {
         expect(typeof JSON.parse(localStorage.getItem('weather'))).toBe('object');
         expect(JSON.parse(localStorage.getItem('weather')).city.name).toBe('London');
     });
-
-    
 
 });
