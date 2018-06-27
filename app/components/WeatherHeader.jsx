@@ -17,16 +17,24 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
             </div>
         </div>
 
-        <div className={styles.currently}>
-            <h2>Current Weather</h2>
-            <p>{currentWeather.weather[0].description}</p>
-            <div className={styles.iconContainer}>
-                <img src={require(`../images/weatherIcons/${iconCodes[currentWeather.weather[0].icon]}`)} />
+        <div className={styles.weatherContent}>
+            <div className={styles.currently}>
+                <h2>Current Weather</h2>
+                <div>
+                <p>{currentWeather.weather[0].description}</p>
+                <div className={styles.iconContainer}>
+                    <img src={require(`../images/weatherIcons/${iconCodes[currentWeather.weather[0].icon]}`)} />
+                </div>
+                </div>
             </div>
-        </div>
 
-        <div className={styles.currently}>
-            <h2>Temperature</h2>
+            <div className={styles.temperature}>
+                <h2>Temperature</h2>
+                <p>
+                    {Math.round(currentWeather.main.temp - 273.15)}
+                    <span className={styles.symbol}>&#8451;</span>
+                </p>
+            </div>
         </div>
     </div>
 )
