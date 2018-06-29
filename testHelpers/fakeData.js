@@ -22,6 +22,7 @@ export const apiFakeData = {
             id: 800,
             main: 'Clear'
         }],
+        dt_txt: "2018-06-29 15:00:00",
         main: {
            temp: 300 
         }
