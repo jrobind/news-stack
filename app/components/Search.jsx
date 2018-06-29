@@ -45,8 +45,6 @@ class Search extends Component {
                     .then((latLng) => {
                         getWeather(latLng)
                             .then((weather) => {
-                                const { placeName } = this.state;
-
                                 this.setState(() => ({loading: false}));
                                 // set weather data to localStorage
                                 storage.setStorage(weather, 'weather');

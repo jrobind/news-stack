@@ -65,11 +65,13 @@ describe('<Search />', () => {
 
     it('should render <PlacesAutocomplete /> component', () => {
         const wrapper = shallow(<Search />);
+
         expect(wrapper.find(mapPlacesApi.default)).toHaveLength(1);
     });
 
     it('should render a .container class', () => {
         const wrapper = shallow(<Search />);
+        
         expect(wrapper.find('.container')).toHaveLength(1);
     });
 
@@ -78,7 +80,6 @@ describe('<Search />', () => {
         const input = wrapper.find('input');
 
         input.simulate('change', {target: { value: 'London' }});
-
         expect(wrapper.state('address')).toBe('London');
     });
 

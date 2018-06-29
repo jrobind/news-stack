@@ -30,7 +30,7 @@ class DashboardContainer extends Component {
 
     render() {
         const { currentWeather, country, name, weather, coord } = this.state;
-
+        
         return (
             <div className={styles.dashContainer}>
                 {currentWeather ? 
