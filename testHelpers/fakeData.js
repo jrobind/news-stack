@@ -21,6 +21,9 @@ export const apiFakeData = {
             icon: '01d',
             id: 800,
             main: 'Clear'
-        }]
+        }],
+        main: {
+           temp: 300 
+        }
     }]
 }
