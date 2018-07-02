@@ -18,6 +18,7 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
         </div>
 
         <div className={styles.weatherContent}>
+            <hr/>
             <div className={styles.currently}>
                 <h2>Current Weather</h2>
                 <div>
@@ -34,6 +35,16 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
                     {Math.round(currentWeather.main.temp - 273.15)}
                     <span className={styles.symbol}>&#8451;</span>
                 </p>
+            </div>
+
+            <div className={styles.humidity}>
+                <h2>Humidity</h2>
+                <p>{currentWeather.main.humidity}%</p>
+            </div>
+
+            <div className={styles.windSpeed}>
+                <h2>Wind Speed</h2>
+                <p>{Math.round(currentWeather.wind.speed * 2.2369)} mph</p>
             </div>
         </div>
     </div>
