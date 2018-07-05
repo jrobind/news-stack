@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import storage from '../utils/storage';
+import Loading from '../components/Loading';
 import WeatherHeader from '../components/WeatherHeader';
+import Forecast from '../components/Forecast';
 import styles from '../styles/components/DashboardContainer.scss';
 
 class DashboardContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            weather: null,
             currentWeather: null,
+            forecast: null,
             coord: null,
             country: '',
             name: ''
@@ -16,12 +18,23 @@ class DashboardContainer extends Component {
     }
 
     componentDidMount() {
-       const { city: { name, country, coord }, list } = storage.getStorage('weather');
-       const  placeName = storage.getStorage('placeName');
-       
+        const { city: { name, country, coord }, list } = storage.getStorage('weather');
+        const weather = storage.getStorage('weather');
+        const  placeName = storage.getStorage('placeName');
+        const times = ['09:00:00', '15:00:00', '21:00:00'];
+
+        //format forecast data for Forecast component i.e. weather data for 9am, 3pm and 9pm
+        const formattedForecast = weather.list.filter((day) => {
+            const dateToday = new Date();
+            const dateToCheck = new Date(day.dt_txt);
+
+            return dateToday.getDate() !== dateToCheck.getDate();
+
+        }).filter((day) => times.includes(day.dt_txt.split(' ')[1]));
+
         this.setState(() => ({
             currentWeather: list[0],
-            weather: storage.getStorage('weather'),
+            forecast: formattedForecast.slice(0, formattedForecast.length -1),
             coord,
             country,
             name: placeName === name ? name : placeName
@@ -29,20 +42,25 @@ class DashboardContainer extends Component {
     }
 
     render() {
-        const { currentWeather, country, name, weather, coord } = this.state;
+        const { currentWeather, country, name, forecast, coord } = this.state;
         
-        return (
-            <div className={styles.dashContainer}>
-                {currentWeather ? 
+        if (currentWeather) {
+            return (
+                <div className={styles.dashContainer}>
                     <WeatherHeader 
                         currentWeather={currentWeather}
                         country={country}
                         coord={coord}
                         name={name}
-                    /> : 
-                null}
-            </div>
-        )
+                    /> 
+                    <Forecast
+                        forecast={[currentWeather].concat(forecast)}
+                    />
+                </div>
+            )
+        } else {
+            return <Loading />;
+        }
     }
 }
 
