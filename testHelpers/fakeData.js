@@ -22,9 +22,11 @@ export const apiFakeData = {
             id: 800,
             main: 'Clear'
         }],
+        wind: {speed: 1.72},
         dt_txt: "2018-06-29 15:00:00",
         main: {
-           temp: 300 
+           temp: 300,
+           humidity: 49
         }
     }]
 }
