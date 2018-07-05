@@ -44,6 +44,27 @@ describe('<WeatherHeader />', () => {
         expect(wrapper.dive().find('.temperature')).toHaveLength(1);
     });
 
+    it('should render a .humidity class', () => {
+        const { city: { name, country, coord }, list } = apiFakeData;
+        const wrapper = setup({ currentWeather: list[0], country, coord, name });
+
+        expect(wrapper.dive().find('.humidity')).toHaveLength(1);
+    });
+
+    it('should render a .windSpeed class', () => {
+        const { city: { name, country, coord }, list } = apiFakeData;
+        const wrapper = setup({ currentWeather: list[0], country, coord, name });
+
+        expect(wrapper.dive().find('.windSpeed')).toHaveLength(1);
+    });
+
+    it('should render a .coordinates class', () => {
+        const { city: { name, country, coord }, list } = apiFakeData;
+        const wrapper = setup({ currentWeather: list[0], country, coord, name });
+
+        expect(wrapper.dive().find('.coordinates')).toHaveLength(1);
+    });
+
     it('should render correct place name and country code', () => {
         const { city: { name, country, coord }, list } = apiFakeData;
         const wrapper = setup({ currentWeather: list[0], country, coord, name });
@@ -79,6 +100,49 @@ describe('<WeatherHeader />', () => {
                 .find('.temperature')
                 .childAt(1)
                 .text()).toEqual('27℃');
+    });
+
+    it('should render correct humidity', () => {
+        const { city: { name, country, coord }, list } = apiFakeData;
+        const wrapper = setup({ currentWeather: list[0], country, coord, name });
+
+        expect(
+            wrapper
+                .dive()
+                .find('.humidity')
+                .childAt(1)
+                .text()).toEqual('49%');
+    });
+
+    it('should render correct wind speed', () => {
+        const { city: { name, country, coord }, list } = apiFakeData;
+        const wrapper = setup({ currentWeather: list[0], country, coord, name });
+
+        expect(
+            wrapper
+                .dive()
+                .find('.windSpeed')
+                .childAt(1)
+                .text()).toEqual('4 mph');
+    });
+
+    it('should render correct coordinates', () => {
+        const { city: { name, country, coord }, list } = apiFakeData;
+        const wrapper = setup({ currentWeather: list[0], country, coord, name });
+
+        expect(
+            wrapper
+                .dive()
+                .find('.coordinates')
+                .childAt(1)
+                .text()).toEqual('LAT: 51.5752');
+
+        expect(
+            wrapper
+                .dive()
+                .find('.coordinates')
+                .childAt(2)
+                .text()).toEqual('LON: 0.1858');
     });
 
 });
