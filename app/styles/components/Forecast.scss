@@ -1,4 +1,50 @@
+@import '../utils/variables';
+
 .container {
-    height: 100%;
-    background-color: antiquewhite;
+    height: 450px;
+    overflow-y: scroll;
+    margin: 16px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
 }
+
+.container::-webkit-scrollbar {
+    width: 0.7em;
+    padding: 5px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: $primaryDashBlue;
+}
+
+.forecastWrapper:first-of-type {
+    margin-top: 0;
+}
+
+.forecastWrapper {
+    min-height: 130px;
+    text-align: center;
+    display: flex;
+    color: $primaryDashBlue;
+    align-items: center;
+    border: 1px solid $dashLightGrey;
+    border-left: none;
+    border-right: none;
+    margin: 8px;
+
+    .date, .iconContainer, .description, .timeOfDay {
+        flex-basis: 25%;
+    }
+}
+
+select {
+    border: none;
+    color: $secondaryDashBlue;
+    background-color: transparent;
+}
+
+option {
+    color: black;
+}
+
