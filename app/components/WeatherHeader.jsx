@@ -21,11 +21,11 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
             <hr/>
             <div className={styles.currently}>
                 <h2>Current Weather</h2>
-                <div>
-                <p>{currentWeather.weather[0].description}</p>
-                <div className={styles.iconContainer}>
-                    <img src={require(`../images/weatherIcons/${iconCodes[currentWeather.weather[0].icon]}`)} />
-                </div>
+                <div className={styles.currentlyWrap}>
+                    <p>{currentWeather.weather[0].description}</p>
+                    <div className={styles.iconContainer}>
+                        <img src={require(`../images/weatherIcons/${iconCodes[currentWeather.weather[0].icon]}`)} />
+                    </div>
                 </div>
             </div>
 
@@ -46,6 +46,12 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
                 <h2>Wind Speed</h2>
                 <p>{Math.round(currentWeather.wind.speed * 2.2369)} mph</p>
             </div>
+        </div>
+
+        <div className={styles.coordinates}>
+            <h2>Coordinates</h2>
+            <p>LAT: <span>{coord.lat}</span></p>
+            <p>LON: <span>{coord.lon}</span></p>
         </div>
     </div>
 )
