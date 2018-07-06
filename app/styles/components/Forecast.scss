@@ -33,14 +33,19 @@
     border-right: none;
     margin: 8px;
 
-    .date, .iconContainer, .description, .timeOfDay {
-        flex-basis: 25%;
+    .date, 
+    .iconContainer, 
+    .description, 
+    .timeOfDay,
+    .temperature {
+        flex-basis: 20%;
     }
 }
 
 .temperature {
     display: flex;
-    
+    justify-content: center;
+
     .symbol {
         align-self: flex-start;
         display: inline-block;

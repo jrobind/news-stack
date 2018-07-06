@@ -47,7 +47,7 @@ class Forecast extends Component {
                             <div className={styles.description}>{day.weather[0].description}</div>
 
                             <div className={styles.temperature}>
-                                {Math.round(day.main.temp - 273.15)}
+                                <span>{Math.round(day.main.temp - 273.15)}</span>
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
 
