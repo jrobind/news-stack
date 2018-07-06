@@ -38,6 +38,18 @@
     }
 }
 
+.temperature {
+    display: flex;
+    
+    .symbol {
+        align-self: flex-start;
+        display: inline-block;
+        font-size: 0.6em;
+        margin: 2px 0 0 1px;
+
+    }
+}
+
 select {
     border: none;
     color: $secondaryDashBlue;
