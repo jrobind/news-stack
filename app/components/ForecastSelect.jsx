@@ -6,7 +6,7 @@ class ForecastSelect extends Component {
         super(props);
         this.state = {
             value: 'Afternoon',
-            day: ''
+            date: ''
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -15,12 +15,10 @@ class ForecastSelect extends Component {
     handleChange(e) {
         const { updateForecast } = this.props;
         const value = e.target.value;
-        const day = e.target.closest('div')
-            .getAttribute('data')
-            .split(' ')[0];
+        const date = e.target.closest('div').getAttribute('data')
 
-        this.setState({value, day}, () => {
-            updateForecast(this.state)
+        this.setState({value, date}, () => {
+            updateForecast(this.state);
         });
 
     }
