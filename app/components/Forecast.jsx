@@ -41,7 +41,7 @@ class Forecast extends Component {
                 timeOfDay = '15:00:00';
                 break;
             case 'Evening':
-                timeOfDay = '18:00:00';
+                timeOfDay = '21:00:00';
                 break;
         }
 
@@ -60,7 +60,7 @@ class Forecast extends Component {
         if (defaultForecast) {
             return (
                 <div className={styles.container}>
-                    {defaultForecast.map((day, i) => (
+                    { defaultForecast.map((day, i) => (
                         <div 
                             key={i} 
                             className={styles.forecastWrapper}
