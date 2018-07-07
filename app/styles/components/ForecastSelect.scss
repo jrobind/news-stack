@@ -1,0 +1,11 @@
+@import '../utils/variables';
+
+select {
+    border: none;
+    color: $secondaryDashBlue;
+    background-color: transparent;
+}
+
+option {
+    color: black;
+}
