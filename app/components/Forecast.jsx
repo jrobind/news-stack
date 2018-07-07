@@ -83,7 +83,10 @@ class Forecast extends Component {
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
 
-                            <ForecastSelect updateForecast={this.updateForecast}/>
+                            {i ? 
+                                <ForecastSelect updateForecast={this.updateForecast}/> 
+                                : 
+                                <span className={styles.currently}>Currently</span>}
                         </div>
                     ))}
                 </div>
