@@ -23,7 +23,7 @@ class DashboardContainer extends Component {
         const  placeName = storage.getStorage('placeName');
         const times = ['09:00:00', '15:00:00', '21:00:00'];
 
-        //format forecast data for Forecast component i.e. weather data for 9am, 3pm and 9pm
+        // format forecast data for Forecast component i.e. weather data for 9am, 3pm and 9pm
         const formattedForecast = weather.list.filter((day) => {
             const dateToday = new Date();
             const dateToCheck = new Date(day.dt_txt);
