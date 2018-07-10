@@ -23,7 +23,7 @@ export const apiFakeData = {
             main: 'Clear'
         }],
         wind: {speed: 1.72},
-        dt_txt: "2018-06-29 15:00:00",
+        dt_txt: "2018-06-28 15:00:00",
         main: {
            temp: 300,
            humidity: 49
@@ -31,13 +31,13 @@ export const apiFakeData = {
     },
     {
         weather: [{
-            description: 'clear sky',
+            description: 'scattered clouds',
             icon: '01d',
             id: 800,
-            main: 'Clear'
+            main: 'Clouds'
         }],
         wind: {speed: 1.82},
-        dt_txt: "2018-06-29 21:00:00",
+        dt_txt: "2018-06-29 15:00:00",
         main: {
            temp: 310,
            humidity: 59
