@@ -1,16 +1,16 @@
 .container {
     height: 100%;
     padding-top: 95%;
+}
 
-    .loading {
-        margin: auto;
-        border: 12px solid rgba(250, 250, 250, 0.7);
-        border-top: 12px solid rgb(80, 79, 79);
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        animation: spin 2s linear infinite;
-    }
+.loading {
+    margin: auto;
+    border: 12px solid rgba(250, 250, 250, 0.7);
+    border-top: 12px solid rgb(80, 79, 79);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
 }
 
 @keyframes spin {

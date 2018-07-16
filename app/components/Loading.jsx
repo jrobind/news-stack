@@ -1,8 +1,8 @@
 import React,{ Component } from 'react';
 import styles from '../styles/components/Loading.scss';
 
-const Loading = () => (
-    <div className={styles.container}>
+const Loading = ({ addClass }) => (
+    <div className={addClass ? styles.container : null} >
         <div className={styles.loading}></div>
     </div>
 )
