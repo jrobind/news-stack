@@ -1,7 +1,7 @@
 @import '../utils/variables';
 
 .container {
-    height: 450px;
+    height: 500px;
     overflow-y: scroll;
     margin: 16px 10px 10px 10px;
     display: flex;
@@ -23,7 +23,7 @@
 }
 
 .forecastWrapper {
-    min-height: 130px;
+    min-height: 148px;
     text-align: center;
     display: flex;
     color: $primaryDashBlue;

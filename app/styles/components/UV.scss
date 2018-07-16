@@ -1,0 +1,15 @@
+@import '../utils/variables';
+
+.container {
+    max-width: 500px;
+    padding: 20px;
+    .uv {
+        display: flex;
+        flex-direction: column;
+    
+        h2 {
+            color: $primaryDashBlue;
+            font-weight: 300;
+        }
+    }
+}
