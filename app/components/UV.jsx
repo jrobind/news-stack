@@ -41,7 +41,7 @@ class UV extends Component {
                             <p className={styles.index}>{Math.round(value)}</p>
                             <Line 
                                 className={styles.progress}
-                                percent={value * 9} 
+                                percent={value * 8} 
                                 strokeWidth="1.5"
                                 trailWidth="1.5"
                                 strokeColor="#19315b"
