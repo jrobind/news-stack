@@ -8,11 +8,29 @@ class UV extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: null,
-            clicked: false
+            value: 0,
+            index: null,
+            clicked: false,
+            max: null,
+            showIndex: false
         }
 
         this.handleClick = this.handleClick.bind(this);
+        this.addValue = this.addValue.bind(this);
+        this.changeValue = this.changeValue.bind(this);
+    }
+
+    addValue() {
+        const self = this;
+
+        this.setState(() => ({value: this.state.value + 1}));
+        setTimeout(() => { self.changeValue() }, 20);
+    }
+
+    changeValue() {
+        const { value, max } = this.state;
+
+        value < max ? this.addValue() : this.setState(() => ({showIndex: true}));
     }
 
     handleClick() {
@@ -22,13 +40,13 @@ class UV extends Component {
         this.setState(() => ({clicked: true}));
 
         fetchUVIndex(coord)
-        .then(({ value }) => this.setState(() => ({value})))
+        .then(({ value }) => this.setState({max: value * 8, index: value},() => this.addValue(value)))
         .catch((error) => console.log(error))
 
     }
 
     render() {
-        const { clicked, value } = this.state;
+        const { clicked, index, value, showIndex } = this.state;
 
         return (
             <div className={styles.container}>     
@@ -38,10 +56,13 @@ class UV extends Component {
 
                     {clicked && 
                         <div className={styles.uvAnimationContainer}>
-                            <p className={styles.index}>{Math.round(value)}</p>
+                            <p className={showIndex ? styles.show : styles.index}>
+                                {showIndex && Math.round(index)}
+                            </p>
                             <Line 
                                 className={styles.progress}
-                                percent={value * 8} 
+                                percent={value} 
+                                strokeLinecap='butt'
                                 strokeWidth="1.5"
                                 trailWidth="1.5"
                                 strokeColor="#19315b"
