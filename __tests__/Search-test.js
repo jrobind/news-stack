@@ -106,6 +106,19 @@ describe('<Search />', () => {
         expect(JSON.parse(localStorage.getItem('weather')).city.name).toBe('London');
     });
 
+    it('should update state loading value once the call to getWeather() is made', () => {
+        const history = createMemoryHistory('/');
+        const wrapper = mount(<Search history={history} />);
+        const input = wrapper.find('input');
+        const promise = mapPlacesApi.geocodeByAddress();;
+
+        input.simulate('change', { target: { value: 'London' }});
+        input.simulate('keyDown', { key: 'Enter' });
+        // testing setState after multiple async functions 
+        return promise.then(() => {}).then(() => {})
+            .then(() => expect(wrapper.state('loading')).toBe(false)); 
+    });
+
     it('should update localStorage with weather data after valid input submission', () => {
         const history = createMemoryHistory('/');
         const wrapper = mount(<Search history={history} />);
