@@ -9,6 +9,10 @@ export const getLatLngData = {
     lng: -0.12775829999998223
 };
 
+export const apiFakeUVData = {
+    value: 6
+}
+
 export const apiFakeData = {
     city: { 
         name:'London',
