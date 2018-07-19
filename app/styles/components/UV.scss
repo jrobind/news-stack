@@ -12,7 +12,6 @@
 
         .progress {
             width: 100%;
-
         }
 
         hr {
@@ -41,6 +40,16 @@
 
         .uvAnimationContainer {
             max-height: 64px;
+
+            p {
+                transition: opacity .3s linear;
+                opacity: 0;
+                min-height: 23px;
+            }
+            
+            .show {
+                opacity: 1;
+            }
         }
     }
 
