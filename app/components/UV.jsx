@@ -40,8 +40,8 @@ class UV extends Component {
         this.setState(() => ({clicked: true}));
 
         fetchUVIndex(coord)
-        .then(({ value }) => this.setState({max: value * 8, index: value},() => this.addValue(value)))
-        .catch((error) => console.log(error))
+            .then(({ value }) => this.setState({max: value * 8.3, index: value},() => this.addValue(value)))
+            .catch((error) => console.log(error))
 
     }
 
@@ -79,7 +79,7 @@ class UV extends Component {
                         </button>
                     }
 
-                    <p className={styles.uvDescription}>The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues. Take necessary precautions to ensure you stay safe in the sun.</p>
+                    <p className={styles.info}>The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues. Take necessary precautions to ensure you stay safe in the sun.</p>
                 </div>
             </div>
 
