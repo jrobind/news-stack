@@ -3,6 +3,8 @@ import { MemoryRouter } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 import DashboardContainer from '../app/containers/DashboardContainer'
 import Weatherheader from '../app/components/WeatherHeader';
+import Forecast from '../app/components/Forecast';
+import UV from '../app/components/UV';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
 import { apiFakeData } from '../testHelpers/fakeData';
 
@@ -26,6 +28,26 @@ describe('<DashboardContainer/>', () => {
         );
 
         expect(wrapper.find(Weatherheader)).toHaveLength(1);
+    });
+
+    it ('should render <Forecast /> component', () => {
+        const wrapper = mount(
+            <MemoryRouter>
+                <DashboardContainer />
+            </MemoryRouter>
+        );
+
+        expect(wrapper.find(Forecast)).toHaveLength(1);
+    });
+
+    it ('should render <UV /> component', () => {
+        const wrapper = mount(
+            <MemoryRouter>
+                <DashboardContainer />
+            </MemoryRouter>
+        );
+
+        expect(wrapper.find(UV)).toHaveLength(1);
     });
 
     it('should render a .dashContainer class', () => {
