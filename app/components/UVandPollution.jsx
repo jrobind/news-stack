@@ -83,16 +83,7 @@ class UV extends Component {
                     <p className={styles.info}>{info}</p>
                 </div>
             </div>
-
         )
-
-        if (loading) {
-            return (
-                <div className={styles.container}> 
-                    <Loading addClass={false} />
-                </div>
-            )    
-        } 
     }
 }
 
