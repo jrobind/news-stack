@@ -4,7 +4,7 @@ import { shallow, mount } from 'enzyme';
 import DashboardContainer from '../app/containers/DashboardContainer'
 import Weatherheader from '../app/components/WeatherHeader';
 import Forecast from '../app/components/Forecast';
-import UV from '../app/components/UV';
+import UVandPollution from '../app/components/UVandPollution';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
 import { apiFakeData } from '../testHelpers/fakeData';
 
@@ -40,14 +40,14 @@ describe('<DashboardContainer/>', () => {
         expect(wrapper.find(Forecast)).toHaveLength(1);
     });
 
-    it ('should render <UV /> component', () => {
+    it ('should render <UVandPollution /> component', () => {
         const wrapper = mount(
             <MemoryRouter>
                 <DashboardContainer />
             </MemoryRouter>
         );
 
-        expect(wrapper.find(UV)).toHaveLength(1);
+        expect(wrapper.find(UVandPollution)).toHaveLength(2);
     });
 
     it('should render a .dashContainer class', () => {

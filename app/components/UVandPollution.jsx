@@ -36,7 +36,7 @@ class UV extends Component {
     handleClick() {
         const { city: { coord } } = storage.getStorage('weather');
 
-        // set loading state to true while retrieving uv api data
+        // set loading state to true while retrieving uv/pollution api data
         this.setState(() => ({clicked: true}));
 
         fetchUVIndex(coord)
@@ -47,11 +47,12 @@ class UV extends Component {
 
     render() {
         const { clicked, index, value, showIndex } = this.state;
+        const { info, title } = this.props;
 
         return (
             <div className={styles.container}>     
                 <div className={styles.uv}>
-                    <h2>UV Index</h2>
+                    <h2>{title} Index</h2>
                     <hr/>
 
                     {clicked && 
@@ -79,7 +80,7 @@ class UV extends Component {
                         </button>
                     }
 
-                    <p className={styles.info}>The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues. Take necessary precautions to ensure you stay safe in the sun.</p>
+                    <p className={styles.info}>{info}</p>
                 </div>
             </div>
 

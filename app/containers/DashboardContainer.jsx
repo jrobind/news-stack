@@ -3,6 +3,7 @@ import storage from '../utils/storage';
 import Loading from '../components/Loading';
 import WeatherHeader from '../components/WeatherHeader';
 import Forecast from '../components/Forecast';
+import UVandPollution from '../components/UVandPollution';
 import styles from '../styles/components/DashboardContainer.scss';
 
 class DashboardContainer extends Component {
@@ -55,6 +56,14 @@ class DashboardContainer extends Component {
                     /> 
                     <Forecast
                         forecast={[currentWeather].concat(forecast)}
+                    />
+                    <UVandPollution 
+                        title='UV'
+                        info='The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues. Take necessary precautions to ensure you stay safe in the sun.'
+                    />
+                    <UVandPollution 
+                        title='Pollution'
+                        info='The Air Pollution index indicates the levels of pollition in the surrounding air. Air with high levels of pollutants - such as in large, built up, heavily industrialised cities - can have severe adverse health effects.'
                     />
                 </div>
             )

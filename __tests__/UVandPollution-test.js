@@ -1,10 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import UV from '../app/components/UV';
+import UVandPollution from '../app/components/UVandPollution';
 import { apiFakeUVData, apiFakeData } from '../testHelpers/fakeData';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
 import * as uvApi from '../app/utils/api';
-import { doesNotReject } from 'assert';
 
 // mocks
 
@@ -24,40 +23,40 @@ beforeEach(function() {
 
 // tests
 
-describe('<UV />', () => {
+describe('<UVandPollution />', () => {
 
     it('should render a .container class', () => {
-        const wrapper = shallow(<UV />);
+        const wrapper = shallow(<UVandPollution />);
         
         expect(wrapper.find('.container')).toHaveLength(1);
     });
 
     it('should render a .uv class', () => {
-        const wrapper = shallow(<UV />);
+        const wrapper = shallow(<UVandPollution />);
         
         expect(wrapper.find('.uv')).toHaveLength(1);
     });
 
     it('should render a .info class', () => {
-        const wrapper = shallow(<UV />);
+        const wrapper = shallow(<UVandPollution />);
         
         expect(wrapper.find('.info')).toHaveLength(1);
     });
 
     it('should render a .seeIndex class by default', () => {
-        const wrapper = shallow(<UV />);
+        const wrapper = shallow(<UVandPollution />);
         
         expect(wrapper.find('.seeIndex')).toHaveLength(1);
     });
 
     it('should not render a .uvAnimationContainer class by default', () => {
-        const wrapper = shallow(<UV />);
+        const wrapper = shallow(<UVandPollution />);
         
         expect(wrapper.find('.uvAnimationContainer')).toHaveLength(0);
     });
 
     it('it should call fetchUVIndex after button click', () => {
-        const wrapper = shallow(<UV />);
+        const wrapper = shallow(<UVandPollution />);
         const button = wrapper.find('button');
 
         button.simulate('click');
@@ -68,7 +67,7 @@ describe('<UV />', () => {
     });
 
     it('it should update state UV index value and max value after button click', () => {
-        let wrapper = shallow(<UV />);
+        let wrapper = shallow(<UVandPollution />);
         const button = wrapper.find('button');
         const promise = uvApi.fetchUVIndex();
 
