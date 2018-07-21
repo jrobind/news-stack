@@ -70,7 +70,7 @@ describe('<DashboardContainer/>', () => {
         expect(wrapper.state('name')).toBe('London');
         expect(wrapper.state('country')).toBe('GB');
         expect(wrapper.state('coord')).toEqual(apiFakeData.city.coord);
-        expect(wrapper.state('forecast')).toEqual([apiFakeData.list[0]]);
+        expect(wrapper.state('forecast')).toEqual([apiFakeData.list[0], apiFakeData.list[1]]);
         expect(wrapper.state('currentWeather')).toEqual(apiFakeData.list[0])
     });
 });

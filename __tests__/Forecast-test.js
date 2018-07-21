@@ -1,8 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Forecast from '../app/components/Forecast';
 import ForecastSelect from '../app/components/ForecastSelect';
 import { apiFakeData } from '../testHelpers/fakeData';
+
+// mocks
+
+// mock for DOM Element.closest() and Element.getAttribute()
+const closest = () => ({ getAttribute() {return '2018-06-29 15:00:00'} });
+
+// tests
 
 describe('<Forecast />', () => {
 
@@ -40,6 +47,15 @@ describe('<Forecast />', () => {
         const wrapper = shallow(<Forecast forecast={apiFakeData.list} />);
 
         expect(wrapper.find(ForecastSelect)).toHaveLength(1);
+    });
+
+    it('should render a new forecast when time of day is changed', () => {
+        const wrapper = mount(<Forecast forecast={apiFakeData.list} />);
+        wrapper.find('select').simulate('change', {target: { value: 'Morning', closest}});
+        const forecastTwo = wrapper.find('.description').at(1);
+
+        expect(wrapper.state('defaultForecast')[1].weather[0].id).toBe(100);
+        expect(forecastTwo.text()).toEqual('few clouds');
     });
     
 });

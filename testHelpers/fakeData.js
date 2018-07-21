@@ -46,5 +46,19 @@ export const apiFakeData = {
            temp: 310,
            humidity: 59
         }
+    },
+    {
+        weather: [{
+            description: 'few clouds',
+            icon: '01d',
+            id: 100,
+            main: 'Clouds'
+        }],
+        wind: {speed: 1.82},
+        dt_txt: "2018-06-29 09:00:00",
+        main: {
+           temp: 310,
+           humidity: 59
+        }
     }]
 }
