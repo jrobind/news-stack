@@ -40,7 +40,10 @@ class UV extends Component {
         this.setState(() => ({clicked: true}));
 
         fetchUVIndex(coord)
-            .then(({ value }) => this.setState({max: value * 8.3, index: value},() => this.addValue(value)))
+            .then(({ value }) => {
+                value = Math.floor(value);
+                this.setState({max: Math.round(value * 8.3), index: value},() => this.addValue(value));
+            })
             .catch((error) => console.log(error))
 
     }
