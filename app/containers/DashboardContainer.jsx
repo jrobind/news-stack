@@ -32,7 +32,7 @@ class DashboardContainer extends Component {
             return dateToday.getDate() !== dateToCheck.getDate();
 
         }).filter((day) => times.includes(day.dt_txt.split(' ')[1]));
-
+    
         this.setState(() => ({
             currentWeather: list[0],
             forecast: formattedForecast.slice(0, formattedForecast.length -1),
@@ -44,7 +44,7 @@ class DashboardContainer extends Component {
 
     render() {
         const { currentWeather, country, name, forecast, coord } = this.state;
-        
+
         if (currentWeather) {
             return (
                 <div className={styles.dashContainer}>
@@ -57,14 +57,16 @@ class DashboardContainer extends Component {
                     <Forecast
                         forecast={[currentWeather].concat(forecast)}
                     />
-                    <UVandPollution 
-                        title='UV'
-                        info='The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues. Take necessary precautions to ensure you stay safe in the sun.'
-                    />
-                    <UVandPollution 
-                        title='Pollution'
-                        info='The Air Pollution index indicates the levels of pollition in the surrounding air. Air with high levels of pollutants - such as in large, built up, heavily industrialised cities - can have severe adverse health effects.'
-                    />
+                    <div className={styles.uvPolContainer}>
+                        <UVandPollution 
+                            title='UV'
+                            info='The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues. Take necessary precautions to ensure you stay safe in the sun.'
+                        />
+                        <UVandPollution 
+                            title='Pollution'
+                            info='The Air Pollution index indicates the levels of pollition in the surrounding air. Air with high levels of pollutants - such as in large, built up, heavily industrialised cities - can have severe adverse health effects.'
+                        />
+                    </div>
                 </div>
             )
         } else {
