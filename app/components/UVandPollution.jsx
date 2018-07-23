@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { fetchUVIndex } from '../utils/api';
 import storage from '../utils/storage';
+import Loading from '../components/Loading';
 import { Line } from 'rc-progress';
 import styles from '../styles/components/UV.scss'; 
 
@@ -11,6 +12,7 @@ class UV extends Component {
             value: 0,
             index: null,
             clicked: false,
+            loading: false,
             max: null,
             showIndex: false
         }
@@ -37,19 +39,19 @@ class UV extends Component {
         const { city: { coord } } = storage.getStorage('weather');
 
         // set loading state to true while retrieving uv/pollution api data
-        this.setState(() => ({clicked: true}));
+        this.setState(() => ({clicked: true, loading: true}));
 
         fetchUVIndex(coord)
             .then(({ value }) => {
                 value = Math.floor(value);
-                this.setState({max: Math.round(value * 8.3), index: value},() => this.addValue(value));
+                this.setState({max: Math.round(value * 8.3), index: value, loading: false},() => this.addValue(value));
             })
             .catch((error) => console.log(error))
 
     }
 
     render() {
-        const { clicked, index, value, showIndex } = this.state;
+        const { clicked, index, value, showIndex, loading } = this.state;
         const { info, title } = this.props;
 
         return (
@@ -58,20 +60,23 @@ class UV extends Component {
                     <h2>{title} Index</h2>
                     <hr/>
 
-                    {clicked && 
-                        <div className={styles.uvAnimationContainer}>
-                            <p className={showIndex ? styles.show : styles.index}>
-                                {showIndex && Math.round(index)}
-                            </p>
-                            <Line 
-                                className={styles.progress}
-                                percent={value} 
-                                strokeLinecap='butt'
-                                strokeWidth="1.5"
-                                trailWidth="1.5"
-                                strokeColor="#19315b"
-                            />
-                        </div>
+                    {clicked ?  
+                        loading ? 
+                            <Loading /> 
+                            : 
+                            <div className={styles.uvAnimationContainer}>
+                                <p className={showIndex ? styles.show : styles.index}>
+                                    {showIndex && Math.round(index)}
+                                </p>
+                                <Line 
+                                    className={styles.progress}
+                                    percent={value} 
+                                    strokeLinecap='butt'
+                                    strokeWidth="1.5"
+                                    trailWidth="1.5"
+                                    strokeColor="#19315b"
+                                />
+                            </div> : null
                     }
 
                     {!clicked && 
