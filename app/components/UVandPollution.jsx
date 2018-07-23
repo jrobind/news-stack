@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchUVIndex } from '../utils/api';
+import { fetchUVIndex, fetchPollutionIndex } from '../utils/api';
 import storage from '../utils/storage';
 import Loading from '../components/Loading';
 import { Line } from 'rc-progress';
@@ -36,18 +36,28 @@ class UV extends Component {
     }
 
     handleClick() {
+        const { title } = this.props;
         const { city: { coord } } = storage.getStorage('weather');
-
+        
         // set loading state to true while retrieving uv/pollution api data
         this.setState(() => ({clicked: true, loading: true}));
 
-        fetchUVIndex(coord)
-            .then(({ value }) => {
-                value = Math.floor(value);
-                this.setState({max: Math.round(value * 8.3), index: value, loading: false},() => this.addValue(value));
+        if (title === 'Pollution') {
+            fetchPollutionIndex(coord)
+            .then(({ data: { current: { pollution } }}) => {
+                let aqius = Math.floor(pollution.aqius);
+                this.setState({max: Math.round(aqius / 4), index: aqius, loading: false},() => this.addValue(aqius));
             })
-            .catch((error) => console.log(error))
+            .catch((error) => console.log(error));
 
+        } else {
+            fetchUVIndex(coord)
+                .then(({ value }) => {
+                    value = Math.floor(value);
+                    this.setState({max: Math.round(value * 8.3), index: value, loading: false},() => this.addValue(value));
+                })
+                .catch((error) => console.log(error));
+            }
     }
 
     render() {
