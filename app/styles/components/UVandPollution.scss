@@ -1,15 +1,15 @@
 @import '../utils/variables';
 
 .container {
-    width: 50%;
-    margin: 17px;
     border: 1px solid #9bc2cf;
+    margin: 5px;
 
     .uv {
         position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 360px;
 
         .info {
             width: 85%;
@@ -46,6 +46,11 @@
         .uvAnimationContainer {
             max-height: 64px;
             padding: 5px;
+
+            .indexValue {
+                position: absolute;
+                left: 50%;
+            }
 
             .index, .show {
                 transition: opacity .3s linear;

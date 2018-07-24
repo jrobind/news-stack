@@ -54,17 +54,19 @@ class DashboardContainer extends Component {
                         coord={coord}
                         name={name}
                     /> 
-                    <Forecast
-                        forecast={[currentWeather].concat(forecast)}
-                    />
-                    <div className={styles.uvPolContainer}>
-                        <UVandPollution 
-                            title='UV'
-                            info='The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues. Take necessary precautions to ensure you stay safe in the sun.'
-                        />
-                        <UVandPollution 
-                            title='Pollution'
-                            info='The Air Pollution index indicates the levels of pollition in the surrounding air. Air with high levels of pollutants - such as in large, built up, heavily industrialised cities - can have severe adverse health effects.'
+                    <div className={styles.forecastDataWrapper}>
+                        <div className={styles.uvPolContainer}>
+                            <UVandPollution 
+                                title='UV'
+                                info='The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues. Take necessary precautions to ensure you stay safe in the sun.'
+                            />
+                            <UVandPollution 
+                                title='Pollution'
+                                info='The Air Pollution index indicates the levels of pollition in the surrounding air. Air with high levels of pollutants - such as in large, built up, heavily industrialised cities - can have severe adverse health effects.'
+                            />
+                        </div>
+                        <Forecast
+                            forecast={[currentWeather].concat(forecast)}
                         />
                     </div>
                 </div>

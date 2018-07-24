@@ -14,7 +14,7 @@
 
 .container {
     padding: 5px 10px;
-    background-color: rgba(25, 49, 91, 1);
+    background-color: $weatherHeaderbackground;
     min-height: 180px;
     display: flex;
     justify-content: space-between;
