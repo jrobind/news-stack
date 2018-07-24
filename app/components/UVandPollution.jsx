@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { fetchUVIndex, fetchPollutionIndex } from '../utils/api';
 import storage from '../utils/storage';
+import PropTypes from 'prop-types';
 import Loading from '../components/Loading';
 import { Line } from 'rc-progress';
 import styles from '../styles/components/UV.scss'; 
 
-class UV extends Component {
+class UVandPollution extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,14 +47,14 @@ class UV extends Component {
             fetchPollutionIndex(coord)
             .then(({ data: { current: { pollution } }}) => {
                 let aqius = Math.floor(pollution.aqius);
-                this.setState({max: Math.round(aqius / 4), index: aqius, loading: false},() => this.addValue(aqius));
+                this.setState({max: Math.round(aqius / 3), index: aqius, loading: false},() => this.addValue(aqius));
             })
             .catch((error) => console.log(error));
 
         } else {
             fetchUVIndex(coord)
                 .then(({ value }) => {
-                    value = Math.floor(value);
+                    value = value > 12 ? 12 : Math.floor(value);
                     this.setState({max: Math.round(value * 8.3), index: value, loading: false},() => this.addValue(value));
                 })
                 .catch((error) => console.log(error));
@@ -105,4 +106,9 @@ class UV extends Component {
     }
 }
 
-export default UV;
+UVandPollution.propTypes = {
+    title: PropTypes.string.isRequired,
+    info: PropTypes.string.isRequired 
+}
+
+export default UVandPollution;
