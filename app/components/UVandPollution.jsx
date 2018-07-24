@@ -3,7 +3,9 @@ import { fetchUVIndex, fetchPollutionIndex } from '../utils/api';
 import storage from '../utils/storage';
 import PropTypes from 'prop-types';
 import Loading from '../components/Loading';
+import Tooltip from '../components/Tooltip';
 import { Line } from 'rc-progress';
+import classification from '../utils/UVPollutionClassification';
 import styles from '../styles/components/UV.scss'; 
 
 class UVandPollution extends Component {
@@ -76,9 +78,10 @@ class UVandPollution extends Component {
                             <Loading /> 
                             : 
                             <div className={styles.uvAnimationContainer}>
-                                <p className={showIndex ? styles.show : styles.index}>
+                                <div className={showIndex ? styles.show : styles.index}>
                                     {showIndex && Math.round(index)}
-                                </p>
+                                    {showIndex && <Tooltip data={classification(title, index)}/>}
+                                </div>
                                 <Line 
                                     className={styles.progress}
                                     percent={value} 
