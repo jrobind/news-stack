@@ -1,7 +1,7 @@
 @import '../utils/variables';
 
 .container {
-    max-width: 500px;
+    width: 50%;
     margin: 17px;
     border: 1px solid #9bc2cf;
 
@@ -9,6 +9,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        .info {
+            width: 85%;
+        }
 
         .progress {
             width: 100%;
@@ -22,7 +26,7 @@
             background-color: $dashLightGrey;
         }
 
-        p {
+        .index, .show, p {
             padding: 10px;
             text-align: center;
             color: $secondaryDashBlue;
@@ -41,7 +45,7 @@
         .uvAnimationContainer {
             max-height: 64px;
 
-            p {
+            .index, .show {
                 transition: opacity .3s linear;
                 opacity: 0;
                 min-height: 23px;
@@ -49,6 +53,7 @@
             
             .show {
                 opacity: 1;
+                position: relative;
             }
         }
     }
