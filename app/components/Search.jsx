@@ -61,6 +61,7 @@ class Search extends Component {
 
         return(
             <div className={styles.container}>
+                <div className={styles.filler}></div>
                 <PlacesAutocomplete
                     value={this.state.address}
                     onChange={this.handleChange}

@@ -2,27 +2,34 @@
 @import '../base/base';
 
 .container {
-    height: 100%;
+    height: 100vh;
     background: url('../../images/search-background.jpg') center center / cover no-repeat;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .filler {
+        background-color: transparent;
+        min-height: calc(50% - 41px);
+    }
 
     .autocompleteRoot {
         max-width: 400px;
-        margin: auto;
-        height: 100vh;
+        align-self: center;
 
         input {
-            margin-top: 100%;
+            position: relative;      
             background-color: transparent;
             width: 100%;
             border-bottom: 2px solid rgba(250, 250, 250, 0.85);
             caret-color: white;
             color: white;
             font-size: $xxlargeFont;
-            padding-bottom: 3px;
+            padding-bottom: 2px;
 
             &::placeholder {
                 color: rgba(250, 250, 250, 0.6);
+                text-align: center;
                 font-weight: 300;
                 font-size: $largeFont;
             }
