@@ -1,4 +1,5 @@
 @import '../utils/variables';
+@import '../base/base';
 
 .container {
     border: 1px solid #9bc2cf;
@@ -34,7 +35,7 @@
         }
 
         p:first-of-type {
-            font-size: 1.1em;
+            font-size: $largeFont;
         }
     
         h2 {
@@ -71,7 +72,7 @@
         margin: 12px;
         background-color: rgba(250, 250, 250, 0.3);
         color: white;
-        font-size: 0.9em;
+        font-size: $mediumFont;
         cursor: pointer;
 
         &:hover {

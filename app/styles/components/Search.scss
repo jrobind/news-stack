@@ -1,4 +1,5 @@
 @import '../utils/variables';
+@import '../base/base';
 
 .container {
     height: 100%;
@@ -17,13 +18,13 @@
             border-bottom: 2px solid rgba(250, 250, 250, 0.85);
             caret-color: white;
             color: white;
-            font-size: 1.9em;
+            font-size: $xxlargeFont;
             padding-bottom: 3px;
 
             &::placeholder {
                 color: rgba(250, 250, 250, 0.6);
                 font-weight: 300;
-                font-size: 1.1em;
+                font-size: $largeFont;
             }
         }
     }

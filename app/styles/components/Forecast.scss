@@ -1,8 +1,9 @@
 @import '../utils/variables';
+@import '../base/base';
 
 .container {
     flex-basis: 75%;
-    max-height: calc(100vh - 240px);
+    max-height: $heightMinusHeader;
     overflow-y: scroll;
     margin: 15px 10px 0 0;
     display: flex;
@@ -50,7 +51,7 @@
     .symbol {
         align-self: flex-start;
         display: inline-block;
-        font-size: 0.6em;
+        font-size: $xsmallFont;
         margin: 2px 0 0 1px;
 
     }
@@ -59,6 +60,6 @@
 .currently {
     margin-left: 5px;
     color: #e1ecf0;
-    font-size: 0.9em  
+    font-size: $mediumFont; 
 }
 

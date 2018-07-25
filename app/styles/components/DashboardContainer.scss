@@ -1,3 +1,6 @@
+@import '../base/base';
+@import '../utils/variables';
+
 .dashContainer {
     height: 100%;
     background: url('../../images/app-background.jpg') center center / cover no-repeat;
@@ -12,5 +15,5 @@
     flex-direction: column;
     flex-basis: 25%;
     margin-top: 10px;
-    max-height: calc(100vh - 240px);
+    max-height: $heightMinusHeader;
 }

@@ -1,11 +1,13 @@
 @import '../utils/variables';
+@import '../base/base';
 
 select {
     border: none;
     color: $secondaryDashBlue;
     background-color: transparent;
+    cursor: pointer;
 }
 
 option {
-    color: black;
+    color: $defaultBlack;
 }

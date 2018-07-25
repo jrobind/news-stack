@@ -1,4 +1,5 @@
 @import '../utils/variables';
+@import '../base/base';
 
 .linkHome {
     margin-top: 10px;
@@ -8,7 +9,7 @@
     a {
         color: $secondaryDashBlue;
         text-decoration: none;
-        font-size: 0.8em;
+        font-size: $smallFont;
     }
 }
 
@@ -92,14 +93,14 @@
             align-self: center;
             margin: auto;
             color: $secondaryDashBlue;
-            font-size: 1.4em;
+            font-size: $xlargeFont;
             font-weight: 300;
         }
 
         .symbol {
             align-self: flex-start;
             display: inline-block;
-            font-size: 0.6em;
+            font-size: $xsmallFont;
             margin: 2px 0 0 1px;
 
         }

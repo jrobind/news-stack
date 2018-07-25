@@ -1,3 +1,7 @@
+//font
+
+$fontStack: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
 // colours
 
 $primaryDashBlue: #9bc2cf;
@@ -5,3 +9,17 @@ $secondaryDashBlue: #e1ecf0;
 $dashLightGrey: rgba(211, 211, 211, 0.5);
 $weatherHeaderbackground: rgba(25, 49, 91, 1);
 $searchDropdownGrey: rgba(233, 230, 230, 0.767);
+$defaultBlack: #000000;
+
+// values
+
+$heightMinusHeader: calc(100vh - 240px);
+
+// font sizes
+
+$xsmallFont: 0.6em;
+$smallFont: 0.8em;
+$mediumFont: 0.9em;
+$largeFont: 1.1em;
+$xlargeFont: 1.4em;
+$xxlargeFont: 1.9em;
