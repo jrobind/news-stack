@@ -2,8 +2,9 @@
 
 .container {
     flex-basis: 75%;
+    max-height: calc(100vh - 240px);
     overflow-y: scroll;
-    margin-top: 15px;
+    margin: 15px 10px 0 0;
     display: flex;
     flex-direction: column;
 }
@@ -23,7 +24,7 @@
 }
 
 .forecastWrapper {
-    height: 132px;
+    min-height: 155px;
     text-align: center;
     display: flex;
     color: $primaryDashBlue;
