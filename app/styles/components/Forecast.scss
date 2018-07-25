@@ -1,5 +1,6 @@
 @import '../utils/variables';
 @import '../base/base';
+@import '../utils/mixins';
 
 .container {
     flex-basis: 75%;
@@ -34,6 +35,10 @@
     border-left: none;
     border-right: none;
     margin: 8px;
+
+    @include mediaQuery(660px) {
+        font-size: $smallFont;
+    }
 
     .date, 
     .iconContainer, 

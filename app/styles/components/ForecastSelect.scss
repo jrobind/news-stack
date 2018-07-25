@@ -1,11 +1,16 @@
 @import '../utils/variables';
 @import '../base/base';
+@import '../utils/mixins';
 
 select {
     border: none;
     color: $secondaryDashBlue;
     background-color: transparent;
     cursor: pointer;
+
+    @include mediaQuery(660px) {
+        font-size: 0.85em;
+    }
 }
 
 option {

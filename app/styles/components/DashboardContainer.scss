@@ -1,5 +1,6 @@
 @import '../base/base';
 @import '../utils/variables';
+@import '../utils/mixins';
 
 .dashContainer {
     height: 100%;
@@ -8,12 +9,25 @@
 
 .forecastDataWrapper {
     display: flex;
+
+    @include mediaQuery(1250px) {
+        flex-direction: column;
+    }
 }
 
 .uvPolContainer {
+    order: 2;
     display: flex;
     flex-direction: column;
     flex-basis: 25%;
     margin-top: 10px;
     max-height: $heightMinusHeader;
+
+    @include mediaQuery(1250px) {
+        flex-direction: row;
+    }
+
+    @include mediaQuery(660px) {
+        flex-direction: column;
+    }
 }

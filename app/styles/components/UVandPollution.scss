@@ -1,5 +1,7 @@
 @import '../utils/variables';
 @import '../base/base';
+@import '../utils/mixins';
+
 
 .container {
     border: 1px solid #9bc2cf;
@@ -7,7 +9,7 @@
     flex-direction: column;
     margin: 5px;
     flex: 1 1 auto;
-
+    
     .uv {
         position: relative;
         display: flex;
@@ -39,7 +41,7 @@
         }
 
         p:first-of-type {
-            font-size: $largeFont;
+            font-size: $mediumFont;
         }
     
         h2 {
@@ -50,7 +52,7 @@
 
         .uvAnimationContainer {
             max-height: 64px;
-            padding: 5px;
+            padding: 10px;
 
             .indexValue {
                 position: absolute;
