@@ -3,6 +3,8 @@
 
 .container {
     border: 1px solid #9bc2cf;
+    display: flex;
+    flex-direction: column;
     margin: 5px;
     flex: 1 1 auto;
 
@@ -11,6 +13,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 100%;
+        flex: 1 1 auto;
 
         .info {
             width: 85%;
