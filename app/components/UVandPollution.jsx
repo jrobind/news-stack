@@ -6,7 +6,7 @@ import Loading from '../components/Loading';
 import Tooltip from '../components/Tooltip';
 import { Line } from 'rc-progress';
 import classification from '../utils/UVPollutionClassification';
-import styles from '../styles/components/UV.scss'; 
+import styles from '../styles/components/UVandPollution.scss'; 
 
 class UVandPollution extends Component {
     constructor(props) {
@@ -47,11 +47,17 @@ class UVandPollution extends Component {
 
         if (title === 'Pollution') {
             fetchPollutionIndex(coord)
-            .then(({ data: { current: { pollution } }}) => {
-                let aqius = Math.floor(pollution.aqius);
-                this.setState({max: Math.round(aqius / 3), index: aqius, loading: false},() => this.addValue(aqius));
-            })
-            .catch((error) => console.log(error));
+            .then(({status, data }) => {
+                // handle error
+                if (status === 'fail') {
+                    this.setState(() => ({value: false, loading: false}));
+                } else {
+                    const { current: { pollution }} = data;
+                    let aqius = Math.floor(pollution.aqius);
+
+                    this.setState({max: Math.round(aqius / 3), index: aqius, loading: false},() => this.addValue(aqius));
+                }
+            });
 
         } else {
             fetchUVIndex(coord)
@@ -59,7 +65,7 @@ class UVandPollution extends Component {
                     value = value > 12 ? 12 : Math.floor(value);
                     this.setState({max: Math.round(value * 8.3), index: value, loading: false},() => this.addValue(value));
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => this.setState(() => ({value: false})));
             }
     }
 
@@ -77,7 +83,7 @@ class UVandPollution extends Component {
                         loading ? 
                             <Loading /> 
                             : 
-                            <div className={styles.uvAnimationContainer}>
+                            value !== false ? <div className={styles.uvAnimationContainer}>
                                 <div className={showIndex ? styles.show : styles.index}>
                                     {showIndex && Math.round(index)}
                                     {showIndex && <Tooltip data={classification(title, index)}/>}
@@ -90,7 +96,8 @@ class UVandPollution extends Component {
                                     trailWidth="1.5"
                                     strokeColor="#19315b"
                                 />
-                            </div> : null
+                            </div> 
+                            : <div className={styles.noData}>No data available</div> : null
                     }
 
                     {!clicked && 
