@@ -92,9 +92,9 @@ class UVandPollution extends Component {
                                     className={styles.progress}
                                     percent={value} 
                                     strokeLinecap='butt'
-                                    strokeWidth="1.5"
-                                    trailWidth="1.5"
-                                    strokeColor="#19315b"
+                                    strokeWidth="1.7"
+                                    trailWidth="1.7"
+                                    strokeColor="#6c8790"
                                 />
                             </div> 
                             : <div className={styles.noData}>No data available</div> : null
