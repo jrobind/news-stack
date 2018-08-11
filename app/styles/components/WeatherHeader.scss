@@ -37,6 +37,11 @@
     h2, p {
         color: $primaryDashBlue;
     }
+
+    @include mediaQuery(1050px) {
+        max-width: 300px;
+        width: 35%;
+    }
 }
 
 .placeInfo {
@@ -61,6 +66,10 @@
     padding: 5px;
     position: relative;
 
+    @include mediaQuery(1050px) {
+        flex-direction: column;
+    }
+
     hr {
         position: absolute;
         top: 40px;
@@ -76,7 +85,7 @@
             font-weight: 300;
 
             @include mediaQuery(1050px) {
-                font-size: $largeFont;
+                text-align: center;
             }
         }
     }
@@ -87,6 +96,22 @@
         align-items: center;
         color: $secondaryDashBlue;
         margin-top: 25px;
+
+        @include mediaQuery(1050px) {
+            margin-top: 15px;
+        }
+
+        p {
+            @include mediaQuery(1050px) {
+                display: none;
+            }
+        }
+
+        div {
+            @include mediaQuery(1050px) {
+                height: 90px;
+            }
+        }
     }
 
     .temperature, .humidity, .windSpeed {
@@ -112,6 +137,18 @@
             font-size: $xsmallFont;
             margin: 2px 0 0 1px;
 
+        }
+    }
+
+    .temperature h2 {
+        @include mediaQuery(1050px) {
+            display: none;
+        }
+    }
+
+    .humidity, .windSpeed {
+        @include mediaQuery(1050px) {
+            display: none;
         }
     }
 }
