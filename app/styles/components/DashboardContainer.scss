@@ -25,6 +25,7 @@
 
     @include mediaQuery(1250px) {
         flex-direction: row;
+        margin-bottom: 10px;
     }
 
     @include mediaQuery(660px) {

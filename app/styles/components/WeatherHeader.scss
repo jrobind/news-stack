@@ -1,4 +1,5 @@
 @import '../utils/variables';
+@import '../utils/mixins';
 @import '../base/base';
 
 .linkHome {
@@ -73,6 +74,10 @@
     .currently, .temperature, .humidity, .windSpeed {
         h2 {
             font-weight: 300;
+
+            @include mediaQuery(1050px) {
+                font-size: $largeFont;
+            }
         }
     }
 
@@ -95,6 +100,10 @@
             color: $secondaryDashBlue;
             font-size: $xlargeFont;
             font-weight: 300;
+            
+            @include mediaQuery(1050px) {
+                font-size: $largeFont;
+            }
         }
 
         .symbol {
