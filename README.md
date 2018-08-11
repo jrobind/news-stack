@@ -7,6 +7,5 @@ Weather-101 is a React weather application displaying current weather, forecasts
 * Finish Dashboard Component
 * Improve test coverage
 * Ensure application is responsive
-* Add Pollution index component to Dashboard
-* Create reusable component for UV index and air Pollution
+* Update WeatherHeader component for mobile/tablet views
 
