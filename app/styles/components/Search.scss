@@ -1,5 +1,6 @@
 @import '../utils/variables';
 @import '../base/base';
+@import '../utils/mixins';
 
 .container {
     height: 100vh;
@@ -17,6 +18,10 @@
         width: 380px;
         align-self: center;
 
+        @include mediaQuery(465px) {
+            width: 275px;
+        }
+
         input {
             position: relative;      
             background-color: transparent;
@@ -32,6 +37,10 @@
                 text-align: center;
                 font-weight: 300;
                 font-size: $largeFont;
+
+                @include mediaQuery(470px) {
+                    font-size: $smallFont;
+                }
             }
         }
     }
