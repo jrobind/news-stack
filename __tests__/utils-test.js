@@ -1,6 +1,4 @@
 import UVandPollutionClassification from '../app/utils/UVPollutionClassification';
-import { apiFakeUVData, apiFakeData } from '../testHelpers/fakeData';
-import LocalStorageMock from '../testHelpers/mockLocalStorage';
 
 describe('UVandPollutionClassification', () => {
 
