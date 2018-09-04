@@ -146,6 +146,12 @@
         }
     }
 
+    .temperature, .currently {
+        @include mediaQuery(550px) {
+            display: none;
+        }
+    }
+
     .humidity, .windSpeed {
         @include mediaQuery(1050px) {
             display: none;
