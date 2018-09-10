@@ -83,10 +83,10 @@ class UVandPollution extends Component {
                         loading ? 
                             <Loading /> 
                             : 
-                            value !== false ? <div className={styles.uvAnimationContainer}>
+                            value !== false ? <div className={styles.uvAnimationContainer} style={!info ? {margin: 'auto'} : null}>
                                 <div className={showIndex ? styles.show : styles.index}>
                                     {showIndex && Math.round(index)}
-                                    {showIndex && <Tooltip data={classification(title, index)}/>}
+                                    {showIndex && <Tooltip data={classification(title, index)} infoTxt={Boolean(info)}/>}
                                 </div>
                                 <Line 
                                     className={styles.progress}
@@ -101,7 +101,8 @@ class UVandPollution extends Component {
                     }
 
                     {!clicked && 
-                        <button 
+                        <button
+                            style={!info ? {margin: 'auto'} : null}
                             className={styles.seeIndex}
                             onClick={this.handleClick}
                         >
