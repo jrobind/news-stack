@@ -58,11 +58,11 @@ class DashboardContainer extends Component {
                         <div className={styles.uvPolContainer}>
                             <UVandPollution 
                                 title='UV'
-                                info='The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues. Take necessary precautions to ensure you stay safe in the sun.'
+                                info= {window.innerHeight > 1000 ? 'The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues.' : ''}
                             />
                             <UVandPollution 
                                 title='Pollution'
-                                info='The Air Pollution index indicates the levels of pollition in the surrounding air. Air with high levels of pollutants - such as in large, built up, heavily industrialised cities - can have severe adverse health effects.'
+                                info= {window.innerHeight > 1000 ? 'The Air Pollution index indicates the levels of pollition in the surrounding air. Air with high levels of pollutants can have severe adverse health effects.' : ''}
                             />
                         </div>
                         <Forecast
