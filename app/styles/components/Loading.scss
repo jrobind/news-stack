@@ -10,6 +10,16 @@
     animation: spin 2s linear infinite;
 }
 
+.search {
+    height: 55px;
+    width: 55px;
+}
+
+.dash {
+    height: 40px;
+    width: 40px;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);

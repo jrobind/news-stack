@@ -10,13 +10,13 @@ describe('<Loading />', () => {
         expect(wrapper.find('.loading')).toHaveLength(1);
     });
     
-    it('should render a .container class if passed truthy prop', () => {
+    it('should render a .search class if passed truthy prop', () => {
         const wrapper = shallow(<Loading addClass={true} />);
         
-        expect(wrapper.find('.container')).toHaveLength(1);
+        expect(wrapper.find('.search')).toHaveLength(1);
     });
     
-    it('should not render a .container class if no prop is passed', () => {
+    it('should not render a .dash class if no prop is passed', () => {
         const wrapper = shallow(<Loading />);
         
         expect(wrapper.find('.container')).toHaveLength(0);

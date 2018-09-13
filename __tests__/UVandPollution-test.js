@@ -35,10 +35,10 @@ describe('<UVandPollution />', () => {
         expect(wrapper.find('.container')).toHaveLength(1);
     });
 
-    it('should render a .uv class', () => {
+    it('should render a .uvPollutionWrapper class', () => {
         const wrapper = shallow(<UVandPollution {...props}/>);
         
-        expect(wrapper.find('.uv')).toHaveLength(1);
+        expect(wrapper.find('.uvPollutionWrapper')).toHaveLength(1);
     });
 
     it('should render a .info class', () => {
