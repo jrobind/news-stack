@@ -10,7 +10,8 @@
     margin: 5px;
     flex: 1 1 auto;
     
-    .uv {
+    .uvPollutionWrapper {
+        min-height: 186px;
         position: relative;
         display: flex;
         flex-direction: column;

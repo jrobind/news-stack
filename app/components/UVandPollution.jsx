@@ -75,7 +75,7 @@ class UVandPollution extends Component {
 
         return (
             <div className={styles.container}>     
-                <div className={styles.uv}>
+                <div className={styles.uvPollutionWrapper}>
                     <h2>{title} Index</h2>
                     <hr/>
 
