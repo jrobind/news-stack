@@ -118,8 +118,7 @@ class UVandPollution extends Component {
 }
 
 UVandPollution.propTypes = {
-    title: PropTypes.string.isRequired,
-    info: PropTypes.string.isRequired 
+    title: PropTypes.string.isRequired
 }
 
 export default UVandPollution;

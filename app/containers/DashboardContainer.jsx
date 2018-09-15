@@ -56,14 +56,8 @@ class DashboardContainer extends Component {
                     /> 
                     <div className={styles.forecastDataWrapper}>
                         <div className={styles.uvPolContainer}>
-                            <UVandPollution 
-                                title='UV'
-                                info= {window.innerHeight > 1000 ? 'The UV index identifies the strength of the ultraviolet radiation from the sun. Large amounts of UV exposure at a high index can lead to serious health issues.' : ''}
-                            />
-                            <UVandPollution 
-                                title='Pollution'
-                                info= {window.innerHeight > 1000 ? 'The Air Pollution index indicates the levels of pollition in the surrounding air. Air with high levels of pollutants can have severe adverse health effects.' : ''}
-                            />
+                            <UVandPollution title='UV' />
+                            <UVandPollution title='Pollution' />
                         </div>
                         <Forecast
                             forecast={[currentWeather].concat(forecast)}
