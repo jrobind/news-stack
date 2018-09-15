@@ -41,12 +41,6 @@ describe('<UVandPollution />', () => {
         expect(wrapper.find('.uvPollutionWrapper')).toHaveLength(1);
     });
 
-    it('should render a .info class', () => {
-        const wrapper = shallow(<UVandPollution {...props}/>);
-        
-        expect(wrapper.find('.info')).toHaveLength(1);
-    });
-
     it('should render a .seeIndex class by default', () => {
         const wrapper = shallow(<UVandPollution {...props}/>);
         

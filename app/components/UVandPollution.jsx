@@ -71,7 +71,7 @@ class UVandPollution extends Component {
 
     render() {
         const { clicked, index, value, showIndex, loading } = this.state;
-        const { info, title } = this.props;
+        const { title } = this.props;
 
         return (
             <div className={styles.container}>     
@@ -83,10 +83,10 @@ class UVandPollution extends Component {
                         loading ? 
                             <Loading /> 
                             : 
-                            value !== false ? <div className={styles.uvAnimationContainer} style={!info ? {margin: 'auto'} : null}>
+                            value !== false ? <div className={styles.uvAnimationContainer} style={{margin: 'auto'}}>
                                 <div className={showIndex ? styles.show : styles.index}>
                                     {showIndex && Math.round(index)}
-                                    {showIndex && <Tooltip data={classification(title, index)} infoTxt={Boolean(info)}/>}
+                                    {showIndex && <Tooltip data={classification(title, index)}/>}
                                 </div>
                                 <Line 
                                     className={styles.progress}
@@ -102,15 +102,13 @@ class UVandPollution extends Component {
 
                     {!clicked && 
                         <button
-                            style={!info ? {margin: 'auto'} : null}
+                            style={{margin: 'auto'}}
                             className={styles.seeIndex}
                             onClick={this.handleClick}
                         >
                             See current index
                         </button>
                     }
-
-                    <p className={styles.info}>{info}</p>
                 </div>
             </div>
         )
