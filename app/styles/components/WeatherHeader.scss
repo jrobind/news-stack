@@ -58,6 +58,14 @@
     margin-top: 6px;
     padding-bottom: 30px;
     border-bottom: 1px solid $dashLightGrey;
+
+    @include mediaQuery(750px) {
+        padding-bottom: 10px;
+    }
+
+    @include mediaQuery(550px) {
+        padding-bottom: 30px;
+    }
 }
 
 .weatherContent {
@@ -190,4 +198,10 @@
 .coordinates p:last-of-type {
     text-align: center;
     margin-top: 15px;
+}
+
+.weatherContent, .placeInfo, .coordinates {
+    @include mediaQuery(700px) {
+        font-size: 0.85em;
+    }
 }
