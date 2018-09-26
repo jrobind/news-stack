@@ -13,8 +13,7 @@ const Tooltip = ({ data: { color, text }}) => (
 )
 
 Tooltip.propTypes = {
-    data: PropTypes.object.isRequired,
-    infoTxt: PropTypes.bool.isRequired
+    data: PropTypes.object.isRequired
 }
 
 export default Tooltip;

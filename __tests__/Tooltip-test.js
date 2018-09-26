@@ -8,19 +8,19 @@ const mockProps = {color: 'red', text: 'test'};
 describe('<Tooltip />', () => {
 
     it('should render a .toolTip class', () => {
-        const wrapper = shallow(<Tooltip infoTxt={true} data={mockProps} />);
+        const wrapper = shallow(<Tooltip data={mockProps} />);
         
         expect(wrapper.find('.toolTip')).toHaveLength(1);
     });
 
     it('should render a .tail class', () => {
-        const wrapper = shallow(<Tooltip infoTxt={true} data={mockProps} />);
+        const wrapper = shallow(<Tooltip data={mockProps} />);
         
         expect(wrapper.find('.tail')).toHaveLength(1);
     });
     
     it('should render correct text description', () => {
-        const wrapper = shallow(<Loading infoTxt={true} data={mockProps} />);
+        const wrapper = shallow(<Loading data={mockProps} />);
 
         expect(
             wrapper
