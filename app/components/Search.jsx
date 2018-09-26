@@ -75,7 +75,7 @@ class Search extends Component {
                                 {!loading ? <input 
                                     {...getInputProps({autoFocus: true, placeholder: "Paris, London, Rome..."})}
                                 /> : 
-                                <Loading addClass={true}/>}
+                                <Loading />}
 
                                 {suggestions.length > 0 && <div className={styles.autocompleteDropdownContainer} styles={{display: suggestions.length ? 'inline' : 'none'}}>
                                     {suggestions.map((suggestion) => {
