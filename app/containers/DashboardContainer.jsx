@@ -21,9 +21,9 @@ class DashboardContainer extends Component {
     componentDidMount() {
         const { city: { name, country, coord }, list } = storage.getStorage('weather');
         const weather = storage.getStorage('weather');
-        const  placeName = storage.getStorage('placeName');
+        const placeName = storage.getStorage('placeName');
         const times = ['09:00:00', '15:00:00', '21:00:00'];
-
+   
         // format forecast data for Forecast component i.e. weather data for 9am, 3pm and 9pm
         const formattedForecast = weather.list.filter((day) => {
             const dateToday = new Date();

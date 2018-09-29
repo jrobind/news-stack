@@ -27,7 +27,7 @@ export const apiFakeData = {
             main: 'Clear'
         }],
         wind: {speed: 1.72},
-        dt_txt: "2018-06-28 15:00:00",
+        dt_txt: new Date().getDate() !== 29 ? "2018-06-29 09:00:00" : "2018-06-30 09:00:00",
         main: {
            temp: 300,
            humidity: 49
@@ -41,7 +41,7 @@ export const apiFakeData = {
             main: 'Clouds'
         }],
         wind: {speed: 1.82},
-        dt_txt: "2018-06-29 15:00:00",
+        dt_txt: new Date().getDate() !== 29 ? "2018-06-29 15:00:00" : "2018-06-30 15:00:00" ,
         main: {
            temp: 310,
            humidity: 59
@@ -55,7 +55,7 @@ export const apiFakeData = {
             main: 'Clouds'
         }],
         wind: {speed: 1.82},
-        dt_txt: "2018-06-29 09:00:00",
+        dt_txt: new Date().getDate() !== 29 ? "2018-06-29 21:00:00" : "2018-06-30 21:00:00",
         main: {
            temp: 310,
            humidity: 59

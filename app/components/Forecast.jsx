@@ -22,7 +22,6 @@ class Forecast extends Component {
         const defaultForecast = forecast.filter((day, i) => {
             return i && day.dt_txt.split(' ')[1] === '15:00:00';
         });
-        console.log(forecast[0])
         // if date of first forecast is the same as second then we do not prepend current forecast
         this.setState(() => ({defaultForecast: forecast[0].dt_txt ===  forecast[1].dt_txt ? defaultForecast : [forecast[0]].concat(defaultForecast)}));
     }

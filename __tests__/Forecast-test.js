@@ -54,8 +54,8 @@ describe('<Forecast />', () => {
         wrapper.find('select').simulate('change', {target: { value: 'Morning', closest}});
         const forecastTwo = wrapper.find('.description').at(1);
 
-        expect(wrapper.state('defaultForecast')[1].weather[0].id).toBe(100);
-        expect(forecastTwo.text()).toEqual('few clouds');
+        expect(wrapper.state('defaultForecast')[1].weather[0].id).toBe(800);
+        expect(forecastTwo.text()).toEqual('scattered clouds');
     });
     
 });
