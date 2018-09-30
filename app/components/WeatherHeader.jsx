@@ -6,8 +6,14 @@ import iconCodes from '../utils/iconCodes';
 import styles from '../styles/components/WeatherHeader.scss';
 
 const WeatherHeader = ({ currentWeather, country, name, coord }) => (
-    <div className={styles.container}>
-        <div className={styles.placeInfo}>
+    <div 
+        className={styles.container}
+        data-testid = 'container'
+     >
+        <div 
+            className={styles.placeInfo}
+            data-testid = 'place-info'
+        >
             <h2>{name}, {country}</h2>
             <p>
                 <Moment format='LL'>{currentWeather.dt_txt}</Moment>
@@ -17,7 +23,10 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
             </div>
         </div>
 
-        <div className={styles.weatherContent}>
+        <div 
+            className={styles.weatherContent}
+            data-testid='weather-content'
+        >
             <hr/>
             <div className={styles.currently}>
                 <h2>Current Weather</h2>
@@ -29,7 +38,10 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
                 </div>
             </div>
 
-            <div className={styles.temperature}>
+            <div 
+                className={styles.temperature}
+                data-testid='temperature'
+            >
                 <h2>Temperature</h2>
                 <p>
                     {Math.round(currentWeather.main.temp - 273.15)}

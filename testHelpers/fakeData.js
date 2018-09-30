@@ -21,7 +21,7 @@ export const apiFakeData = {
     },
     list: [{
         weather: [{
-            description: 'clear sky',
+            description: 'scattered clouds',
             icon: '01d',
             id: 800,
             main: 'Clear'

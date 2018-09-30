@@ -30,7 +30,7 @@ describe('<Forecast />', () => {
         const forecastOne = wrapper.find('.description').at(0);
         const forecastTwo = wrapper.find('.description').at(1);
 
-        expect(forecastOne.text()).toEqual('clear sky');
+        expect(forecastOne.text()).toEqual('scattered clouds');
         expect(forecastTwo.text()).toEqual('scattered clouds');
     });
 

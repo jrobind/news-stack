@@ -16,32 +16,32 @@ const setup = (props) => {
 
 describe('<WeatherHeader />', () => {
     
-    it('should render a .container class', () => {
+    it('should render a container data-testid attribute', () => {
         const { city: { name, country, coord }, list } = apiFakeData;
         const wrapper = setup({ currentWeather: list[0], country, coord, name });
 
-        expect(wrapper.dive().find('.container')).toHaveLength(1);
+        expect(wrapper.dive().find('[data-testid="container"]')).toHaveLength(1);
     });
 
-    it('should render a .placeInfo class', () => {
+    it('should render a place-info data-testid attribute', () => {
         const { city: { name, country, coord }, list } = apiFakeData;
         const wrapper = setup({ currentWeather: list[0], country, coord, name });
 
-        expect(wrapper.dive().find('.placeInfo')).toHaveLength(1);
+        expect(wrapper.dive().find('[data-testid="place-info"]')).toHaveLength(1);
     });
 
-    it('should render a .weatherContent class', () => {
+    it('should render a weather-content data-testid attribute', () => {
         const { city: { name, country, coord }, list } = apiFakeData;
         const wrapper = setup({ currentWeather: list[0], country, coord, name });
 
-        expect(wrapper.dive().find('.weatherContent')).toHaveLength(1);
+        expect(wrapper.dive().find('[data-testid="weather-content"]')).toHaveLength(1);
     });
 
-    it('should render a .temperature class', () => {
+    it('should render a temperature data-testid attribute', () => {
         const { city: { name, country, coord }, list } = apiFakeData;
         const wrapper = setup({ currentWeather: list[0], country, coord, name });
 
-        expect(wrapper.dive().find('.temperature')).toHaveLength(1);
+        expect(wrapper.dive().find('[data-testid="temperature"]')).toHaveLength(1);
     });
 
     it('should render a .humidity class', () => {
@@ -87,7 +87,7 @@ describe('<WeatherHeader />', () => {
                 .find('.currently')
                 .childAt(1)
                 .childAt(0)
-                .text()).toEqual('clear sky');
+                .text()).toEqual('scattered clouds');
     });
 
     it('should render correct temperature', () => {
