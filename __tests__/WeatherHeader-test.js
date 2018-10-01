@@ -44,25 +44,25 @@ describe('<WeatherHeader />', () => {
         expect(wrapper.dive().find('[data-testid="temperature"]')).toHaveLength(1);
     });
 
-    it('should render a .humidity class', () => {
+    it('should render a humidity data-testid attribute', () => {
         const { city: { name, country, coord }, list } = apiFakeData;
         const wrapper = setup({ currentWeather: list[0], country, coord, name });
 
-        expect(wrapper.dive().find('.humidity')).toHaveLength(1);
+        expect(wrapper.dive().find('[data-testid="humidity"]')).toHaveLength(1);
     });
 
-    it('should render a .windSpeed class', () => {
+    it('should render a wind-speed data-testid attribute', () => {
         const { city: { name, country, coord }, list } = apiFakeData;
         const wrapper = setup({ currentWeather: list[0], country, coord, name });
 
-        expect(wrapper.dive().find('.windSpeed')).toHaveLength(1);
+        expect(wrapper.dive().find('[data-testid="wind-speed"]')).toHaveLength(1);
     });
 
-    it('should render a .coordinates class', () => {
+    it('should render a coordinates data-testid attribute', () => {
         const { city: { name, country, coord }, list } = apiFakeData;
         const wrapper = setup({ currentWeather: list[0], country, coord, name });
 
-        expect(wrapper.dive().find('.coordinates')).toHaveLength(1);
+        expect(wrapper.dive().find('[data-testid="coordinates"]')).toHaveLength(1);
     });
 
     it('should render correct place name and country code', () => {
@@ -72,7 +72,7 @@ describe('<WeatherHeader />', () => {
         expect(
             wrapper
                 .dive()
-                .find('.placeInfo')
+                .find('[data-testid="place-info"]')
                 .childAt(0)
                 .text()).toEqual('London, GB');
     });
@@ -84,7 +84,7 @@ describe('<WeatherHeader />', () => {
         expect(
             wrapper
                 .dive()
-                .find('.currently')
+                .find('[data-testid="currently"]')
                 .childAt(1)
                 .childAt(0)
                 .text()).toEqual('scattered clouds');
@@ -97,7 +97,7 @@ describe('<WeatherHeader />', () => {
         expect(
             wrapper
                 .dive()
-                .find('.temperature')
+                .find('[data-testid="temperature"]')
                 .childAt(1)
                 .text()).toEqual('27℃');
     });
@@ -109,7 +109,7 @@ describe('<WeatherHeader />', () => {
         expect(
             wrapper
                 .dive()
-                .find('.humidity')
+                .find('[data-testid="humidity"]')
                 .childAt(1)
                 .text()).toEqual('49%');
     });
@@ -121,7 +121,7 @@ describe('<WeatherHeader />', () => {
         expect(
             wrapper
                 .dive()
-                .find('.windSpeed')
+                .find('[data-testid="wind-speed"]')
                 .childAt(1)
                 .text()).toEqual('4 mph');
     });
@@ -133,14 +133,14 @@ describe('<WeatherHeader />', () => {
         expect(
             wrapper
                 .dive()
-                .find('.coordinates')
+                .find('[data-testid="coordinates"]')
                 .childAt(1)
                 .text()).toEqual('LAT: 51.5752');
 
         expect(
             wrapper
                 .dive()
-                .find('.coordinates')
+                .find('[data-testid="coordinates"]')
                 .childAt(2)
                 .text()).toEqual('LON: 0.1858');
     });

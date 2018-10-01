@@ -28,7 +28,10 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
             data-testid='weather-content'
         >
             <hr/>
-            <div className={styles.currently}>
+            <div 
+                className={styles.currently}
+                data-testid='currently'
+            >
                 <h2>Current Weather</h2>
                 <div className={styles.currentlyWrap}>
                     <p>{currentWeather.weather[0].description}</p>
@@ -49,18 +52,27 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
                 </p>
             </div>
 
-            <div className={styles.humidity}>
+            <div 
+                className={styles.humidity}
+                data-testid='humidity'    
+            >
                 <h2>Humidity</h2>
                 <p>{currentWeather.main.humidity}%</p>
             </div>
 
-            <div className={styles.windSpeed}>
+            <div 
+                className={styles.windSpeed}
+                data-testid='wind-speed'
+            >
                 <h2>Wind Speed</h2>
                 <p>{Math.round(currentWeather.wind.speed * 2.2369)} mph</p>
             </div>
         </div>
 
-        <div className={styles.coordinates}>
+        <div 
+            className={styles.coordinates}
+            data-testid='coordinates'
+        >
             <h2>Coordinates</h2>
             <p>LAT: <span>{coord.lat}</span></p>
             <p>LON: <span>{coord.lon}</span></p>
