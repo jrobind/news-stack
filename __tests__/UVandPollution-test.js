@@ -29,28 +29,28 @@ beforeEach(function() {
 
 describe('<UVandPollution />', () => {
 
-    it('should render a .container class', () => {
+    it('should render a container data-testid attribute', () => {
         const wrapper = shallow(<UVandPollution {...props}/>);
         
-        expect(wrapper.find('.container')).toHaveLength(1);
+        expect(wrapper.find('[data-testid="container"]')).toHaveLength(1);
     });
 
-    it('should render a .uvPollutionWrapper class', () => {
+    it('should render a uv-pollution-wrapper data-testid attribute', () => {
         const wrapper = shallow(<UVandPollution {...props}/>);
         
-        expect(wrapper.find('.uvPollutionWrapper')).toHaveLength(1);
+        expect(wrapper.find('[data-testid="uv-pollution-wrapper"]')).toHaveLength(1);
     });
 
-    it('should render a .seeIndex class by default', () => {
+    it('should render a see-index data-testid attribute by default', () => {
         const wrapper = shallow(<UVandPollution {...props}/>);
         
-        expect(wrapper.find('.seeIndex')).toHaveLength(1);
+        expect(wrapper.find('[data-testid="see-index"]')).toHaveLength(1);
     });
 
-    it('should not render a .uvAnimationContainer class by default', () => {
+    it('should not render a uv-animation-container data-testid attribute by default', () => {
         const wrapper = shallow(<UVandPollution {...props}/>);
         
-        expect(wrapper.find('.uvAnimationContainer')).toHaveLength(0);
+        expect(wrapper.find('[data-testid="uv-animation-container"]')).toHaveLength(0);
     });
 
     it('it should call fetchUVIndex after button click', () => {

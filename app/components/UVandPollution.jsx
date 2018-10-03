@@ -74,8 +74,14 @@ class UVandPollution extends Component {
         const { title } = this.props;
 
         return (
-            <div className={styles.container}>     
-                <div className={styles.uvPollutionWrapper}>
+            <div 
+                className={styles.container}
+                data-testid='container'
+            >     
+                <div 
+                    className={styles.uvPollutionWrapper}
+                    data-testid='uv-pollution-wrapper'
+                >
                     <h2>{title} Index</h2>
                     <hr/>
 
@@ -83,20 +89,25 @@ class UVandPollution extends Component {
                         loading ? 
                             <Loading /> 
                             : 
-                            value !== false ? <div className={styles.uvAnimationContainer} style={{margin: 'auto'}}>
-                                <div className={showIndex ? styles.show : styles.index}>
-                                    {showIndex && Math.round(index)}
-                                    {showIndex && <Tooltip data={classification(title, index)}/>}
-                                </div>
-                                <Line 
-                                    className={styles.progress}
-                                    percent={value} 
-                                    strokeLinecap='butt'
-                                    strokeWidth="1.7"
-                                    trailWidth="1.7"
-                                    strokeColor="#6c8790"
-                                />
-                            </div> 
+                            value !== false ? 
+                                <div 
+                                    className={styles.uvAnimationContainer}
+                                    style={{margin: 'auto'}}
+                                    data-testid='uv-animation-container'
+                                >
+                                    <div className={showIndex ? styles.show : styles.index}>
+                                        {showIndex && Math.round(index)}
+                                        {showIndex && <Tooltip data={classification(title, index)}/>}
+                                    </div>
+                                    <Line 
+                                        className={styles.progress}
+                                        percent={value} 
+                                        strokeLinecap='butt'
+                                        strokeWidth="1.7"
+                                        trailWidth="1.7"
+                                        strokeColor="#6c8790"
+                                    />
+                                </div> 
                             : <div className={styles.noData}>No data available</div> : null
                     }
 
@@ -104,6 +115,7 @@ class UVandPollution extends Component {
                         <button
                             style={{margin: 'auto'}}
                             className={styles.seeIndex}
+                            data-testid='see-index'
                             onClick={this.handleClick}
                         >
                             See current index
