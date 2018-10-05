@@ -7,16 +7,16 @@ const mockProps = {color: 'red', text: 'test'};
 
 describe('<Tooltip />', () => {
 
-    it('should render a .toolTip class', () => {
+    it('should render a tooltip data-testid attribute', () => {
         const wrapper = shallow(<Tooltip data={mockProps} />);
         
-        expect(wrapper.find('.toolTip')).toHaveLength(1);
+        expect(wrapper.find('[data-testid="tooltip"]')).toHaveLength(1);
     });
 
-    it('should render a .tail class', () => {
+    it('should render a tail data-testid attribute', () => {
         const wrapper = shallow(<Tooltip data={mockProps} />);
         
-        expect(wrapper.find('.tail')).toHaveLength(1);
+        expect(wrapper.find('[data-testid="tail"]')).toHaveLength(1);
     });
     
     it('should render correct text description', () => {
