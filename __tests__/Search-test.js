@@ -69,10 +69,10 @@ describe('<Search />', () => {
         expect(wrapper.find(mapPlacesApi.default)).toHaveLength(1);
     });
 
-    it('should render a .container class', () => {
+    it('should render a container data-testid attribute', () => {
         const wrapper = shallow(<Search />);
         
-        expect(wrapper.find('.container')).toHaveLength(1);
+        expect(wrapper.find('[data-testid="container"]')).toHaveLength(1);
     });
 
     it('should update state address value when input is updated', () => {
