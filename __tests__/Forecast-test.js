@@ -13,22 +13,22 @@ const closest = () => ({ getAttribute() {return '2018-06-29 15:00:00'} });
 
 describe('<Forecast />', () => {
 
-    it('should render a .container class', () => {
+    it('should render a container data-testid attribute', () => {
         const wrapper = shallow(<Forecast forecast={apiFakeData.list} />);
         
-        expect(wrapper.find('.container')).toHaveLength(1);
+        expect(wrapper.find('[data-testid="container"]')).toHaveLength(1);
     });
 
-    it('should render a .forecastWrapper class', () => {
+    it('should render a forecast-wrapper data-testid attribute', () => {
         const wrapper = shallow(<Forecast forecast={apiFakeData.list} />);
         
-        expect(wrapper.find('.forecastWrapper')).toHaveLength(2);
+        expect(wrapper.find('[data-testid="forecast-wrapper"]')).toHaveLength(2);
     });
 
     it('should render current weather conditions', () => {
         const wrapper = shallow(<Forecast forecast={apiFakeData.list} />);
-        const forecastOne = wrapper.find('.description').at(0);
-        const forecastTwo = wrapper.find('.description').at(1);
+        const forecastOne = wrapper.find('[data-testid="description"]').at(0);
+        const forecastTwo = wrapper.find('[data-testid="description"]').at(1);
 
         expect(forecastOne.text()).toEqual('scattered clouds');
         expect(forecastTwo.text()).toEqual('scattered clouds');
@@ -36,8 +36,8 @@ describe('<Forecast />', () => {
 
     it('should render correct temperature', () => {
         const wrapper = shallow(<Forecast forecast={apiFakeData.list} />);
-        const forecastOne = wrapper.find('.temperature').at(0);
-        const forecastTwo = wrapper.find('.temperature').at(1);
+        const forecastOne = wrapper.find('[data-testid="temperature"]').at(0);
+        const forecastTwo = wrapper.find('[data-testid="temperature"]').at(1);
 
         expect(forecastOne.text()).toEqual('27℃');
         expect(forecastTwo.text()).toEqual('37℃');

@@ -57,11 +57,15 @@ class Forecast extends Component {
 
         if (defaultForecast) {
             return (
-                <div className={styles.container}>
+                <div 
+                    className={styles.container}
+                    data-testid='container'   
+                >
                     { defaultForecast.map((day, i) => (
                         <div 
                             key={i} 
                             className={styles.forecastWrapper}
+                            data-testid='forecast-wrapper'
                             data={day.dt_txt}    
                         >
                             <div className={styles.date}>
@@ -74,9 +78,17 @@ class Forecast extends Component {
                                 <img src={require(`../images/weatherIcons/${iconCodes[day.weather[0].icon]}`)} />
                             </div>
 
-                            <div className={styles.description}>{day.weather[0].description}</div>
+                            <div 
+                                className={styles.description}
+                                data-testid='description'
+                            >
+                                {day.weather[0].description}
+                            </div>
 
-                            <div className={styles.temperature}>
+                            <div 
+                                className={styles.temperature}
+                                data-testid='temperature'    
+                            >
                                 <span>{Math.round(day.main.temp - 273.15)}</span>
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
