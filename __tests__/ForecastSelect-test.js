@@ -20,10 +20,10 @@ beforeEach(function() {
 
 describe('<ForecastSelect />', () => {
 
-    it('should render a .timeOfDay class', () => {
+    it('should render a time-of-day data-testid attribute', () => {
         const wrapper = shallow(<ForecastSelect />);
 
-        expect(wrapper.find('.timeOfDay')).toHaveLength(1);
+        expect(wrapper.find('[data-testid="time-of-day"]')).toHaveLength(1);
     });
 
     it('should render "Afternoon" as the default select option', () => {

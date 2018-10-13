@@ -15,7 +15,7 @@ class ForecastSelect extends Component {
     handleChange(e) {
         const { updateForecast } = this.props;
         const value = e.target.value;
-        const date = e.target.closest('div').getAttribute('data')
+        const date = e.target.closest('div').getAttribute('data');
 
         this.setState({value, date}, () => {
             updateForecast(this.state);
@@ -25,7 +25,10 @@ class ForecastSelect extends Component {
 
     render() {
         return (
-            <form className={styles.timeOfDay}>
+            <form 
+                className={styles.timeOfDay}
+                data-testid="time-of-day"    
+            >
                 <select value={this.state.value} onChange={this.handleChange}>  
                     <option value="Afternoon">Afternoon</option>
                     <option value="Morning">Morning</option>
