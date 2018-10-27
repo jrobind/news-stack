@@ -51,6 +51,12 @@
     .temperature {
         flex-basis: 20%;
     }
+
+    .description {
+        @include mediaQuery(400px) {
+            display: none;
+        }
+    }
 }
 
 .temperature {
