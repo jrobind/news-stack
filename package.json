@@ -1,7 +1,7 @@
 {
-  "name": "newsstack",
+  "name": "weather-101",
   "version": "1.0.0",
-  "description": "React application showing top world news stories",
+  "description": "React application displaying weather data",
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack -p --config ./webpack.prod.config.js --progress --colors",
