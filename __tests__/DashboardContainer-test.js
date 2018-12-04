@@ -50,14 +50,14 @@ describe('<DashboardContainer/>', () => {
         expect(wrapper.find(UVandPollution)).toHaveLength(2);
     });
 
-    it('should render a .dashContainer class', () => {
+    it('should render a dashboard-container data-testid attribute', () => {
         const wrapper = mount(
             <MemoryRouter>
                 <DashboardContainer />
             </MemoryRouter>
         );
 
-        expect(wrapper.find('.dashContainer')).toHaveLength(1);
+        expect(wrapper.find('[data-testid="dashboard-container"]')).toHaveLength(1);
     });
 
     it('should update state with weather api data once component mounts', () => {

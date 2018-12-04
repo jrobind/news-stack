@@ -47,7 +47,10 @@ class DashboardContainer extends Component {
 
         if (currentWeather) {
             return (
-                <div className={styles.dashContainer}>
+                <div 
+                    className={styles.dashContainer}
+                    data-testid = 'dashboard-container'
+                >
                     <WeatherHeader 
                         currentWeather={currentWeather}
                         country={country}
