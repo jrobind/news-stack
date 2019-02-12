@@ -7,5 +7,5 @@ You can see Weather-101 in action at https://weather-101.netlify.com
 ## TODO
 
 * Ensure cross browser compatibility 
-* There is a problem with the results being returned from the weather API. Specifically, for certain regions of the world. I.e. incorrect icon codes and temperature data.
+* Change api weather service
 

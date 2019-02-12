@@ -23,6 +23,12 @@ class Search extends Component {
         this.onKeyDown = this.onKeyDown.bind(this);
     }
 
+    componentDidMount() {
+        fetch('https://api.apixu.com/v1/forecast.json?key=945662b0093f46b9a3f212001191102&q=51.6205=0.3072&days=6')
+            .then(r => r.json())
+            .then(r => console.log(r))
+    }
+
     onKeyDown(e) {
         console.log(e);
     }
