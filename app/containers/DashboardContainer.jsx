@@ -12,14 +12,16 @@ class DashboardContainer extends Component {
         this.state = {
             currentWeather: null,
             forecast: null,
-            coord: null,
+            lat: null,
+            lon: null,
             country: '',
             name: ''
         }
     }
 
     componentDidMount() {
-        const { city: { name, country, coord }, list } = storage.getStorage('weather');
+        const { location: { name, country, lat, lon }, forecast } = storage.getStorage('weather');
+        console.log(storage.getStorage('weather'))
         const weather = storage.getStorage('weather');
         const placeName = storage.getStorage('placeName');
         const times = ['09:00:00', '15:00:00', '21:00:00'];
@@ -36,9 +38,10 @@ class DashboardContainer extends Component {
         this.setState(() => ({
             currentWeather: list[0],
             forecast: formattedForecast.slice(0, formattedForecast.length -1),
-            coord,
+            lat,
+            lon,
             country,
-            name: placeName === name ? name : placeName
+            name: placeName === name ? name : placeName // check whether placename returned from api matches placename search
         }));
     }
 

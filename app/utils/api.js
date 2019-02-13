@@ -1,5 +1,5 @@
 export default ({ lat, lng }) => {
-   return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=63a86f0f410d1650aed27460d8b457a4`)
+   return fetch(`https://api.apixu.com/v1/forecast.json?key=945662b0093f46b9a3f212001191102&q=${lat}=${lng}&days=6`)
         .then((response) => response.json())
         .then((data) => data)
         .catch((error) => console.log(error));
