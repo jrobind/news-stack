@@ -56,7 +56,7 @@ class DashboardContainer extends Component {
                             <UVandPollution title='Pollution' />
                         </div>
                         <Forecast
-                            forecast={[currentWeather].concat(forecast)}
+                            forecast={forecast.forecastday}
                         />
                     </div>
                 </div>

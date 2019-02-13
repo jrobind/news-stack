@@ -12,84 +12,46 @@ class Forecast extends Component {
         this.state = {
             defaultForecast: null,
         }
-
-        this.updateForecast = this.updateForecast.bind(this);
-    }
-
-    componentDidMount() {
-        const { forecast } = this.props;
-        // by default we render 3pm forecasts (excluding the current day's forecast)
-        const defaultForecast = forecast.filter((day, i) => {
-            return i && day.dt_txt.split(' ')[1] === '15:00:00';
-        });
-        // if date of first forecast is the same as second then we do not prepend current forecast
-        this.setState(() => ({defaultForecast: forecast[0].dt_txt ===  forecast[1].dt_txt ? defaultForecast : [forecast[0]].concat(defaultForecast)}));
-    }
-
-    updateForecast({ date, value }) {
-        const { forecast } = this.props;
-        const { defaultForecast } = this.state;
-        let timeOfDay;
-
-        switch(value) {
-            case 'Morning':
-                timeOfDay = '09:00:00';
-                break;
-            case 'Afternoon':
-                timeOfDay = '15:00:00';
-                break;
-            case 'Evening':
-                timeOfDay = '21:00:00';
-                break;
-        }
-
-        const dateMatch = `${date.split(' ')[0]} ${timeOfDay}`;
-        const newForecast = forecast.filter((day) => day.dt_txt === dateMatch);
-        // replace old forecast with new one
-        const i = defaultForecast.indexOf(defaultForecast.filter((day) => day.dt_txt === date)[0]);
-
-        defaultForecast[i] = newForecast[0];
-        this.setState(() => (defaultForecast));
     }
 
     render() {
-        const { defaultForecast } = this.state;
-
-        if (defaultForecast) {
+        const { forecast } = this.props;
+        console.log(forecast)
+        if (forecast) {
             return (
                 <div 
                     className={styles.container}
                     data-testid='container'   
                 >
-                    { defaultForecast.map((day, i) => (
+                    {forecast.map((day, i) => (
                         <div 
                             key={i} 
                             className={styles.forecastWrapper}
                             data-testid='forecast-wrapper'
-                            data={day.dt_txt}    
+                            data={day.date}    
                         >
                             <div className={styles.date}>
                                 <div>
-                                    <Moment format='dddd, Do'>{day.dt_txt}</Moment>
+                                    <Moment format='dddd, Do'>{day.date}</Moment>
                                 </div>
                             </div>
 
                             <div className={styles.iconContainer}>
-                                <img src={require(`../images/weatherIcons/${iconCodes[day.weather[0].icon]}`)} />
+                                <img src={day.day.condition.icon} />
                             </div>
 
                             <div 
                                 className={styles.description}
                                 data-testid='description'
                             >
-                                {day.weather[0].description}
+                                {day.day.condition.text}
                             </div>
 
                             <div 
                                 className={styles.temperature}
                                 data-testid='temperature'    
                             >
-                                <span>{Math.round(day.main.temp - 273.15)}</span>
+                                <span>{day.temp_c}</span>
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
 
