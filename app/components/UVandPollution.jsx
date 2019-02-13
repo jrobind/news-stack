@@ -40,7 +40,8 @@ class UVandPollution extends Component {
 
     handleClick() {
         const { title } = this.props;
-        const { city: { coord } } = storage.getStorage('weather');
+        const { location: { lat, lon } } = storage.getStorage('weather');
+        const coord = {lat, lon};
         
         // set loading state to true while retrieving uv/pollution api data
         this.setState(() => ({clicked: true, loading: true}));

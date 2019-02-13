@@ -9,9 +9,6 @@ import styles from '../styles/components/Forecast.scss';
 class Forecast extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            defaultForecast: null,
-        }
     }
 
     render() {
@@ -23,35 +20,35 @@ class Forecast extends Component {
                     className={styles.container}
                     data-testid='container'   
                 >
-                    {forecast.map((day, i) => (
+                    {forecast.map((currentDay, i) => (
                         <div 
                             key={i} 
                             className={styles.forecastWrapper}
                             data-testid='forecast-wrapper'
-                            data={day.date}    
+                            data={currentDay.date}    
                         >
                             <div className={styles.date}>
                                 <div>
-                                    <Moment format='dddd, Do'>{day.date}</Moment>
+                                    <Moment format='dddd, Do'>{currentDay.date}</Moment>
                                 </div>
                             </div>
 
                             <div className={styles.iconContainer}>
-                                <img src={day.day.condition.icon} />
+                                <img src={currentDay.day.condition.icon} />
                             </div>
 
                             <div 
                                 className={styles.description}
                                 data-testid='description'
                             >
-                                {day.day.condition.text}
+                                {currentDay.day.condition.text}
                             </div>
 
                             <div 
                                 className={styles.temperature}
                                 data-testid='temperature'    
                             >
-                                <span>{day.temp_c}</span>
+                                <span>{Math.round(currentDay.day.avgtemp_c)}</span>
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
 
