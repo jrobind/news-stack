@@ -34,9 +34,9 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
             >
                 <h2>Current Weather</h2>
                 <div className={styles.currentlyWrap}>
-                    <p>{currentWeather.weather[0].description}</p>
+                    <p>{currentWeather.condition.text}</p>
                     <div className={styles.iconContainer}>
-                        <img src={require(`../images/weatherIcons/${iconCodes[currentWeather.weather[0].icon]}`)} />
+                        <img src={currentWeather && currentWeather.condition.icon} />
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
             >
                 <h2>Temperature</h2>
                 <p>
-                    {Math.round(currentWeather.main.temp - 273.15)}
+                    {currentWeather.temp_c}
                     <span className={styles.symbol}>&#8451;</span>
                 </p>
             </div>
@@ -57,7 +57,7 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
                 data-testid='humidity'    
             >
                 <h2>Humidity</h2>
-                <p>{currentWeather.main.humidity}%</p>
+                <p>{currentWeather.humidity}%</p>
             </div>
 
             <div 
@@ -65,7 +65,7 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
                 data-testid='wind-speed'
             >
                 <h2>Wind Speed</h2>
-                <p>{Math.round(currentWeather.wind.speed * 2.2369)} mph</p>
+                <p>{currentWeather.wind_mph} mph</p>
             </div>
         </div>
 

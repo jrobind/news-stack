@@ -21,24 +21,13 @@ class DashboardContainer extends Component {
 
     componentDidMount() {
         const { location: { name, country, lat, lon }, forecast } = storage.getStorage('weather');
-        console.log(storage.getStorage('weather'))
         const weather = storage.getStorage('weather');
         const placeName = storage.getStorage('placeName');
-        const times = ['09:00:00', '15:00:00', '21:00:00'];
-   
-        // format forecast data for Forecast component i.e. weather data for 9am, 3pm and 9pm
-        const formattedForecast = weather.list.filter((day) => {
-            const dateToday = new Date();
-            const dateToCheck = new Date(day.dt_txt);
 
-            return dateToday.getDate() !== dateToCheck.getDate();
-
-        }).filter((day) => times.includes(day.dt_txt.split(' ')[1]));
-    
         this.setState(() => ({
-            currentWeather: list[0],
-            forecast: formattedForecast.slice(0, formattedForecast.length -1),
-            lat,
+            currentWeather: weather.current,
+            forecast,
+            lat, 
             lon,
             country,
             name: placeName === name ? name : placeName // check whether placename returned from api matches placename search
@@ -46,7 +35,8 @@ class DashboardContainer extends Component {
     }
 
     render() {
-        const { currentWeather, country, name, forecast, coord } = this.state;
+        const { currentWeather, country, name, forecast, lat, lon } = this.state;
+        const coord = {lat, lon};
 
         if (currentWeather) {
             return (
