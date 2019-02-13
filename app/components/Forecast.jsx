@@ -32,7 +32,8 @@ class Forecast extends Component {
         const fOld = old < 10 ? '0' + old : old;
         const fDate = date.slice(0, 8) + fOld;
         coord.date = fDate;
-        fetchLastWeekForecast(apiData);
+        fetchLastWeekForecast(coord)
+            .then(r => console.log(r))
     }
 
     render() {
