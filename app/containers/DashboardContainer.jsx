@@ -57,6 +57,7 @@ class DashboardContainer extends Component {
                         </div>
                         <Forecast
                             forecast={forecast.forecastday}
+                            coord={coord}
                         />
                     </div>
                 </div>

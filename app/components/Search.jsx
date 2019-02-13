@@ -82,7 +82,7 @@ class Search extends Component {
                             <div className={styles.autocompleteRoot}>
 
                                 {!loading ? <input 
-                                    {...getInputProps({autoFocus: true, placeholder: "Paris, London, Rome..."})}
+                                    {...getInputProps({autoFocus: true, placeholder:"Paris, London, Rome..."})}
                                 /> : 
                                 <Loading />}
 

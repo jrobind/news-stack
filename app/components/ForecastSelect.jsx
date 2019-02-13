@@ -4,37 +4,24 @@ import styles from '../styles/components/ForecastSelect.scss';
 class ForecastSelect extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            value: 'Afternoon',
-            date: ''
-        }
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleChange(e) {
+    handleClick(e) {
         const { updateForecast } = this.props;
-        const value = e.target.value;
-        const date = e.target.closest('div').getAttribute('data');
+        const date = e.target.parentElement.getAttribute('date');
 
-        this.setState({value, date}, () => {
-            updateForecast(this.state);
-        });
-
+        updateForecast(date);
     }
 
     render() {
         return (
-            <form 
+            <div
                 className={styles.timeOfDay}
-                data-testid="time-of-day"    
-            >
-                <select value={this.state.value} onChange={this.handleChange}>  
-                    <option value="Afternoon">Afternoon</option>
-                    <option value="Morning">Morning</option>
-                    <option value="Evening">Evening</option>
-                </select>
-            </form>
+                data-testid="time-of-day" 
+                onClick={this.handleClick}   
+            >Forecast last week</div>           
         )
     }
 }

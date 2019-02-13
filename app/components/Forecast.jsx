@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
-import iconCodes from '../utils/iconCodes';
+import api, { fetchLastWeekForecast } from '../utils/api';
 import ForecastSelect from './ForecastSelect';
 import Loading from '../components/Loading';
 import styles from '../styles/components/Forecast.scss';
@@ -9,11 +9,36 @@ import styles from '../styles/components/Forecast.scss';
 class Forecast extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            currentDate: null,
+        }
+
+        this.updateForecast = this.updateForecast.bind(this);
+    }
+
+    componentDidMount() {
+        const d = new Date();
+        const month = d.getMonth() + 1; // months run 0-11 in JS, with 0 representing January
+        const formattedDate = `${d.getFullYear()}-${month < 10 ? `0${month}`: month}-${d.getDate()}`;
+        console.log(formattedDate);
+        this.setState(() => ({currentDate: formattedDate}));
+    }
+
+    updateForecast(date) {
+        const { coord } = this.props;
+        // subtract 7 days from current date selected and pass to api fetch
+        const old = String(Number(date.slice(-2) - 7));
+        const fOld = old < 10 ? '0' + old : old;
+        const fDate = date.slice(0, 8) + fOld;
+        coord.date = fDate;
+        fetchLastWeekForecast(apiData);
     }
 
     render() {
         const { forecast } = this.props;
-        console.log(forecast)
+        const { currentDate } = this.state;
+
         if (forecast) {
             return (
                 <div 
@@ -25,7 +50,7 @@ class Forecast extends Component {
                             key={i} 
                             className={styles.forecastWrapper}
                             data-testid='forecast-wrapper'
-                            data={currentDay.date}    
+                            date={currentDay.date}    
                         >
                             <div className={styles.date}>
                                 <div>
@@ -52,7 +77,7 @@ class Forecast extends Component {
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
 
-                            {false ? 
+                            {currentDay.date !== currentDate ? 
                                 <ForecastSelect updateForecast={this.updateForecast}/> 
                                 : 
                                 <span className={styles.currently}>Currently</span>}

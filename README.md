@@ -7,5 +7,6 @@ You can see Weather-101 in action at https://weather-101.netlify.com
 ## TODO
 
 * Ensure cross browser compatibility 
-* Change api weather service
+* Change api weather service & fix broken tests
+* Fix styling flex issues on different devices - especially mobile 
 
