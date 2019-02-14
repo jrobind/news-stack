@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { fetchLastWeekForecast } from '../utils/api';
+import storage from '../utils/storage';
 import styles from '../styles/components/ForecastSelect.scss'; 
 
 class ForecastSelect extends Component {
@@ -15,10 +18,10 @@ class ForecastSelect extends Component {
     handleChange(e) {
         const { updateForecast, coord } = this.props;
         const value = e.target.value;
-        const date = e.target.parentElement.getAttribute('date');
+        const date = e.target.closest('div').getAttribute('date');
         const { forecast } = storage.getStorage('weather');
 
-        this.setState(() => ({optionValue: e.target.value}));
+        this.setState(() => ({optionValue: value}));
 
         switch (value) {
             case 'Weather history':
@@ -34,7 +37,7 @@ class ForecastSelect extends Component {
                 const fDate = date.slice(0, 8) + fOld;
                 coord.date = fDate;
                 fetchLastWeekForecast(coord)
-                    .then(forecast =>  updateForecast(forecast))
+                    .then(forecast =>  updateForecast(forecast, date))
                     .catch((error) => console.log(error));
         }  
     }

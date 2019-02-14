@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
-import api, { fetchLastWeekForecast } from '../utils/api';
 import ForecastSelect from './ForecastSelect';
 import Loading from '../components/Loading';
 import styles from '../styles/components/Forecast.scss';
@@ -12,6 +11,7 @@ class Forecast extends Component {
 
         this.state = {
             currentDate: null,
+            forecast: this.props.forecast
         }
 
         this.updateForecast = this.updateForecast.bind(this);
@@ -25,7 +25,18 @@ class Forecast extends Component {
         this.setState(() => ({currentDate: formattedDate}));
     }
 
-    updateForecast(forecast) {
+    updateForecast(historyForecast, date) {
+        const { forecast } = this.state;
+        const forecastToUpdateWith = historyForecast.forecast.forecastday[0];
+        // update current forecast with historical forecast
+        const updatedForecast = forecast.map(day => {
+            if (day.date === date) {
+                return forecastToUpdateWith;
+            }
+            return day;
+        });
+
+        console.log(updatedForecast);
     }
 
     render() {
@@ -89,7 +100,7 @@ class Forecast extends Component {
 
 Forecast.propTypes = {
     forecast: PropTypes.array.isRequired,
-    coord: PropTypes.obj.isRequired
+    coord: PropTypes.object.isRequired
 }
 
 export default Forecast;
