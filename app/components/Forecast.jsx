@@ -25,23 +25,28 @@ class Forecast extends Component {
         this.setState(() => ({currentDate: formattedDate}));
     }
 
-    updateForecast(historyForecast, date) {
+    updateForecast(newForecast, date) {
         const { forecast } = this.state;
-        const forecastToUpdateWith = historyForecast.forecast.forecastday[0];
-        // update current forecast with historical forecast
-        const updatedForecast = forecast.map(day => {
-            if (day.date === date) {
-                return forecastToUpdateWith;
-            }
-            return day;
-        });
-
-        console.log(updatedForecast);
+        if (date) {
+            const forecastToUpdateWith = newForecast.forecast.forecastday[0];
+            // update current forecast with historical forecast
+            const updatedForecast = forecast.map(day => {
+                if (day.date === date) {
+                    return forecastToUpdateWith;
+                }
+                return day;
+            });
+    
+            this.setState(() => ({forecast: updatedForecast}));
+        } else {
+            this.setState(() => ({forecast: newForecast.forecastday}));
+        }
     }
 
     render() {
-        const { forecast, coord } = this.props;
-        const { currentDate } = this.state;
+        const { coord } = this.props;
+        const { currentDate, forecast } = this.state;
+        console.log(forecast)
 
         if (forecast) {
             return (
@@ -81,13 +86,10 @@ class Forecast extends Component {
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
 
-                            {currentDay.date !== currentDate ? 
-                                <ForecastSelect 
-                                    updateForecast={this.updateForecast}
-                                    coord={coord}
-                                /> 
-                                : 
-                                <span className={styles.currently}>Currently</span>}
+                            <ForecastSelect 
+                                updateForecast={this.updateForecast}
+                                coord={coord}
+                            /> 
                         </div>
                     ))}
                 </div>

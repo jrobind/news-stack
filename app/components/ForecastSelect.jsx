@@ -24,9 +24,6 @@ class ForecastSelect extends Component {
         this.setState(() => ({optionValue: value}));
 
         switch (value) {
-            case 'Weather history':
-                updateForecast(forecast);
-                break;
             case 'Current':
                 updateForecast(forecast);
                 break;
@@ -49,8 +46,7 @@ class ForecastSelect extends Component {
             data-testid="time-of-day"    
             >
                 <select value={this.state.value} onChange={this.handleChange}>  
-                    <option value="Weather history">Weather history</option>
-                    <option value="Current">Current</option>
+                    <option value="Current forecast">Current forecast</option>
                     <option value="Last week">Last week</option>
                 </select>
             </form>      
