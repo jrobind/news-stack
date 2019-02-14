@@ -6,40 +6,57 @@ class ForecastSelect extends Component {
         super(props);
 
         this.state = {
-            hasAttribute: false
+            optionValue: 'Weather history'
         }
 
-        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleClick(e) {
-        const attr = e.target.parentElement.hasAttribute('selected');
-        console.log(attr)
-        const { updateForecast } = this.props;
+    handleChange(e) {
+        const { updateForecast, coord } = this.props;
+        const value = e.target.value;
         const date = e.target.parentElement.getAttribute('date');
-        // add attribute to clicked forecast day
-        if (!attr) {
-            e.target.parentElement.setAttribute('selected', '');
-            this.setState(() => ({hasAttribute: true}));
-        } else {
-            e.target.parentElement.removeAttribute('selected');
-            this.setState(() => ({hasAttribute: false}));
-        }
+        const { forecast } = storage.getStorage('weather');
 
-        updateForecast(date);
+        this.setState(() => ({optionValue: e.target.value}));
+
+        switch (value) {
+            case 'Weather history':
+                updateForecast(forecast);
+                break;
+            case 'Current':
+                updateForecast(forecast);
+                break;
+            case 'Last week':
+                // subtract 7 days from current date selected and pass to api fetch
+                const old = String(Number(date.slice(-2) - 7));
+                const fOld = old < 10 ? '0' + old : old;
+                const fDate = date.slice(0, 8) + fOld;
+                coord.date = fDate;
+                fetchLastWeekForecast(coord)
+                    .then(forecast =>  updateForecast(forecast))
+                    .catch((error) => console.log(error));
+        }  
     }
 
     render() {
-        const { hasAttribute } = this.state;
-
         return (
-            <div
-                className={styles.timeOfDay}
-                data-testid="time-of-day" 
-                onClick={this.handleClick}   
-            >{hasAttribute ? 'Current forecast' : 'Weather last week'}</div>           
+            <form 
+            className={styles.timeOfDay}
+            data-testid="time-of-day"    
+            >
+                <select value={this.state.value} onChange={this.handleChange}>  
+                    <option value="Weather history">Weather history</option>
+                    <option value="Current">Current</option>
+                    <option value="Last week">Last week</option>
+                </select>
+            </form>      
         )
     }
+}
+
+ForecastSelect.propTypes = {
+    updateForecast: PropTypes.func.isRequired
 }
 
 export default ForecastSelect;

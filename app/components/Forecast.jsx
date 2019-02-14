@@ -21,23 +21,15 @@ class Forecast extends Component {
         const d = new Date();
         const month = d.getMonth() + 1; // months run 0-11 in JS, with 0 representing January
         const formattedDate = `${d.getFullYear()}-${month < 10 ? `0${month}`: month}-${d.getDate()}`;
-        console.log(formattedDate);
+
         this.setState(() => ({currentDate: formattedDate}));
     }
 
-    updateForecast(date) {
-        const { coord } = this.props;
-        // subtract 7 days from current date selected and pass to api fetch
-        const old = String(Number(date.slice(-2) - 7));
-        const fOld = old < 10 ? '0' + old : old;
-        const fDate = date.slice(0, 8) + fOld;
-        coord.date = fDate;
-        fetchLastWeekForecast(coord)
-            .then(r => console.log(r))
+    updateForecast(forecast) {
     }
 
     render() {
-        const { forecast } = this.props;
+        const { forecast, coord } = this.props;
         const { currentDate } = this.state;
 
         if (forecast) {
@@ -79,7 +71,10 @@ class Forecast extends Component {
                             </div>
 
                             {currentDay.date !== currentDate ? 
-                                <ForecastSelect updateForecast={this.updateForecast}/> 
+                                <ForecastSelect 
+                                    updateForecast={this.updateForecast}
+                                    coord={coord}
+                                /> 
                                 : 
                                 <span className={styles.currently}>Currently</span>}
                         </div>
@@ -93,7 +88,8 @@ class Forecast extends Component {
 }
 
 Forecast.propTypes = {
-    forecast: PropTypes.array.isRequired
+    forecast: PropTypes.array.isRequired,
+    coord: PropTypes.obj.isRequired
 }
 
 export default Forecast;
