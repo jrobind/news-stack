@@ -24,7 +24,7 @@ class ForecastSelect extends Component {
         this.setState(() => ({optionValue: value}));
 
         switch (value) {
-            case 'Current':
+            case 'Current forecast':
                 updateForecast(forecast);
                 break;
             case 'Last week':
