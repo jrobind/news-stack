@@ -39,14 +39,14 @@ class Forecast extends Component {
     
             this.setState(() => ({forecast: updatedForecast}));
         } else {
+            console.log('reaching', newForecast)
             this.setState(() => ({forecast: newForecast.forecastday}));
         }
     }
 
     render() {
         const { coord } = this.props;
-        const { currentDate, forecast } = this.state;
-        console.log(forecast)
+        const { forecast } = this.state;
 
         if (forecast) {
             return (

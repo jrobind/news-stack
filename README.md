@@ -7,7 +7,6 @@ You can see Weather-101 in action at https://weather-101.netlify.com
 ## TODO
 
 * Ensure cross browser compatibility 
-* Change api weather service & fix broken tests
+* Fix broken tests & improve test coverage
 * Fix styling flex issues on different devices - especially mobile 
-* ForecastSelect component should be a form with a select element containing two options - weather for last week, and weather for most recent forecast
 
