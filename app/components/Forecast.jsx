@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import ForecastSelect from './ForecastSelect';
+import storage from '../utils/storage';
 import Loading from '../components/Loading';
 import styles from '../styles/components/Forecast.scss';
 
@@ -27,7 +28,9 @@ class Forecast extends Component {
 
     updateForecast(newForecast, date) {
         const { forecast } = this.state;
-        if (date) {
+        const weather = storage.getStorage('weather');
+
+        if (newForecast) {
             const forecastToUpdateWith = newForecast.forecast.forecastday[0];
             // update current forecast with historical forecast
             const updatedForecast = forecast.map(day => {
@@ -38,9 +41,16 @@ class Forecast extends Component {
             });
     
             this.setState(() => ({forecast: updatedForecast}));
+            // update local storage 
+            weather.forecast = updatedForecast;
+            storage.setStorage(weather, 'forecast-histoy-updated');
+
         } else {
-            console.log('reaching', newForecast)
-            this.setState(() => ({forecast: newForecast.forecastday}));
+            const { forecast } = storage.getStorage('forecast-histoy-updated');
+            // replace old forecast with most recent forecast
+            console.log(forecast);
+
+            // this.setState(() => ({forecast: newForecast.forecastday}));
         }
     }
 
