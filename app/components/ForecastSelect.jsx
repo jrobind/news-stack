@@ -18,13 +18,14 @@ class ForecastSelect extends Component {
     handleChange(e) {
         const { updateForecast, coord } = this.props;
         const value = e.target.value;
+        const id = e.target.closest('div').getAttribute('data-id');
         const date = e.target.closest('div').getAttribute('date');
 
         this.setState(() => ({optionValue: value}));
 
         switch (value) {
             case 'Current forecast':
-                updateForecast(null, date);
+                updateForecast(null, date, id);
                 break; 
             case 'Last week':
                 // subtract 7 days from current date selected and pass to api fetch
@@ -35,7 +36,7 @@ class ForecastSelect extends Component {
                 coord.date = fDate;
 
                 fetchLastWeekForecast(coord)
-                    .then(forecast =>  updateForecast(forecast, date))
+                    .then(forecast =>  updateForecast(forecast, date, id))
                     .catch((error) => console.log(error));
         }  
     }

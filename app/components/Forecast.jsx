@@ -26,12 +26,14 @@ class Forecast extends Component {
         this.setState(() => ({currentDate: formattedDate}));
     }
 
-    updateForecast(newForecast, date) {
+    updateForecast(newForecast, date, id) {
         const { forecast } = this.state;
         const weather = storage.getStorage('weather');
 
         if (newForecast) {
             const forecastToUpdateWith = newForecast.forecast.forecastday[0];
+            // add unique id
+            forecastToUpdateWith.id = id;
             // update current forecast with historical forecast
             const updatedForecast = forecast.map(day => {
                 if (day.date === date) {
@@ -46,9 +48,13 @@ class Forecast extends Component {
             storage.setStorage(weather, 'forecast-histoy-updated');
 
         } else {
-            const { forecast } = storage.getStorage('forecast-histoy-updated');
-            // replace old forecast with most recent forecast
-            console.log(forecast);
+            const historicalForecast = storage.getStorage('forecast-histoy-updated');
+            const { forecast } = this.state;
+
+            // update current forecast from historical data to current
+            const forecastId = historicalForecast.forecast.map(day => day.id).indexOf(id);
+            const dayToUpdate = forecast[forecastId];
+            console.log(dayToUpdate);
 
             // this.setState(() => ({forecast: newForecast.forecastday}));
         }
@@ -67,6 +73,7 @@ class Forecast extends Component {
                     {forecast.map((currentDay, i) => (
                         <div 
                             key={i} 
+                            data-id={i}
                             className={styles.forecastWrapper}
                             data-testid='forecast-wrapper'
                             date={currentDay.date}    
