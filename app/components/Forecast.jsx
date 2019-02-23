@@ -49,14 +49,14 @@ class Forecast extends Component {
 
         } else {
             const historicalForecast = storage.getStorage('forecast-histoy-updated');
-            const { forecast } = this.state;
-
+            const {forecastday} = weather.forecast;
             // update current forecast from historical data to current
             const forecastId = historicalForecast.forecast.map(day => day.id).indexOf(id);
-            const dayToUpdate = forecast[forecastId];
-            console.log(dayToUpdate);
+            const dayToUpdate = forecastday[forecastId];
+            // iterate over original forecast array and replace historical with current
+            const updatedForecast = historicalForecast.forecast.map((day, i) => i === forecastId ? dayToUpdate : day);
 
-            // this.setState(() => ({forecast: newForecast.forecastday}));
+            this.setState(() => ({forecast: updatedForecast}));
         }
     }
 
