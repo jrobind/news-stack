@@ -23,6 +23,7 @@ class DashboardContainer extends Component {
         const { location: { name, country, lat, lon }, forecast } = storage.getStorage('weather');
         const weather = storage.getStorage('weather');
         const placeName = storage.getStorage('placeName');
+        console.log(weather)
 
         this.setState(() => ({
             currentWeather: weather.current,

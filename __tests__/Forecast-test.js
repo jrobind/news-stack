@@ -7,7 +7,7 @@ import { apiMockData } from '../testHelpers/mockData.js';
 // mocks
 
 // mock for DOM Element.closest() and Element.getAttribute()
-const closest = () => ({ getAttribute() {return '2018-06-29 15:00:00'} });
+const closest = () => ({ getAttribute() { return '2018-06-29 15:00:00'} });
 
 // tests
 

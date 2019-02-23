@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fetchLastWeekForecast } from '../utils/api';
-import storage from '../utils/storage';
 import styles from '../styles/components/ForecastSelect.scss'; 
 
 class ForecastSelect extends Component {

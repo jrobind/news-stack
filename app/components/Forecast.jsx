@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import ForecastSelect from './ForecastSelect';
 import storage from '../utils/storage';
-import Loading from '../components/Loading';
+import Loading from './Loading';
 import styles from '../styles/components/Forecast.scss';
 
 class Forecast extends Component {
