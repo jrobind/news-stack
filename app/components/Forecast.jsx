@@ -99,7 +99,7 @@ class Forecast extends Component {
                                 className={styles.temperature}
                                 data-testid='temperature'    
                             >
-                                <span>{Math.round(currentDay.day.avgtemp_c)}</span>
+                                <span>{Math.round(currentDay.day.maxtemp_c)}</span>
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
 
