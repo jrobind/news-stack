@@ -6,7 +6,7 @@ import Weatherheader from '../app/components/WeatherHeader';
 import Forecast from '../app/components/Forecast';
 import UVandPollution from '../app/components/UVandPollution';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
-import { apiFakeData } from '../testHelpers/fakeData';
+import { apiMockData } from '../testHelpers/mockData';
 
 // mock for localStorage api
 global.localStorage = new LocalStorageMock;

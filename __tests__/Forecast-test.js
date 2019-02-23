@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Forecast from '../app/components/Forecast';
 import ForecastSelect from '../app/components/ForecastSelect';
-import { apiFakeData } from '../testHelpers/fakeData';
+import { apiMockData } from '../testHelpers/fakeData';
 
 // mocks
 
