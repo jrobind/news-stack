@@ -12,8 +12,8 @@ import { apiMockData } from '../testHelpers/mockData';
 global.localStorage = new LocalStorageMock;
 
 beforeAll(() => {
-    localStorage.setItem('placeName', JSON.stringify('London'));
-    localStorage.setItem('weather', JSON.stringify(apiFakeData));
+    localStorage.setItem('placeName', JSON.stringify('Lodz'));
+    localStorage.setItem('weather', JSON.stringify(apiMockData));
 });
 
 // tests
@@ -67,10 +67,11 @@ describe('<DashboardContainer/>', () => {
             </MemoryRouter>
         ).find(DashboardContainer).dive();
        
-        expect(wrapper.state('name')).toBe('London');
-        expect(wrapper.state('country')).toBe('GB');
-        expect(wrapper.state('coord')).toEqual(apiFakeData.city.coord);
-        expect(wrapper.state('forecast')).toEqual([apiFakeData.list[0], apiFakeData.list[1]]);
-        expect(wrapper.state('currentWeather')).toEqual(apiFakeData.list[0])
+        expect(wrapper.state('name')).toBe('Lodz');
+        expect(wrapper.state('country')).toBe('Poland');
+        expect(wrapper.state('lat')).toEqual(51.76);
+        expect(wrapper.state('lon')).toEqual(19.46);
+        expect(wrapper.state('currentWeather')).toEqual(apiMockData.current);
+        expect(wrapper.state('forecast')).toEqual(apiMockData.forecast);
     });
 });
