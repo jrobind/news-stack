@@ -14,51 +14,45 @@ export const apiFakeUVData = {
 }
 
 export const apiFakeData = {
-    city: { 
-        name:'London',
-        country: 'GB',
-        coord: {lat: 51.5752, lon: 0.1858}
+    current: { 
+        condition: { text: 'Sunny', icon: "//cdn.apixu.com/weather/64x64/day/113.png" },
+        humidity: 50,
+        wind_mph: 3.8,
+        temp_c: 10
     },
-    list: [{
-        weather: [{
-            description: 'scattered clouds',
-            icon: '01d',
-            id: 800,
-            main: 'Clear'
-        }],
-        wind: {speed: 1.72},
-        dt_txt: new Date().getDate() !== 29 ? "2018-06-29 09:00:00" : "2018-06-30 09:00:00",
-        main: {
-           temp: 300,
-           humidity: 49
-        }
+    location: {
+        country: 'Poland',
+        name: 'Lodz',
+        lat: 51.76,
+        lon: 19.46
     },
-    {
-        weather: [{
-            description: 'scattered clouds',
-            icon: '01d',
-            id: 800,
-            main: 'Clouds'
-        }],
-        wind: {speed: 1.82},
-        dt_txt: new Date().getDate() !== 29 ? "2018-06-29 15:00:00" : "2018-06-30 15:00:00" ,
-        main: {
-           temp: 310,
-           humidity: 59
-        }
-    },
-    {
-        weather: [{
-            description: 'few clouds',
-            icon: '01d',
-            id: 100,
-            main: 'Clouds'
-        }],
-        wind: {speed: 1.82},
-        dt_txt: new Date().getDate() !== 29 ? "2018-06-29 21:00:00" : "2018-06-30 21:00:00",
-        main: {
-           temp: 310,
-           humidity: 59
-        }
-    }]
+    forecast: {
+        forecastday: [{
+            date: '2019-02-24',
+            day: {
+                condition: { text: "Partly cloudy", icon: "//cdn.apixu.com/weather/64x64/day/116.png" },
+                humidity: 40,
+                wind_mph: 4,
+                maxtemp_c: 8
+            }
+        }, 
+        {
+            date: '2019-02-25',
+            day: {
+                condition: { text: "Moderate rain at times", icon: "//cdn.apixu.com/weather/64x64/day/299.png" },
+                humidity: 48,
+                wind_mph: 4.5,
+                maxtemp_c: 10
+            }
+        }, 
+        {
+            date: '2019-02-26',
+            day: {
+                condition: { text: "Partly cloudy", icon: "//cdn.apixu.com/weather/64x64/day/116.png" },
+                humidity: 45,
+                wind_mph: 9.4,
+                maxtemp_c: 13
+            }
+        }]
+    }
 }
