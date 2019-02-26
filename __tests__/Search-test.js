@@ -4,13 +4,13 @@ import { createMemoryHistory } from 'history';
 import Search from '../app/components/Search';
 import * as mapPlacesApi from 'react-places-autocomplete';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
-import { geocodeByAddressData, getLatLngData, apiFakeData } from '../testHelpers/fakeData';
+import { geocodeByAddressData, getLatLngData, apiMockData } from '../testHelpers/fakeData';
 import * as getWeather from '../app/utils/api';
 
 // mocks
 
 getWeather.default = jest.fn(() => {
-    return new Promise((resolve) => resolve(apiFakeData));
+    return new Promise((resolve) => resolve(apiMockData));
 })
 
 // mock async requests in react-places-autocomplete library

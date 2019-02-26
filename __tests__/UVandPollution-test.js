@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import UVandPollution from '../app/components/UVandPollution';
-import { apiFakeUVData, apiFakeData } from '../testHelpers/fakeData';
+import { apiMockUVData, apiMockData } from '../testHelpers/fakeData';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
 import * as uvApi from '../app/utils/api';
 
@@ -14,11 +14,11 @@ const props = { title: 'UV', info: 'UV test'};
 global.localStorage = new LocalStorageMock;
 
 uvApi.fetchUVIndex = jest.fn(() => {
-    return new Promise((resolve) => resolve(apiFakeUVData));
+    return new Promise((resolve) => resolve(apiMockUVData));
 });
 
 beforeAll(() => {
-    localStorage.setItem('weather', JSON.stringify(apiFakeData));
+    localStorage.setItem('weather', JSON.stringify(apiMockData));
 });
 
 beforeEach(function() {
