@@ -20,7 +20,7 @@ class ForecastSelect extends Component {
         const id = e.target.closest('div')
             .getAttribute('data-id');
 
-        this.setState(() => ({optionValue: value}));
+        !Number(id) ? this.setState(() => ({currentValue: value})) : this.setState(() => ({optionValue: value}));
 
         switch(value) {
             case 'Feels like':
@@ -39,17 +39,18 @@ class ForecastSelect extends Component {
 
     render() {
         const { id } = this.props;
+        const { currentValue, optionValue } = this.state;
 
         return (
             <form 
                 className={styles.timeOfDay}
                 data-testid="temp-options"    
             >
-                <select value={!id ? this.state.currentValue : this.state.value} onChange={this.handleChange}>  
-                    {!id && <option value="Feels-like">Feels like</option>}
-                    <option value="Average-temperature">Average temperature</option>
-                    <option value="Maximum-temperature">Maximum temperature</option>
-                    <option value="Minimum-temperature">Minimum temperature</option>
+                <select value={!id ? currentValue : optionValue} onChange={this.handleChange}>  
+                    {!id && <option value="Feels like">Feels like</option>}
+                    <option value="Average temperature">Average temperature</option>
+                    <option value="Maximum temperature">Maximum temperature</option>
+                    <option value="Minimum temperature">Minimum temperature</option>
                 </select>
             </form>      
         )
