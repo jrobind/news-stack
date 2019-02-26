@@ -5,13 +5,6 @@ export default ({ lat, lng }) => {
         .catch((error) => console.log(error));
 }
 
-export const fetchLastWeekForecast = ({ lat, lon, date }) => {
-        return fetch(`https://api.apixu.com/v1/history.json?key=945662b0093f46b9a3f212001191102&q=${lat}=${lon}&dt=${date}`)
-             .then((response) => response.json())
-             .then((data) => data)
-             .catch((error) => console.log(error));
-     }
-
 export const fetchUVIndex = ({ lat, lon }) => {
    return fetch(`https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=63a86f0f410d1650aed27460d8b457a4`)
         .then((response) => response.json())

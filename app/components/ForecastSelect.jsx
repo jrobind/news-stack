@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fetchLastWeekForecast } from '../utils/api';
 import styles from '../styles/components/ForecastSelect.scss'; 
 
 class ForecastSelect extends Component {
@@ -8,47 +7,49 @@ class ForecastSelect extends Component {
         super(props);
 
         this.state = {
-            optionValue: 'Weather history'
+            currentValue: 'Feels like',
+            optionValue: 'Average temperature'
         }
 
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {
-        const { updateForecast, coord } = this.props;
+        const { updateForecast } = this.props;
         const value = e.target.value;
-        const id = e.target.closest('div').getAttribute('data-id');
-        const date = e.target.closest('div').getAttribute('date');
+        const id = e.target.closest('div')
+            .getAttribute('data-id');
 
         this.setState(() => ({optionValue: value}));
 
-        switch (value) {
-            case 'Current forecast':
-                updateForecast(null, date, id);
-                break; 
-            case 'Last week':
-                // subtract 7 days from current date selected and pass to api fetch
-                const old = String(Number(date.slice(-2) - 7));
-                const fOld = old < 10 ? '0' + old : old;
-                const fDate = date.slice(0, 8) + fOld;
-
-                coord.date = fDate;
-
-                fetchLastWeekForecast(coord)
-                    .then(forecast =>  updateForecast(forecast, date, id))
-                    .catch((error) => console.log(error));
-        }  
+        switch(value) {
+            case 'Feels like':
+                updateForecast('feels-like', id);
+            break;
+            case 'Average-temperature':
+                updateForecast('average-temp', id);
+            break;
+            case 'Maximum-temperature':
+                updateForecast('max-temp', id);
+            break;
+            case 'Minimum-temperature':
+                updateForecast('min-temp', id);
+        }
     }
 
     render() {
+        const { id } = this.props;
+
         return (
             <form 
-            className={styles.timeOfDay}
-            data-testid="time-of-day"    
+                className={styles.timeOfDay}
+                data-testid="temp-options"    
             >
-                <select value={this.state.value} onChange={this.handleChange}>  
-                    <option value="Current forecast">Current forecast</option>
-                    <option value="Last week">Last week</option>
+                <select value={!id ? this.state.currentValue : this.state.value} onChange={this.handleChange}>  
+                    {!id && <option value="Feels-like">Feels like</option>}
+                    <option value="Average-temperature">Average temperature</option>
+                    <option value="Maximum-temperature">Maximum temperature</option>
+                    <option value="Minimum-temperature">Minimum temperature</option>
                 </select>
             </form>      
         )
@@ -56,7 +57,9 @@ class ForecastSelect extends Component {
 }
 
 ForecastSelect.propTypes = {
-    updateForecast: PropTypes.func.isRequired
+    updateForecast: PropTypes.func.isRequired,
+    coord: PropTypes.object.isRequired,
+    id: PropTypes.number.isRequired
 }
 
 export default ForecastSelect;
