@@ -24,16 +24,19 @@ class ForecastSelect extends Component {
 
         switch(value) {
             case 'Feels like':
-                updateForecast('feels-like', id);
+                updateForecast('feels like', id);
+                break;
+            case 'Temperature':
+                updateForecast('temperature', id);
+                break;
+            case 'Average temperature':
+                updateForecast('average temp', id);
+                break;
+            case 'Maximum temperature':
+                updateForecast('max temp', id);
             break;
-            case 'Average-temperature':
-                updateForecast('average-temp', id);
-            break;
-            case 'Maximum-temperature':
-                updateForecast('max-temp', id);
-            break;
-            case 'Minimum-temperature':
-                updateForecast('min-temp', id);
+            case 'Minimum temperature':
+                updateForecast('min temp', id);
         }
     }
 
@@ -48,9 +51,10 @@ class ForecastSelect extends Component {
             >
                 <select value={!id ? currentValue : optionValue} onChange={this.handleChange}>  
                     {!id && <option value="Feels like">Feels like</option>}
-                    <option value="Average temperature">Average temperature</option>
-                    <option value="Maximum temperature">Maximum temperature</option>
-                    <option value="Minimum temperature">Minimum temperature</option>
+                    {!id && <option value="Temperature">Temperature</option>}
+                    {id && <option value="Average temperature">Average temperature</option>}
+                    {id && <option value="Maximum temperature">Maximum temperature</option>}
+                    {id && <option value="Minimum temperature">Minimum temperature</option>}
                 </select>
             </form>      
         )
