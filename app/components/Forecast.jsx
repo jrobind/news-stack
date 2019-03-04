@@ -12,26 +12,38 @@ class Forecast extends Component {
 
         this.state = { 
             forecast: this.props.forecast,
-            tempChange: false, // false is the default temp state for each individual forecast
-            id: null // id of forecast to change
+            tempToChange: null
          };
 
         this.updateForecast = this.updateForecast.bind(this);
     }
 
     updateForecast(type, id) {
-        const { forecast } = this.state;
-        const { current } = storage.getStorage('weather');
-
-        console.log(current);
+        const weather = storage.getStorage('weather');
+        console.log(weather.current.default, id)
+        // current case
+        if (!Number(id)) {
+            if (weather.current.default) {
+                // switch to 'feels like' temp
+                weather.current.default = false;
+                storage.setStorage(weather, 'weather');
+                this.setState(() => ({tempToChange: weather.current.feelslike_c}));
+            } else {
+                // switch back to default
+                console.log('reach')
+                weather.current.default = true;
+                storage.setStorage(weather, 'weather');
+                this.setState(() => ({tempToChange: weather.current.temp_c}));
+            }
+        }
 
         // update tempChange status
-        this.setState(() => ({tempChange: true, id}));
+        this.setState((prevState) => ({tempChange: !prevState.tempChange}));
     }
 
     render() {
         const { coord } = this.props;
-        const { forecast } = this.state;
+        const { forecast, tempToChange } = this.state;
 
         if (forecast) {
             return (
@@ -68,7 +80,7 @@ class Forecast extends Component {
                                 className={styles.temperature}
                                 data-testid='temperature'    
                             >
-                                <span>{Math.round(currentDay.day.maxtemp_c)}</span>
+                                <span>{tempToChange ? Math.round(tempToChange) : Math.round(currentDay.day.maxtemp_c)}</span>
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
 

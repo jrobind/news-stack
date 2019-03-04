@@ -7,8 +7,8 @@ class ForecastSelect extends Component {
         super(props);
 
         this.state = {
-            currentValue: 'Feels like',
-            optionValue: 'Average temperature'
+            optionValue: 'Feels like',
+            currentValue: 'Average temperature'
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -50,8 +50,8 @@ class ForecastSelect extends Component {
                 data-testid="temp-options"    
             >
                 <select value={!id ? currentValue : optionValue} onChange={this.handleChange}>  
-                    {!id && <option value="Feels like">Feels like</option>}
                     {!id && <option value="Temperature">Temperature</option>}
+                    {!id && <option value="Feels like">Feels like</option>}
                     {id && <option value="Average temperature">Average temperature</option>}
                     {id && <option value="Maximum temperature">Maximum temperature</option>}
                     {id && <option value="Minimum temperature">Minimum temperature</option>}
