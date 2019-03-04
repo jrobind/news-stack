@@ -10,54 +10,23 @@ class Forecast extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            currentDate: null,
-            forecast: this.props.forecast
-        }
+        this.state = { 
+            forecast: this.props.forecast,
+            tempChange: false, // false is the default temp state for each individual forecast
+            id: null // id of forecast to change
+         };
 
         this.updateForecast = this.updateForecast.bind(this);
     }
 
-    componentDidMount() {
-        const d = new Date();
-        const month = d.getMonth() + 1; // months run 0-11 in JS, with 0 representing January
-        const formattedDate = `${d.getFullYear()}-${month < 10 ? `0${month}`: month}-${d.getDate()}`;
-
-        this.setState(() => ({currentDate: formattedDate}));
-    }
-
-    updateForecast(newForecast, date, id) {
+    updateForecast(type, id) {
         const { forecast } = this.state;
-        const weather = storage.getStorage('weather');
+        const { current } = storage.getStorage('weather');
 
-        if (newForecast) {
-            const forecastToUpdateWith = newForecast.forecast.forecastday[0];
-            // add unique id
-            forecastToUpdateWith.id = id;
-            // update current forecast with historical forecast
-            const updatedForecast = forecast.map(day => {
-                if (day.date === date) {
-                    return forecastToUpdateWith;
-                }
-                return day;
-            });
-    
-            this.setState(() => ({forecast: updatedForecast}));
-            // update local storage 
-            weather.forecast = updatedForecast;
-            storage.setStorage(weather, 'forecast-histoy-updated');
+        console.log(current);
 
-        } else {
-            const historicalForecast = storage.getStorage('forecast-histoy-updated');
-            const {forecastday} = weather.forecast;
-            // update current forecast from historical data to current
-            const forecastId = historicalForecast.forecast.map(day => day.id).indexOf(id);
-            const dayToUpdate = forecastday[forecastId];
-            // iterate over original forecast array and replace historical with current
-            const updatedForecast = historicalForecast.forecast.map((day, i) => i === forecastId ? dayToUpdate : day);
-
-            this.setState(() => ({forecast: updatedForecast}));
-        }
+        // update tempChange status
+        this.setState(() => ({tempChange: true, id}));
     }
 
     render() {
@@ -106,6 +75,7 @@ class Forecast extends Component {
                             <ForecastSelect 
                                 updateForecast={this.updateForecast}
                                 coord={coord}
+                                id={i}
                             /> 
                         </div>
                     ))}
