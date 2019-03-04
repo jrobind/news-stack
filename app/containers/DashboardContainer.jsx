@@ -9,6 +9,7 @@ import styles from '../styles/components/DashboardContainer.scss';
 class DashboardContainer extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             currentWeather: null,
             forecast: null,
@@ -17,13 +18,17 @@ class DashboardContainer extends Component {
             country: '',
             name: ''
         }
+
+        this.formatForecastData = this.formatForecastData.bind(this);
     }
 
     componentDidMount() {
+        this.formatForecastData();
         const { location: { name, country, lat, lon }, forecast } = storage.getStorage('weather');
         const weather = storage.getStorage('weather');
         const placeName = storage.getStorage('placeName');
-        console.log(weather)
+
+        console.log(weather);
 
         this.setState(() => ({
             currentWeather: weather.current,
@@ -33,6 +38,15 @@ class DashboardContainer extends Component {
             country,
             name: placeName === name ? name : placeName // check whether placename returned from api matches placename search
         }));
+    }
+
+    formatForecastData() {
+        debugger;
+        const weather = storage.getStorage('weather');
+        weather.current['default'] = true;
+        weather.forecast.forecastday.forEach((day) => day['default'] = true );
+
+        storage.setStorage(weather, 'weather');
     }
 
     render() {
