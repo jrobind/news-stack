@@ -42,9 +42,8 @@ class DashboardContainer extends Component {
 
     formatForecastData() {
         const weather = storage.getStorage('weather');
-
-        weather.current['default'] = true;
-        weather.forecast.forecastday.forEach((day) => day['default'] = true );
+        // remove current day from forecast array
+        weather.forecast.forecastday = weather.forecast.forecastday.slice(1);
 
         storage.setStorage(weather, 'weather');
     }

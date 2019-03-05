@@ -12,7 +12,8 @@ class Forecast extends Component {
 
         this.state = { 
             forecast: this.props.forecast,
-            tempToChange: null
+            tempToChange: null,
+            id: null
          };
 
         this.updateForecast = this.updateForecast.bind(this);

@@ -6,10 +6,7 @@ class ForecastSelect extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            optionValue: 'Feels like',
-            currentValue: 'Average temperature'
-        }
+        this.state = { currentValue: 'Average temperature' }
 
         this.handleChange = this.handleChange.bind(this);
     }
@@ -20,41 +17,32 @@ class ForecastSelect extends Component {
         const id = e.target.closest('div')
             .getAttribute('data-id');
 
-        !Number(id) ? this.setState(() => ({currentValue: value})) : this.setState(() => ({optionValue: value}));
+       this.setState(() => ({currentValue: value}));
 
         switch(value) {
-            case 'Feels like':
-                updateForecast('feels like', id);
-                break;
-            case 'Temperature':
-                updateForecast('temperature', id);
-                break;
             case 'Average temperature':
                 updateForecast('average temp', id);
                 break;
             case 'Maximum temperature':
                 updateForecast('max temp', id);
-            break;
+                break;
             case 'Minimum temperature':
                 updateForecast('min temp', id);
         }
     }
 
     render() {
-        const { id } = this.props;
-        const { currentValue, optionValue } = this.state;
+        const { currentValue } = this.state;
 
         return (
             <form 
                 className={styles.timeOfDay}
                 data-testid="temp-options"    
             >
-                <select value={!id ? currentValue : optionValue} onChange={this.handleChange}>  
-                    {!id && <option value="Temperature">Temperature</option>}
-                    {!id && <option value="Feels like">Feels like</option>}
-                    {id && <option value="Average temperature">Average temperature</option>}
-                    {id && <option value="Maximum temperature">Maximum temperature</option>}
-                    {id && <option value="Minimum temperature">Minimum temperature</option>}
+                <select value={currentValue} onChange={this.handleChange}>  
+                    <option value="Average temperature">Average temperature</option>
+                    <option value="Maximum temperature">Maximum temperature</option>
+                    <option value="Minimum temperature">Minimum temperature</option>
                 </select>
             </form>      
         )
