@@ -10,41 +10,65 @@ class Forecast extends Component {
     constructor(props) {
         super(props);
 
+        const { forecast } = storage.getStorage('weather');
+
+        // state wether history will always be the source of truth for original avgtemp data
         this.state = { 
             forecast: this.props.forecast,
-            tempToChange: null,
-            id: null
+            tempToChange: 'avgtemp_c',
+            id: null,
+            weatherHistory: [
+                {temp: +forecast.forecastday[0].day['avgtemp_c']},
+                {temp: +forecast.forecastday[1].day['avgtemp_c']},
+                {temp: +forecast.forecastday[2].day['avgtemp_c']},
+                {temp: +forecast.forecastday[3].day['avgtemp_c']},
+                {temp: +forecast.forecastday[4].day['avgtemp_c']}
+            ]
          };
 
+        this.renderTemp = this.renderTemp.bind(this);
         this.updateForecast = this.updateForecast.bind(this);
     }
 
-    updateForecast(type, id) {
-        const weather = storage.getStorage('weather');
-        console.log(weather.current.default, id)
-        // current case
-        if (!Number(id)) {
-            if (weather.current.default) {
-                // switch to 'feels like' temp
-                weather.current.default = false;
-                storage.setStorage(weather, 'weather');
-                this.setState(() => ({tempToChange: weather.current.feelslike_c}));
-            } else {
-                // switch back to default
-                console.log('reach')
-                weather.current.default = true;
-                storage.setStorage(weather, 'weather');
-                this.setState(() => ({tempToChange: weather.current.temp_c}));
-            }
-        }
+    renderTemp(i) {
+        const { day } = storage.getStorage('weather').forecast.forecastday[i];
+        const { tempToChange } = this.state;
 
-        // update tempChange status
-        this.setState((prevState) => ({tempChange: !prevState.tempChange}));
+        return +day[tempToChange];
+    }
+
+    updateForecast(type, id) {
+        const idNum = Number(id);
+
+        switch(type) {
+            case 'avg-temp':
+                this.setState(() => ({
+                    tempToChange: 'avgtemp_c',
+                     id: idNum,
+                     weatherHistory: weatherHistory.push({id: idNum, temp: this.renderTemp(idNum)})
+                }));
+                break;
+            case 'min-temp':
+                this.setState(() => ({
+                    tempToChange: 'mintemp_c',
+                    id: idNum,
+                    weatherHistory: weatherHistory.push({id: idNum, temp: this.renderTemp(idNum)})
+                }));
+                break;
+            case 'max-temp':
+                this.setState(() => ({
+                    tempToChange: 'maxtemp_c',
+                     id: idNum,
+                     weatherHistory: weatherHistory.push({id: idNum, temp: this.renderTemp(idNum)})
+                }));
+                break;
+        }
     }
 
     render() {
         const { coord } = this.props;
-        const { forecast, tempToChange } = this.state;
+        const { forecast, id, weatherHistory } = this.state;
+        console.log(weatherHistory)
 
         if (forecast) {
             return (
@@ -81,7 +105,7 @@ class Forecast extends Component {
                                 className={styles.temperature}
                                 data-testid='temperature'    
                             >
-                                <span>{tempToChange ? Math.round(tempToChange) : Math.round(currentDay.day.maxtemp_c)}</span>
+                                <span>{Math.round(currentDay.day.avgtemp_c)}</span>
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
 

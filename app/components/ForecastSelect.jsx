@@ -21,13 +21,13 @@ class ForecastSelect extends Component {
 
         switch(value) {
             case 'Average temperature':
-                updateForecast('average temp', id);
+                updateForecast('avg-temp', id);
                 break;
             case 'Maximum temperature':
-                updateForecast('max temp', id);
+                updateForecast('max-temp', id);
                 break;
             case 'Minimum temperature':
-                updateForecast('min temp', id);
+                updateForecast('min-temp', id);
         }
     }
 
