@@ -38,7 +38,7 @@ class UVandPollution extends Component {
         value < max ? this.addValue() : this.setState(() => ({showIndex: true}));
     }
 
-    handleClick() {
+    async handleClick() {
         const { title } = this.props;
         const { location: { lat, lon } } = storage.getStorage('weather');
         const coord = {lat, lon};
@@ -47,27 +47,28 @@ class UVandPollution extends Component {
         this.setState(() => ({clicked: true, loading: true}));
 
         if (title === 'Pollution') {
-            fetchPollutionIndex(coord)
-            .then(({status, data }) => {
-                // handle error
-                if (status === 'fail') {
-                    this.setState(() => ({value: false, loading: false}));
-                } else {
-                    const { current: { pollution }} = data;
-                    let aqius = Math.floor(pollution.aqius);
+            const { status, data } = await fetchPollutionIndex(coord);
+            // handle error
+            if (status === 'fail') {
+                this.setState(() => ({value: false, loading: false}));
+            } else {
+                const { current: { pollution }} = data;
+                let aqius = Math.floor(pollution.aqius);
 
-                    this.setState({max: Math.round(aqius / 3), index: aqius, loading: false},() => this.addValue(aqius));
-                }
-            });
+                this.setState({max: Math.round(aqius / 3), index: aqius, loading: false},() => this.addValue(aqius));
+            }
 
         } else {
-            fetchUVIndex(coord)
-                .then(({ value }) => {
-                    value = value > 12 ? 12 : Math.floor(value);
-                    this.setState({max: Math.round(value * 8.3), index: value, loading: false},() => this.addValue(value));
-                })
-                .catch((error) => this.setState(() => ({value: false})));
+            try {
+                let { value } = await fetchUVIndex(coord);
+
+                value = value > 12 ? 12 : Math.floor(value);
+                this.setState({max: Math.round(value * 8.3), index: value, loading: false},() => this.addValue(value));
+
+            } catch(e) {
+                this.setState(() => ({value: false}));
             }
+        }
     }
 
     render() {
