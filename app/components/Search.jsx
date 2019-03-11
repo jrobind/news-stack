@@ -30,29 +30,22 @@ class Search extends Component {
         this.setState(() => ({address}));
     }
     
-    handleSelect(address) {
+    async handleSelect(address) {
         this.setState(() => ({address, loading: true}));
 
-        geocodeByAddress(address)
-            .then((results) => {
-                const { short_name } = results[0].address_components[0];
-                
-                // set placeName to localStorage
-                storage.setStorage(short_name, 'placeName');
+       const geoAddress = await geocodeByAddress(address);
+       const { short_name } = geoAddress[0].address_components[0];
+        // set placeName to localStorage
+        storage.setStorage(short_name, 'placeName');     
 
-                getLatLng(results[0])
-                    .then((latLng) => {
-                        getWeather(latLng)
-                            .then((weather) => {
-                                this.setState(() => ({loading: false}));
-                                // set weather data to localStorage
-                                storage.setStorage(weather, 'weather');
-                                // redirect to dashboard
-                                this.props.history.push('/weather');
-                            });
-                    });
-            })
-            .catch((error) => console.log(error));
+        const latLng = await getLatLng(geoAddress[0]);
+        const weatherResults = await getWeather(latLng);
+
+        this.setState(() => ({loading: false}));
+        // set weather data to localStorage
+        storage.setStorage(weatherResults, 'weather');
+        // redirect to dashboard
+        this.props.history.push('/weather');
     }
     
     render() {
