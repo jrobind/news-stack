@@ -11,5 +11,4 @@ You can see Weather-101 in action at https://weather-101.netlify.com
 * Add pollution data testing
 * Fix styling flex issues on different devices - especially mobile 
 * Need to improve error handling for bad api requests!
-* Make use of 'feels like' temperature data
 
