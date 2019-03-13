@@ -10,10 +10,7 @@ class Forecast extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
-            forecast: this.props.forecast,
-            id: null
-         };
+        this.state = { forecast: this.props.forecast };
 
         this.updateForecast = this.updateForecast.bind(this);
     }
@@ -24,34 +21,34 @@ class Forecast extends Component {
 
         switch(type) {
             case 'avg-temp':
-                this.setState(() => ({id: idNum}));
                 // update localstorage data
                 weather.forecast.forecastday[idNum].tempState = 'avgtemp_c';
                 weather.forecast.forecastday[idNum].tempStateVal = weather.forecast.forecastday[idNum].day.avgtemp_c;
 
-                storage.setStorage('weather', weather);
-                console.log(weather)
+                storage.setStorage(weather, 'weather');
+                this.setState(() => this.state);
                 break;
             case 'min-temp':
                 weather.forecast.forecastday[idNum].tempState = 'mintemp_c';
                 weather.forecast.forecastday[idNum].tempStateVal = weather.forecast.forecastday[idNum].day.mintemp_c;
 
-                storage.setStorage('weather', weather);
-                console.log(weather)
+                storage.setStorage(weather, 'weather');
+                this.setState(() => this.state);
                 break;
             case 'max-temp':
                 weather.forecast.forecastday[idNum].tempState = 'maxtemp_c';
                 weather.forecast.forecastday[idNum].tempStateVal = weather.forecast.forecastday[idNum].day.maxtemp_c;
 
-                storage.setStorage('weather', weather);
-                console.log(weather)
+                storage.setStorage(weather, 'weather');
+                this.setState(() => this.state);
                 break;
         }
     }
 
     render() {
         const { coord } = this.props;
-        const { forecast, id } = this.state;
+        const { forecast } = this.state;
+        const { forecast: { forecastday } } = storage.getStorage('weather');
 
         if (forecast) {
             return (
@@ -88,7 +85,7 @@ class Forecast extends Component {
                                 className={styles.temperature}
                                 data-testid='temperature'    
                             >
-                                <span>{Math.round(currentDay.day.avgtemp_c)}</span>
+                                <span>{Math.round(forecastday[i].tempStateVal)}</span>
                                 <span className={styles.symbol}>&#8451;</span>
                             </div>
 
