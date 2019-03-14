@@ -46,7 +46,7 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
             >
                 <h2>Temperature</h2>
                 <p>
-                    {currentWeather.temp_c}
+                    {Math.round(currentWeather.temp_c)}
                     <span className={styles.symbol}>&#8451;</span>
                 </p>
             </div>
@@ -64,7 +64,7 @@ const WeatherHeader = ({ currentWeather, country, name, coord }) => (
                 data-testid='wind-speed'
             >
                 <h2>Wind Speed</h2>
-                <p>{currentWeather.wind_mph} mph</p>
+                <p>{Math.round(currentWeather.wind_mph)} mph</p>
             </div>
         </div>
 
