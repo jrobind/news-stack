@@ -31,21 +31,30 @@ class Search extends Component {
     }
     
     async handleSelect(address) {
-        this.setState(() => ({address, loading: true}));
+        this.setState(() => ({address, loading: true}));  
 
-       const geoAddress = await geocodeByAddress(address);
-       const { short_name } = geoAddress[0].address_components[0];
-        // set placeName to localStorage
-        storage.setStorage(short_name, 'placeName');     
+        try {
+            const geoAddress = await geocodeByAddress(address);
 
-        const latLng = await getLatLng(geoAddress[0]);
-        const weatherResults = await getWeather(latLng);
+            const { short_name } = geoAddress[0].address_components[0];
+             // set placeName to localStorage
+             storage.setStorage(short_name, 'placeName');   
 
-        this.setState(() => ({loading: false}));
-        // set weather data to localStorage
-        storage.setStorage(weatherResults, 'weather');
-        // redirect to dashboard
-        this.props.history.push('/weather');
+            const latLng = await getLatLng(geoAddress[0]);
+            const weatherResults = await getWeather(latLng);
+
+            this.setState(() => ({loading: false}));
+            // set weather data to localStorage
+            storage.setStorage(weatherResults, 'weather');
+            // redirect to dashboard
+            this.props.history.push('/weather');
+        } catch(e) {
+            // stay on the search page
+            this.props.history.push('/');
+            this.setState(() => ({address: '', loading: false}));
+            // provide some error feedback to the user. Alert for now
+            alert('Sorry! Failed to retrieve weather data.');
+        }
     }
     
     render() {
