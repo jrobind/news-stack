@@ -3,7 +3,7 @@ export default async ({ lat, lng }) => {
 		const weather = await fetch(`https://api.apixu.com/v1/forecast.json?key=945662b0093f46b9a3f212001191102&q=${lat}=${lng}&days=6`);
 		return weather.json();
 	} catch(e) {
-		return handleError(e);
+		throw e;
 	}
 }
 
