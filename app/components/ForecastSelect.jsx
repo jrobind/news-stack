@@ -36,7 +36,7 @@ class ForecastSelect extends Component {
 
         return (
             <form 
-                className={styles.timeOfDay}
+                className={styles.temperature}
                 data-testid="temp-options"    
             >
                 <select value={currentValue} onChange={this.handleChange}>  

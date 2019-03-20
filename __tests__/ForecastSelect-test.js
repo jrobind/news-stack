@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ForecastSelect from '../app/components/ForecastSelect';
+import { getLatLngData } from '../testHelpers/mockData.js';
 
 // mocks
 
@@ -8,40 +9,53 @@ import ForecastSelect from '../app/components/ForecastSelect';
 const closest = () => ({ getAttribute() {} });
 // mock for updateForecast() function prop
 const updateForecastMock = jest.fn(() => ({
-    value: 'Monday', 
-    date: '2018-07-11 12:00:00'
+    value: 'max-temp', 
+    id: 0
 }));
+
+// props
+const props = {
+    updateForecast: updateForecastMock,
+    coord: getLatLngData,
+    id: 0
+}
+
 
 beforeEach(function() {
     updateForecastMock.mockClear();
   });
 
 // tests
-
 describe('<ForecastSelect />', () => {
 
-    it('should render a time-of-day data-testid attribute', () => {
-        const wrapper = shallow(<ForecastSelect />);
+    it('should render a temp-options data-testid attribute', () => {
+        const wrapper = shallow(<ForecastSelect {...props} />);
 
-        expect(wrapper.find('[data-testid="time-of-day"]')).toHaveLength(1);
+        expect(wrapper.find('[data-testid="temp-options"]')).toHaveLength(1);
     });
 
-    it('should render "Afternoon" as the default select option', () => {
-        const wrapper = shallow(<ForecastSelect />);
+    it('should render "Average temperature" as the default select option', () => {
+        const wrapper = shallow(<ForecastSelect {...props} />);
 
-        expect(wrapper.state('value')).toEqual('Afternoon');
+        expect(wrapper.state('currentValue')).toEqual('Average temperature');
     });
 
-    it('should update time of day value when new option is selected', () => {
-        const wrapper = shallow(<ForecastSelect updateForecast={updateForecastMock} />);
-        wrapper.find('select').simulate('change', {target: { value: 'Morning', closest }});
+    it('should update temperature type when new option is selected', () => {
+        const wrapper = shallow(<ForecastSelect {...props} />);
 
-        expect(wrapper.state('value')).toEqual('Morning');
+        wrapper.find('select').simulate('change', {target: { value: 'Maximum temperature', closest }});
+        expect(wrapper.state('currentValue')).toEqual('Maximum temperature');
+
+        wrapper.find('select').simulate('change', {target: { value: 'Minimum temperature', closest }});
+        expect(wrapper.state('currentValue')).toEqual('Minimum temperature');
+
+        wrapper.find('select').simulate('change', {target: { value: 'Average temperature', closest }});
+        expect(wrapper.state('currentValue')).toEqual('Average temperature');
     });
 
     it('should call updateForecast() when new option is selected', () => {
-        const wrapper = shallow(<ForecastSelect updateForecast={updateForecastMock} />);
-        wrapper.find('select').simulate('change', {target: { value: 'Morning', closest }});
+        const wrapper = shallow(<ForecastSelect {...props} />);
+        wrapper.find('select').simulate('change', {target: { value: 'Maximum temperature', closest }});
 
         expect(updateForecastMock).toHaveBeenCalledTimes(1);
     });
