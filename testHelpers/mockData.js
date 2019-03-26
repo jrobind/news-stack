@@ -33,8 +33,12 @@ export const apiMockData = {
                 condition: { text: "Partly cloudy", icon: "//cdn.apixu.com/weather/64x64/day/116.png" },
                 humidity: 40,
                 wind_mph: 4,
-                maxtemp_c: 8
-            }
+                maxtemp_c: 8,
+                mintemp_c: 2,
+                avgtemp_c: 5
+            },
+            tempState: "avgtemp_c",
+            tempStateVal: 5
         }, 
         {
             date: '2019-02-25',
@@ -42,8 +46,12 @@ export const apiMockData = {
                 condition: { text: "Moderate rain at times", icon: "//cdn.apixu.com/weather/64x64/day/299.png" },
                 humidity: 48,
                 wind_mph: 4.5,
-                maxtemp_c: 10
-            }
+                maxtemp_c: 10,
+                mintemp_c: 3,
+                avgtemp_c: 6
+            },
+            tempState: "avgtemp_c",
+            tempStateVal: 6
         }, 
         {
             date: '2019-02-26',
@@ -51,8 +59,12 @@ export const apiMockData = {
                 condition: { text: "Partly cloudy", icon: "//cdn.apixu.com/weather/64x64/day/116.png" },
                 humidity: 45,
                 wind_mph: 9.4,
-                maxtemp_c: 13
-            }
+                maxtemp_c: 13,
+                mintemp_c: 9,
+                avgtemp_c: 11
+            },
+            tempState: "avgtemp_c",
+            tempStateVal: 11
         }]
     }
 }
