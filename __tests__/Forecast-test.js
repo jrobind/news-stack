@@ -47,32 +47,40 @@ describe('<Forecast />', () => {
         const forecastOne = wrapper.find('[data-testid="description"]').at(0);
         const forecastTwo = wrapper.find('[data-testid="description"]').at(1);
 
-        expect(forecastOne.text()).toEqual('scattered clouds');
-        expect(forecastTwo.text()).toEqual('scattered clouds');
+        expect(forecastOne.text()).toEqual('Partly cloudy');
+        expect(forecastTwo.text()).toEqual('Moderate rain at times');
     });
 
     it('should render correct temperature', () => {
         const wrapper = shallow(<Forecast {...props} />);
-        const forecastOne = wrapper.find('[data-testid="temperature"]').at(0);
-        const forecastTwo = wrapper.find('[data-testid="temperature"]').at(1);
+        const forecastOne = wrapper.find(
+            '[data-testid="forecast-wrapper"] [data-testid="temperature"]'
+        ).at(0).find('span').at(0);
+        const forecastTwo = wrapper.find(
+            '[data-testid="forecast-wrapper"] [data-testid="temperature"]'
+        ).at(1).find('span').at(0);
+        const forecastThree = wrapper.find(
+            '[data-testid="forecast-wrapper"] [data-testid="temperature"]'
+        ).at(2).find('span').at(0);
 
-        expect(forecastOne.text()).toEqual('27℃');
-        expect(forecastTwo.text()).toEqual('37℃');
+        expect(forecastOne.text()).toEqual('5');
+        expect(forecastTwo.text()).toEqual('6');
+        expect(forecastThree.text()).toEqual('11');
     });
 
     it('should render <ForecastSelect /> component for days other than today', () => {
         const wrapper = shallow(<Forecast {...props} />);
 
-        expect(wrapper.find(ForecastSelect)).toHaveLength(1);
+        expect(wrapper.find(ForecastSelect)).toHaveLength(3);
     });
 
-    it('should render a new forecast when time of day is changed', () => {
-        const wrapper = mount(<Forecast {...props} />);
-        wrapper.find('select').simulate('change', {target: { value: 'Morning', closest}});
-        const forecastTwo = wrapper.find('.description').at(1);
+    // it('should render a new value when temperature is toggled', () => {
+    //     const wrapper = mount(<Forecast {...props} />);
+    //     wrapper.find('select').simulate('change', {target: { value: 'Minimum temperature', closest}});
+    //     const forecastTwo = wrapper.find('.description').at(1);
 
-        expect(wrapper.state('defaultForecast')[1].weather[0].id).toBe(800);
-        expect(forecastTwo.text()).toEqual('scattered clouds');
-    });
+    //     expect(wrapper.state('defaultForecast')[1].weather[0].id).toBe(800);
+    //     expect(forecastTwo.text()).toEqual('scattered clouds');
+    // });
     
 });
