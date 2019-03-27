@@ -11,8 +11,8 @@ export default class LocalStorageMock {
         return this.store[key] || null;
     }
   
-    setItem(key, value) {
-        this.store[key] = JSON.stringify(value);
+    setItem(value, key) {
+        this.store[key] = value;
     }
   
     removeItem(key) {
