@@ -11,11 +11,17 @@ import LocalStorageMock from '../testHelpers/mockLocalStorage';
 global.localStorage = new LocalStorageMock;
 
 const setupLocalStorageWeatherData = () => {
-    localStorage.setItem('weather', apiMockData)
+    localStorage.setItem(JSON.stringify(apiMockData), 'weather');
+}
+
+const clearLocalStorageWeatherData = () => {
+    localStorage.removeItem('weather');
 }
 
 // mock for DOM Element.closest() and Element.getAttribute()
-const closest = () => ({ getAttribute() { return '2018-06-29 15:00:00'} });
+const closest = () => ({ getAttribute() { return 0 } });
+// const closestAvg = () => ({ getAttribute() { return 'Average temperature'} });
+// const closestMax = () => ({ getAttribute() { return 'Maximum temperature'} });
 
 // props
 const props = {
@@ -23,8 +29,13 @@ const props = {
     coord: getLatLngData
 }
 
-beforeAll(() => {
+beforeEach(() => {
     setupLocalStorageWeatherData();
+});
+
+  
+afterEach(() => {
+    clearLocalStorageWeatherData();
 });
 
 // tests
@@ -74,13 +85,17 @@ describe('<Forecast />', () => {
         expect(wrapper.find(ForecastSelect)).toHaveLength(3);
     });
 
-    // it('should render a new value when temperature is toggled', () => {
-    //     const wrapper = mount(<Forecast {...props} />);
-    //     wrapper.find('select').simulate('change', {target: { value: 'Minimum temperature', closest}});
-    //     const forecastTwo = wrapper.find('.description').at(1);
+    it('should render a new value when temperature is toggled', () => {
+        const wrapper = mount(<Forecast {...props} />);
+        wrapper.find('select').at(0).simulate('change', {target: { value: 'Minimum temperature', closest }})
+        const min = wrapper.find(
+            '[data-testid="forecast-wrapper"] [data-testid="temperature"]'
+        ).at(0).find('span').at(0);
+        
 
-    //     expect(wrapper.state('defaultForecast')[1].weather[0].id).toBe(800);
-    //     expect(forecastTwo.text()).toEqual('scattered clouds');
-    // });
+        // .simulate('change', {target: { value: 'Minimum temperature', closest}});
+        // const min = wrapper.find('.description').at(1);
+        // expect(forecastTwo.text()).toEqual('scattered clouds');
+    });
     
 });
