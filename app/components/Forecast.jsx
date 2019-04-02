@@ -9,10 +9,17 @@ import styles from '../styles/components/Forecast.scss';
 class Forecast extends Component {
     constructor(props) {
         super(props);
-
-        this.state = { forecast: this.props.forecast };
+        this.state = { 
+            forecast: this.props.forecast,
+            storedForecast: storage.getStorage('weather')
+         };
 
         this.updateForecast = this.updateForecast.bind(this);
+        this.updateStateStoredForecast = this.updateStateStoredForecast.bind(this);
+    }
+
+    updateStateStoredForecast() {
+        this.setState(() => ({storedForecast: storage.getStorage('weather')}));
     }
 
     updateForecast(type, id) {
@@ -26,29 +33,28 @@ class Forecast extends Component {
                 weather.forecast.forecastday[idNum].tempStateVal = weather.forecast.forecastday[idNum].day.avgtemp_c;
 
                 storage.setStorage(weather, 'weather');
-                this.setState(() => this.state);
+                this.updateStateStoredForecast();
                 break;
             case 'min-temp':
                 weather.forecast.forecastday[idNum].tempState = 'mintemp_c';
                 weather.forecast.forecastday[idNum].tempStateVal = weather.forecast.forecastday[idNum].day.mintemp_c;
 
                 storage.setStorage(weather, 'weather');
-                this.setState(() => this.state);
+                this.updateStateStoredForecast();
                 break;
             case 'max-temp':
                 weather.forecast.forecastday[idNum].tempState = 'maxtemp_c';
                 weather.forecast.forecastday[idNum].tempStateVal = weather.forecast.forecastday[idNum].day.maxtemp_c;
 
                 storage.setStorage(weather, 'weather');
-                this.setState(() => this.state);
+                this.updateStateStoredForecast();
                 break;
         }
     }
 
     render() {
         const { coord } = this.props;
-        const { forecast } = this.state;
-        const { forecast: { forecastday } } = storage.getStorage('weather');
+        const { forecast, storedForecast: { forecast: { forecastday } } } = this.state;
 
         if (forecast) {
             return (
