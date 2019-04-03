@@ -16,8 +16,8 @@ class ForecastSelect extends Component {
         const value = e.target.value;
         const id = e.target.closest('div')
             .getAttribute('data-id');
-
-       this.setState(() => ({currentValue: value}));
+        
+        this.setState(() => ({currentValue: value}));
 
         switch(value) {
             case 'Average temperature':
