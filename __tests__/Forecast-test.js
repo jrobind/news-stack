@@ -8,20 +8,14 @@ import LocalStorageMock from '../testHelpers/mockLocalStorage';
 // mocks
 
 // mock for localStorage api
-global.localStorage = new LocalStorageMock;
+global.localStorage = new LocalStorageMock();
 
 const setupLocalStorageWeatherData = () => {
-    localStorage.setItem(JSON.stringify(apiMockData), 'weather');
-}
-
-const clearLocalStorageWeatherData = () => {
-    localStorage.removeItem('weather');
+    localStorage.setItem('weather', JSON.stringify(apiMockData),);
 }
 
 // mock for DOM Element.closest() and Element.getAttribute()
 const closest = () => ({ getAttribute() { return 0 } });
-// const closestAvg = () => ({ getAttribute() { return 'Average temperature'} });
-// const closestMax = () => ({ getAttribute() { return 'Maximum temperature'} });
 
 // props
 const props = {
@@ -29,13 +23,8 @@ const props = {
     coord: getLatLngData
 }
 
-beforeEach(() => {
+beforeAll(() => {
     setupLocalStorageWeatherData();
-});
-
-  
-afterEach(() => {
-    clearLocalStorageWeatherData();
 });
 
 // tests
@@ -92,10 +81,7 @@ describe('<Forecast />', () => {
             '[data-testid="forecast-wrapper"] [data-testid="temperature"]'
         ).at(0).find('span').at(0);
         
-
-        // .simulate('change', {target: { value: 'Minimum temperature', closest}});
-        // const min = wrapper.find('.description').at(1);
-        // expect(forecastTwo.text()).toEqual('scattered clouds');
+        expect(min.text()).toEqual('2');
     });
     
 });
