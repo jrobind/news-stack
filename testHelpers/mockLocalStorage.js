@@ -11,7 +11,7 @@ export default class LocalStorageMock {
         return this.store[key] || null;
     }
   
-    setItem(value, key) {
+    setItem(key, value) {
         this.store[key] = value;
     }
   
