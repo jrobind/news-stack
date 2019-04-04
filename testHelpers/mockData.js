@@ -18,7 +18,8 @@ export const apiMockData = {
         condition: { text: 'Sunny', icon: "//cdn.apixu.com/weather/64x64/day/113.png" },
         humidity: 50,
         wind_mph: 3.8,
-        temp_c: 10
+        temp_c: 10,
+        last_updated: "2019-04-04 20:30"
     },
     location: {
         country: 'Poland',

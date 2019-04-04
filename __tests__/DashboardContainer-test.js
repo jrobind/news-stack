@@ -11,9 +11,13 @@ import { apiMockData } from '../testHelpers/mockData';
 // mock for localStorage api
 global.localStorage = new LocalStorageMock;
 
-beforeAll(() => {
+const setupLocalStorageWeatherData = () => {
     localStorage.setItem('placeName', JSON.stringify('Lodz'));
-    localStorage.setItem('weather', JSON.stringify(apiMockData));
+    localStorage.setItem('weather', JSON.stringify(apiMockData),);
+}
+
+beforeAll(() => {
+    setupLocalStorageWeatherData();
 });
 
 // tests
