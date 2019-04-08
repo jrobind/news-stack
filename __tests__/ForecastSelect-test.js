@@ -8,9 +8,9 @@ import { getLatLngData } from '../testHelpers/mockData.js';
 // mock for DOM Element.closest() and Element.getAttribute()
 const closest = () => ({ getAttribute() {} });
 // mock for updateForecast() function prop
-const updateForecastMock = jest.fn(() => ({
-    value: 'max-temp', 
-    id: 0
+const updateForecastMock = jest.fn((value, id) => ({
+    value,
+    id
 }));
 
 // props
@@ -40,7 +40,7 @@ describe('<ForecastSelect />', () => {
         expect(wrapper.state('currentValue')).toEqual('Average temperature');
     });
 
-    it('should update temperature type when new option is selected', () => {
+    it('should update select element temperature type when new option is selected', () => {
         const wrapper = shallow(<ForecastSelect {...props} />);
 
         wrapper.find('select').simulate('change', {target: { value: 'Maximum temperature', closest }});
@@ -53,11 +53,27 @@ describe('<ForecastSelect />', () => {
         expect(wrapper.state('currentValue')).toEqual('Average temperature');
     });
 
-    it('should call updateForecast() when new option is selected', () => {
+    it('should call updateForecast() when Maximum temperature option is selected', () => {
         const wrapper = shallow(<ForecastSelect {...props} />);
-        wrapper.find('select').simulate('change', {target: { value: 'Maximum temperature', closest }});
 
+        wrapper.find('select').simulate('change', {target: { value: 'Maximum temperature', closest }});
+        expect(updateForecastMock.mock.calls[0][0]).toBe('max-temp');
         expect(updateForecastMock).toHaveBeenCalledTimes(1);
     });
 
+    it('should call updateForecast() when Minimum temperature option is selected', () => {
+        const wrapper = shallow(<ForecastSelect {...props} />);
+
+        wrapper.find('select').simulate('change', {target: { value: 'Minimum temperature', closest }});
+        expect(updateForecastMock.mock.calls[0][0]).toBe('min-temp');
+        expect(updateForecastMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call updateForecast() when Average temperature option is selected', () => {
+        const wrapper = shallow(<ForecastSelect {...props} />);
+
+        wrapper.find('select').simulate('change', {target: { value: 'Average temperature', closest }});
+        expect(updateForecastMock.mock.calls[0][0]).toBe('avg-temp');
+        expect(updateForecastMock).toHaveBeenCalledTimes(1);
+    });
 });
