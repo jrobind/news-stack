@@ -12,8 +12,11 @@ import { apiMockData } from '../testHelpers/mockData';
 global.localStorage = new LocalStorageMock;
 
 const setupLocalStorageWeatherData = () => {
+    localStorage.removeItem('placeName');
+    localStorage.removeItem('weather');
+
     localStorage.setItem('placeName', JSON.stringify('Lodz'));
-    localStorage.setItem('weather', JSON.stringify(apiMockData),);
+    localStorage.setItem('weather', JSON.stringify(apiMockData));
 }
 
 beforeAll(() => {
@@ -65,17 +68,22 @@ describe('<DashboardContainer/>', () => {
     });
 
     it('should update state with weather api data once component mounts', () => {
+        setupLocalStorageWeatherData();
+
         const wrapper = shallow(
             <MemoryRouter>
                 <DashboardContainer />
             </MemoryRouter>
         ).find(DashboardContainer).dive();
+
+        const formattedMockData = apiMockData;
+        formattedMockData.forecast.forecastday = formattedMockData.forecast.forecastday.splice(1);
        
         expect(wrapper.state('name')).toBe('Lodz');
         expect(wrapper.state('country')).toBe('Poland');
         expect(wrapper.state('lat')).toEqual(51.76);
         expect(wrapper.state('lon')).toEqual(19.46);
         expect(wrapper.state('currentWeather')).toEqual(apiMockData.current);
-        expect(wrapper.state('forecast')).toEqual(apiMockData.forecast);
+        expect(wrapper.state('forecast')).toEqual(formattedMockData.forecast);
     });
 });
