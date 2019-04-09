@@ -11,7 +11,7 @@ import LocalStorageMock from '../testHelpers/mockLocalStorage';
 global.localStorage = new LocalStorageMock();
 
 const setupLocalStorageWeatherData = () => {
-    localStorage.setItem('weather', JSON.stringify(apiMockData),);
+    localStorage.setItem('weather', JSON.stringify(apiMockData));
 }
 
 // mock for DOM Element.closest() and Element.getAttribute()
