@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import WeatherHeader from '../app/components/WeatherHeader';
-import { apiMockData } from '../testHelpers/fakeData';
+import { apiMockData } from '../testHelpers/mockData';
 
 const setup = (props) => {
     return shallow(
