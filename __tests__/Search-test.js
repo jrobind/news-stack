@@ -4,7 +4,7 @@ import { createMemoryHistory } from 'history';
 import Search from '../app/components/Search';
 import * as mapPlacesApi from 'react-places-autocomplete';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
-import { geocodeByAddressData, getLatLngData, apiMockData } from '../testHelpers/fakeData';
+import { geocodeByAddressData, getLatLngData, apiMockData } from '../testHelpers/mockData';
 import * as getWeather from '../app/utils/api';
 
 // mocks
@@ -103,7 +103,7 @@ describe('<Search />', () => {
         expect(getWeather.default).toHaveBeenCalled();
         expect(getWeather.default).toHaveBeenCalledTimes(1);
         expect(typeof JSON.parse(localStorage.getItem('weather'))).toBe('object');
-        expect(JSON.parse(localStorage.getItem('weather')).city.name).toBe('London');
+        expect(JSON.parse(localStorage.getItem('weather')).location.name).toBe('Lodz');
     });
 
     it('should update state loading value once the call to getWeather() is made', () => {
@@ -128,7 +128,7 @@ describe('<Search />', () => {
         input.simulate('keyDown', { key: 'Enter' });
 
         expect(typeof JSON.parse(localStorage.getItem('weather'))).toBe('object');
-        expect(JSON.parse(localStorage.getItem('weather')).city.name).toBe('London');
+        expect(JSON.parse(localStorage.getItem('weather')).location.name).toBe('Lodz');
     });
 
 });
