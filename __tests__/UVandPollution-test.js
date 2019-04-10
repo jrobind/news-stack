@@ -1,28 +1,47 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import UVandPollution from '../app/components/UVandPollution';
-import { apiMockUVData, apiMockData } from '../testHelpers/fakeData';
+import { apiMockUVData, apiMockData } from '../testHelpers/mockData';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
-import * as uvApi from '../app/utils/api';
+import * as uvAndPollutionApi from '../app/utils/api';
+
 
 // props
 
-const props = { title: 'UV', info: 'UV test'};
+const props = { 
+    uv: {
+        title: 'UV',
+        info: 'UV test'
+    },
+    pollution: {
+        title: 'Pollution',
+        info: 'Pollution test'
+    }
+};
 
 // mocks
 
 global.localStorage = new LocalStorageMock;
 
-uvApi.fetchUVIndex = jest.fn(() => {
+const setupLocalStorageWeatherData = () => {
+    localStorage.setItem('weather', JSON.stringify(apiMockData));
+}
+
+uvAndPollutionApi.fetchUVIndex = jest.fn(() => {
+    return new Promise((resolve) => resolve(apiMockUVData));
+});
+
+uvAndPollutionApi.fetchPollutionIndex = jest.fn(() => {
     return new Promise((resolve) => resolve(apiMockUVData));
 });
 
 beforeAll(() => {
-    localStorage.setItem('weather', JSON.stringify(apiMockData));
+    setupLocalStorageWeatherData();
 });
 
-beforeEach(function() {
-    uvApi.fetchUVIndex.mockClear();
+beforeEach(() => {
+    uvAndPollutionApi.fetchUVIndex.mockClear();
+    uvAndPollutionApi.fetchPollutionIndex.mockClear();
 });
 
 // tests
@@ -30,44 +49,44 @@ beforeEach(function() {
 describe('<UVandPollution />', () => {
 
     it('should render a container data-testid attribute', () => {
-        const wrapper = shallow(<UVandPollution {...props}/>);
+        const wrapper = shallow(<UVandPollution {...props.uv}/>);
         
         expect(wrapper.find('[data-testid="container"]')).toHaveLength(1);
     });
 
     it('should render a uv-pollution-wrapper data-testid attribute', () => {
-        const wrapper = shallow(<UVandPollution {...props}/>);
+        const wrapper = shallow(<UVandPollution {...props.uv}/>);
         
         expect(wrapper.find('[data-testid="uv-pollution-wrapper"]')).toHaveLength(1);
     });
 
     it('should render a see-index data-testid attribute by default', () => {
-        const wrapper = shallow(<UVandPollution {...props}/>);
+        const wrapper = shallow(<UVandPollution {...props.uv}/>);
         
         expect(wrapper.find('[data-testid="see-index"]')).toHaveLength(1);
     });
 
     it('should not render a uv-animation-container data-testid attribute by default', () => {
-        const wrapper = shallow(<UVandPollution {...props}/>);
+        const wrapper = shallow(<UVandPollution {...props.uv}/>);
         
         expect(wrapper.find('[data-testid="uv-animation-container"]')).toHaveLength(0);
     });
 
     it('it should call fetchUVIndex after button click', () => {
-        const wrapper = shallow(<UVandPollution {...props}/>);
+        const wrapper = shallow(<UVandPollution {...props.uv}/>);
         const button = wrapper.find('button');
 
         button.simulate('click');
 
         expect(wrapper.state('clicked')).toBe(true);
-        expect(uvApi.fetchUVIndex).toHaveBeenCalled();
-        expect(uvApi.fetchUVIndex).toHaveBeenCalledTimes(1);
+        expect(uvAndPollutionApi.fetchUVIndex).toHaveBeenCalled();
+        expect(uvAndPollutionApi.fetchUVIndex).toHaveBeenCalledTimes(1);
     });
 
     it('it should update state UV index value and max value after button click', () => {
-        let wrapper = shallow(<UVandPollution {...props}/>);
+        let wrapper = shallow(<UVandPollution {...props.uv}/>);
         const button = wrapper.find('button');
-        const promise = uvApi.fetchUVIndex();
+        const promise = uvAndPollutionApi.fetchUVIndex();
 
         button.simulate('click')
         // testing async action so we need to acccess mock api promise using a .then() and run tests within
@@ -75,6 +94,16 @@ describe('<UVandPollution />', () => {
             expect(wrapper.update().state('index')).toBe(6);
             expect(Math.round(wrapper.update().state('max'))).toBe(50);
         });
+    });
+
+    it('it should call fetchPollutionIndex after button click', () => {
+        const wrapper = shallow(<UVandPollution {...props.pollution}/>);
+        const button = wrapper.find('button');
+        button.simulate('click');
+
+        expect(wrapper.state('clicked')).toBe(true);
+        expect(uvAndPollutionApi.fetchPollutionIndex).toHaveBeenCalled();
+        expect(uvAndPollutionApi.fetchPollutionIndex).toHaveBeenCalledTimes(1);
     });
 
 });
