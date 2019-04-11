@@ -106,4 +106,17 @@ describe('<UVandPollution />', () => {
         expect(uvAndPollutionApi.fetchPollutionIndex).toHaveBeenCalledTimes(1);
     });
 
+    it('it should update state Pollution index value and max value after button click', () => {
+        let wrapper = shallow(<UVandPollution {...props.uv}/>);
+        const button = wrapper.find('button');
+        const promise = uvAndPollutionApi.fetchUVIndex();
+
+        button.simulate('click')
+        // testing async action so we need to acccess mock api promise using a .then() and run tests within
+        return promise.then(() => {
+            expect(wrapper.update().state('index')).toBe(6);
+            expect(Math.round(wrapper.update().state('max'))).toBe(50);
+        });
+    });
+
 });
