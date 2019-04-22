@@ -14,7 +14,13 @@ export const apiMockUVData = {
 }
 
 export const apiMockPollutionData = {
-    value: 9
+    data: {
+        current: {
+            pollution: {
+                aqius: 111
+            }
+        }
+    }
 }
 
 export const apiMockData = {
