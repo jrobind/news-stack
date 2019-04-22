@@ -13,6 +13,10 @@ export const apiMockUVData = {
     value: 6
 }
 
+export const apiMockPollutionData = {
+    value: 9
+}
+
 export const apiMockData = {
     current: { 
         condition: { text: 'Sunny', icon: "//cdn.apixu.com/weather/64x64/day/113.png" },
