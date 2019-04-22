@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import UVandPollution from '../app/components/UVandPollution';
-import { apiMockUVData, apiMockData } from '../testHelpers/mockData';
+import { apiMockUVData, apiMockPollutionData, apiMockData } from '../testHelpers/mockData';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
 import * as uvAndPollutionApi from '../app/utils/api';
 
@@ -32,7 +32,7 @@ uvAndPollutionApi.fetchUVIndex = jest.fn(() => {
 });
 
 uvAndPollutionApi.fetchPollutionIndex = jest.fn(() => {
-    return new Promise((resolve) => resolve(apiMockUVData));
+    return new Promise((resolve) => resolve(apiMockPollutionData));
 });
 
 beforeAll(() => {
@@ -88,7 +88,7 @@ describe('<UVandPollution />', () => {
         const button = wrapper.find('button');
         const promise = uvAndPollutionApi.fetchUVIndex();
 
-        button.simulate('click')
+        button.simulate('click');
         // testing async action so we need to acccess mock api promise using a .then() and run tests within
         return promise.then(() => {
             expect(wrapper.update().state('index')).toBe(6);
@@ -101,21 +101,20 @@ describe('<UVandPollution />', () => {
         const button = wrapper.find('button');
         button.simulate('click');
 
-        expect(wrapper.state('clicked')).toBe(true);
+        expect(wrapper.update().state('clicked')).toBe(true);
         expect(uvAndPollutionApi.fetchPollutionIndex).toHaveBeenCalled();
         expect(uvAndPollutionApi.fetchPollutionIndex).toHaveBeenCalledTimes(1);
     });
 
     it('it should update state Pollution index value and max value after button click', () => {
-        let wrapper = shallow(<UVandPollution {...props.uv}/>);
+        let wrapper = shallow(<UVandPollution {...props.pollution}/>);
         const button = wrapper.find('button');
-        const promise = uvAndPollutionApi.fetchUVIndex();
+        const promise = uvAndPollutionApi.fetchPollutionIndex();
+        button.simulate('click');
 
-        button.simulate('click')
-        // testing async action so we need to acccess mock api promise using a .then() and run tests within
         return promise.then(() => {
-            expect(wrapper.update().state('index')).toBe(6);
-            expect(Math.round(wrapper.update().state('max'))).toBe(50);
+            expect(wrapper.state('index')).toBe(111);
+            expect(Math.round(wrapper.update().state('max'))).toBe(37);
         });
     });
 
