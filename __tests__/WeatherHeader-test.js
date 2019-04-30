@@ -24,26 +24,29 @@ describe('<WeatherHeader />', () => {
         expect(wrapper.dive().find('[data-testid="container"]')).toHaveLength(1);
     });
 
-    // it('should render a place-info data-testid attribute', () => {
-    //     const { city: { name, country, coord }, list } = apiMockData;
-    //     const wrapper = setup({ currentWeather: list[0], country, coord, name });
+    it('should render a place-info data-testid attribute', () => {
+        const { location: { name, country, lat, lon }, current } = apiMockData;
+        const coord = { lat, lon };
+        const wrapper = setup({ currentWeather: current, country, coord, name });
 
-    //     expect(wrapper.dive().find('[data-testid="place-info"]')).toHaveLength(1);
-    // });
+        expect(wrapper.dive().find('[data-testid="place-info"]')).toHaveLength(1);
+    });
 
-    // it('should render a weather-content data-testid attribute', () => {
-    //     const { city: { name, country, coord }, list } = apiMockData;
-    //     const wrapper = setup({ currentWeather: list[0], country, coord, name });
+    it('should render a weather-content data-testid attribute', () => {
+        const { location: { name, country, lat, lon }, current } = apiMockData;
+        const coord = { lat, lon };
+        const wrapper = setup({ currentWeather: current, country, coord, name });
 
-    //     expect(wrapper.dive().find('[data-testid="weather-content"]')).toHaveLength(1);
-    // });
+        expect(wrapper.dive().find('[data-testid="weather-content"]')).toHaveLength(1);
+    });
 
-    // it('should render a temperature data-testid attribute', () => {
-    //     const { city: { name, country, coord }, list } = apiMockData;
-    //     const wrapper = setup({ currentWeather: list[0], country, coord, name });
+    it('should render a temperature data-testid attribute', () => {
+        const { location: { name, country, lat, lon }, current } = apiMockData;
+        const coord = { lat, lon };
+        const wrapper = setup({ currentWeather: current, country, coord, name });
 
-    //     expect(wrapper.dive().find('[data-testid="temperature"]')).toHaveLength(1);
-    // });
+        expect(wrapper.dive().find('[data-testid="temperature"]')).toHaveLength(1);
+    });
 
     // it('should render a humidity data-testid attribute', () => {
     //     const { city: { name, country, coord }, list } = apiMockData;
