@@ -72,84 +72,90 @@ describe('<WeatherHeader />', () => {
         expect(wrapper.dive().find('[data-testid="coordinates"]')).toHaveLength(1);
     });
 
-    // it('should render correct place name and country code', () => {
-    //     const { city: { name, country, coord }, list } = apiMockData;
-    //     const wrapper = setup({ currentWeather: list[0], country, coord, name });
+    it('should render correct place name and country code', () => {
+        const { location: { name, country, lat, lon }, current } = apiMockData;
+        const coord = { lat, lon };
+        const wrapper = setup({ currentWeather: current, country, coord, name });
 
-    //     expect(
-    //         wrapper
-    //             .dive()
-    //             .find('[data-testid="place-info"]')
-    //             .childAt(0)
-    //             .text()).toEqual('London, GB');
-    // });
+        expect(
+            wrapper
+                .dive()
+                .find('[data-testid="place-info"]')
+                .childAt(0)
+                .text()).toEqual('Lodz, Poland');
+    });
     
-    // it('should render current weather conditions', () => {
-    //     const { city: { name, country, coord }, list } = apiMockData;
-    //     const wrapper = setup({ currentWeather: list[0], country, coord, name });
+    it('should render current weather conditions', () => {
+        const { location: { name, country, lat, lon }, current } = apiMockData;
+        const coord = { lat, lon };
+        const wrapper = setup({ currentWeather: current, country, coord, name });
 
-    //     expect(
-    //         wrapper
-    //             .dive()
-    //             .find('[data-testid="currently"]')
-    //             .childAt(1)
-    //             .childAt(0)
-    //             .text()).toEqual('scattered clouds');
-    // });
+        expect(
+            wrapper
+                .dive()
+                .find('[data-testid="currently"]')
+                .childAt(1)
+                .childAt(0)
+                .text()).toEqual('Sunny');
+    });
 
-    // it('should render correct temperature', () => {
-    //     const { city: { name, country, coord }, list } = apiMockData;
-    //     const wrapper = setup({ currentWeather: list[0], country, coord, name });
+    it('should render correct temperature', () => {
+        const { location: { name, country, lat, lon }, current } = apiMockData;
+        const coord = { lat, lon };
+        const wrapper = setup({ currentWeather: current, country, coord, name });
 
-    //     expect(
-    //         wrapper
-    //             .dive()
-    //             .find('[data-testid="temperature"]')
-    //             .childAt(1)
-    //             .text()).toEqual('27℃');
-    // });
+        expect(
+            wrapper
+                .dive()
+                .find('[data-testid="temperature"]')
+                .childAt(1)
+                .text()).toEqual('10℃');
+    });
 
-    // it('should render correct humidity', () => {
-    //     const { city: { name, country, coord }, list } = apiMockData;
-    //     const wrapper = setup({ currentWeather: list[0], country, coord, name });
+    it('should render correct humidity', () => {
+        const { location: { name, country, lat, lon }, current } = apiMockData;
+        const coord = { lat, lon };
+        const wrapper = setup({ currentWeather: current, country, coord, name });
 
-    //     expect(
-    //         wrapper
-    //             .dive()
-    //             .find('[data-testid="humidity"]')
-    //             .childAt(1)
-    //             .text()).toEqual('49%');
-    // });
+        expect(
+            wrapper
+                .dive()
+                .find('[data-testid="humidity"]')
+                .childAt(1)
+                .text()).toEqual('50%');
+    });
 
-    // it('should render correct wind speed', () => {
-    //     const { city: { name, country, coord }, list } = apiMockData;
-    //     const wrapper = setup({ currentWeather: list[0], country, coord, name });
+    it('should render correct wind speed', () => {
+        const { location: { name, country, lat, lon }, current } = apiMockData;
+        const coord = { lat, lon };
+        const wrapper = setup({ currentWeather: current, country, coord, name });
 
-    //     expect(
-    //         wrapper
-    //             .dive()
-    //             .find('[data-testid="wind-speed"]')
-    //             .childAt(1)
-    //             .text()).toEqual('4 mph');
-    // });
+        expect(
+            wrapper
+                .dive()
+                .find('[data-testid="wind-speed"]')
+                .childAt(1)
+                .text()).toEqual('4 mph');
+    });
 
-    // it('should render correct coordinates', () => {
-    //     const { city: { name, country, coord }, list } = apiMockData;
-    //     const wrapper = setup({ currentWeather: list[0], country, coord, name });
+    it('should render correct coordinates', () => {
+        const { location: { name, country, lat, lon }, current } = apiMockData;
+        const coord = { lat, lon };
+        const wrapper = setup({ currentWeather: current, country, coord, name });
 
-    //     expect(
-    //         wrapper
-    //             .dive()
-    //             .find('[data-testid="coordinates"]')
-    //             .childAt(1)
-    //             .text()).toEqual('LAT: 51.5752');
+        expect(
+            wrapper
+                .dive()
+                .find('[data-testid="coordinates"]')
+                .childAt(1)
+                .text()).toEqual('LAT: 51.76');
 
-    //     expect(
-    //         wrapper
-    //             .dive()
-    //             .find('[data-testid="coordinates"]')
-    //             .childAt(2)
-    //             .text()).toEqual('LON: 0.1858');
-    // });
+        expect(
+            wrapper
+                .dive()
+                .find('[data-testid="coordinates"]')
+                .childAt(2)
+                .text()).toEqual('LON: 19.46');
+    });
 
 });
