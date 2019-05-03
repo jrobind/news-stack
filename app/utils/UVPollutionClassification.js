@@ -21,7 +21,7 @@ export default (type, value) => {
         }
     } else if (type === 'UV' && value > 10.9 || type === 'Pollution' && value > 200) {
         return {
-            color: 'rgba(153, 0, 0, 0.8)',
+            color: 'rgba(153, 0, 0, 1)',
             text: 'Extreme'  
         }
     }
