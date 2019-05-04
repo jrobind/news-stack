@@ -43,7 +43,10 @@ class DashboardContainer extends Component {
     formatForecastData() {
         const weather = storage.getStorage('weather');
         // remove current day from forecast array
-        weather.forecast.forecastday = weather.forecast.forecastday.slice(1);
+        if (weather.forecast.forecastday.length > 5)  {
+            weather.forecast.forecastday = weather.forecast.forecastday.slice(1);
+        }
+
         weather.forecast.forecastday.forEach(day => {
             day.tempState = 'avgtemp_c';
             day.tempStateVal = day.day.avgtemp_c;
