@@ -56,15 +56,10 @@
 .placeInfo p {
     text-align: center;
     margin-top: 6px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid $dashLightGrey;
+    padding-bottom: 13px;
 
     @include mediaQuery(750px) {
         padding-bottom: 10px;
-    }
-
-    @include mediaQuery(550px) {
-        padding-bottom: 30px;
     }
 }
 
