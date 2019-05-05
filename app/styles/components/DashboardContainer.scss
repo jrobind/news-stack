@@ -1,5 +1,5 @@
-@import '../base/base';
 @import '../utils/variables';
+@import '../base/base';
 @import '../utils/mixins';
 
 .dashContainer {
@@ -10,7 +10,7 @@
 .forecastDataWrapper {
     display: flex;
 
-    @include mediaQuery(1250px) {
+    @media screen and (max-width: $xlargeBp) {
         flex-direction: column;
     }
 }
@@ -23,12 +23,12 @@
     margin-top: 10px;
     max-height: $heightMinusHeader;
 
-    @include mediaQuery(1250px) {
+    @media screen and (max-width: $xlargeBp) {
         flex-direction: row;
         margin-bottom: 10px;
     }
 
-    @include mediaQuery(660px) {
+    @media screen and (max-width: 660px) {
         flex-direction: column;
     }
 }

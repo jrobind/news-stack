@@ -38,17 +38,17 @@
         color: $primaryDashBlue;
     }
 
-    @include mediaQuery(1050px) {
+    @media screen and (max-width: $largeBp) {
         max-width: 300px;
         width: 35%;
     }
 }
 
 .placeInfo {
-    margin: 10px 0 10px 10px;
+    margin: 10px 0 10px;
     border-right: none;
 
-    @include mediaQuery(1050px) {
+    @media screen and (max-width: $largeBp) {
         border-right: 1px solid $primaryDashBlue; 
     }
 }
@@ -58,7 +58,7 @@
     margin-top: 6px;
     padding-bottom: 13px;
 
-    @include mediaQuery(750px) {
+    @media screen and (max-width: $mediumBp) {
         padding-bottom: 10px;
     }
 }
@@ -73,11 +73,11 @@
     padding: 5px;
     position: relative;
 
-    @include mediaQuery(550px) {
+    @media screen and (max-width: $xsmallBp) {
         display: none;
     }
 
-    @include mediaQuery(1050px) {
+    @media screen and (max-width: $largeBp) {
         flex-direction: column;
     }
 
@@ -95,7 +95,7 @@
         h2 {
             font-weight: 300;
 
-            @include mediaQuery(1050px) {
+            @media screen and (max-width: $largeBp) {
                 text-align: center;
             }
         }
@@ -108,18 +108,18 @@
         color: $secondaryDashBlue;
         margin-top: 25px;
 
-        @include mediaQuery(1050px) {
+        @media screen and (max-width: $largeBp) {
             margin-top: 15px;
         }
 
         p {
-            @include mediaQuery(1050px) {
+            @media screen and (max-width: $largeBp) {
                 display: none;
             }
         }
 
         div {
-            @include mediaQuery(1050px) {
+            @media screen and (max-width: $largeBp) {
                 height: 90px;
             }
         }
@@ -137,7 +137,7 @@
             font-size: $xlargeFont;
             font-weight: 300;
             
-            @include mediaQuery(1050px) {
+            @media screen and (max-width: $largeBp) {
                 font-size: $largeFont;
             }
         }
@@ -152,19 +152,19 @@
     }
 
     .temperature h2 {
-        @include mediaQuery(1050px) {
+        @media screen and (max-width: $largeBp) {
             display: none;
         }
     }
 
     .temperature, .currently {
-        @include mediaQuery(550px) {
+        @media screen and (max-width: $xsmallBp) {
             display: none;
         }
     }
 
     .humidity, .windSpeed {
-        @include mediaQuery(1050px) {
+        @media screen and (max-width: $largeBp) {
             display: none;
         }
     }
@@ -174,7 +174,7 @@
     margin: 10px 0 10px 0;
     border-left: none;
 
-    @include mediaQuery(550px) {
+    @media screen and (max-width: $xsmallBp) {
         border-left: 1px solid $primaryDashBlue;
     }
 }

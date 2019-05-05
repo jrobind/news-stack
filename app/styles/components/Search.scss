@@ -18,7 +18,7 @@
         width: 380px;
         align-self: center;
 
-        @include mediaQuery(465px) {
+        @media screen and (max-width: 465px) {
             width: 275px;
         }
 
@@ -38,7 +38,7 @@
                 font-weight: 300;
                 font-size: $largeFont;
 
-                @include mediaQuery(470px) {
+                @media screen and (max-width: $xxsmallBp) {
                     font-size: $smallFont;
                 }
             }
