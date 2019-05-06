@@ -1,5 +1,4 @@
 @import '../utils/variables';
-@import '../utils/mixins';
 @import '../base/base';
 
 .linkHome {
@@ -196,7 +195,7 @@
 }
 
 .weatherContent, .placeInfo, .coordinates {
-    @include mediaQuery(700px) {
+    @media screen and (max-width: 700px) {
         font-size: 0.85em;
     }
 }

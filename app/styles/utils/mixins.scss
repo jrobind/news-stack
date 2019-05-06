@@ -1,7 +1,0 @@
-// media query
-
-@mixin mediaQuery($pixels) {
-    @media screen and (max-width: $pixels) {
-        @content;
-    }
-}
