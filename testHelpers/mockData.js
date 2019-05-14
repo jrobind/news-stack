@@ -23,6 +23,8 @@ export const apiMockPollutionData = {
     }
 }
 
+export const errorMessage = 'ZERO_RESULTS';
+
 export const apiMockData = {
     current: { 
         condition: { text: 'Sunny', icon: "//cdn.apixu.com/weather/64x64/day/113.png" },
