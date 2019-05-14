@@ -74,14 +74,39 @@ describe('<Forecast />', () => {
         expect(wrapper.find(ForecastSelect)).toHaveLength(3);
     });
 
-    it('should render a new value when temperature is toggled', () => {
+    it('should render a new value when temperature is toggled to minimum temperature', () => {
         const wrapper = mount(<Forecast {...props} />);
+
         wrapper.find('select').at(0).simulate('change', {target: { value: 'Minimum temperature', closest }})
         const min = wrapper.find(
             '[data-testid="forecast-wrapper"] [data-testid="temperature"]'
         ).at(0).find('span').at(0);
         
         expect(min.text()).toEqual('2');
+    });
+
+    it('should render a new value when temperature is toggled to maximum temperature', () => {
+        const wrapper = mount(<Forecast {...props} />);
+        
+        wrapper.find('select').at(0).simulate('change', {target: { value: 'Maximum temperature', closest }})
+        const max = wrapper.find(
+            '[data-testid="forecast-wrapper"] [data-testid="temperature"]'
+        ).at(0).find('span').at(0);
+        
+        expect(max.text()).toEqual('8');
+    });
+
+    it('should render a new value when temperature is toggled to average temperature', () => {
+        const wrapper = mount(<Forecast {...props} />);
+        // mock for DOM Element.closest() and Element.getAttribute()
+        const closest = () => ({ getAttribute() { return 0 } });
+        
+        wrapper.find('select').at(0).simulate('change', {target: { value: 'Average temperature', closest }})
+        const min = wrapper.find(
+            '[data-testid="forecast-wrapper"] [data-testid="temperature"]'
+        ).at(0).find('span').at(0);
+        
+        expect(min.text()).toEqual('5');
     });
     
 });
