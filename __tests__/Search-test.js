@@ -4,14 +4,16 @@ import { createMemoryHistory } from 'history';
 import Search from '../app/components/Search';
 import * as mapPlacesApi from 'react-places-autocomplete';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
-import { geocodeByAddressData, getLatLngData, apiMockData } from '../testHelpers/mockData';
+import { geocodeByAddressData, getLatLngData, apiMockData, errorMessage } from '../testHelpers/mockData';
 import * as getWeather from '../app/utils/api';
 
 // mocks
 
 getWeather.default = jest.fn(() => {
     return new Promise((resolve) => resolve(apiMockData));
-})
+});
+
+global.alert = jest.fn((() => {}));
 
 // mock async requests in react-places-autocomplete library
 mapPlacesApi.geocodeByAddress = jest.fn(() => {
@@ -110,7 +112,7 @@ describe('<Search />', () => {
         const history = createMemoryHistory('/');
         const wrapper = mount(<Search history={history} />);
         const input = wrapper.find('input');
-        const promise = mapPlacesApi.geocodeByAddress();;
+        const promise = mapPlacesApi.geocodeByAddress();
 
         input.simulate('change', { target: { value: 'London' }});
         input.simulate('keyDown', { key: 'Enter' });
@@ -129,6 +131,32 @@ describe('<Search />', () => {
 
         expect(typeof JSON.parse(localStorage.getItem('weather'))).toBe('object');
         expect(JSON.parse(localStorage.getItem('weather')).location.name).toBe('Lodz');
+    });
+
+    it('should render alert message and remove loading wheel when api data retrieval fails', () => {
+        const history = createMemoryHistory('/');
+        const wrapper = mount(<Search history={history} />);
+        const input = wrapper.find('input');
+        const promise = mapPlacesApi.geocodeByAddress();
+
+        // edit mock to reject
+        getWeather.default = jest.fn(() => {
+            return new Promise((resolve, reject) => reject(errorMessage));
+        });
+
+        input.simulate('change', { target: { value: ' ' } });
+        input.simulate('keyDown', { key: 'Enter' });
+
+        return promise.then(() => {}).then(() => {})
+            .then(() => {
+                expect(wrapper.state('loading')).toBe(false);
+                expect(window.alert).toHaveBeenCalledWith('Sorry! Failed to retrieve weather data.');
+
+                // reset mock
+                getWeather.default = jest.fn(() => {
+                    return new Promise((resolve) => resolve(apiMockData));
+                });
+            }); 
     });
 
 });
