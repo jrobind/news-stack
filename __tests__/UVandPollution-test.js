@@ -1,10 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import UVandPollution from '../app/components/UVandPollution';
-import { apiMockUVData, apiMockPollutionData, apiMockData } from '../testHelpers/mockData';
+import { apiMockUVData, apiMockPollutionData, apiMockData, errorMessage } from '../testHelpers/mockData';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
 import * as uvAndPollutionApi from '../app/utils/api';
-
 
 // props
 
@@ -116,6 +115,20 @@ describe('<UVandPollution />', () => {
             expect(wrapper.state('index')).toBe(111);
             expect(Math.round(wrapper.update().state('max'))).toBe(37);
         });
+    });
+
+    it('should render message when UV index api fetch fails', () => {
+        let wrapper = shallow(<UVandPollution {...props.pollution}/>);
+        const button = wrapper.find('button');
+        // edit mock to reject
+        uvAndPollutionApi.fetchUVIndex = jest.fn(() => {
+            return new Promise((resolve, reject) => reject(errorMessage));
+        });
+
+        button.simulate('click');
+        const promise = uvAndPollutionApi.fetchUVIndex();
+
+        return promise.then(() => expect(wrapper.state('loading')).toBe(false)); 
     });
 
 });
