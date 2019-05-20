@@ -47,17 +47,17 @@ class UVandPollution extends Component {
         this.setState(() => ({clicked: true, loading: true}));
 
         if (title === 'Pollution') {
-            const { status, data } = await fetchPollutionIndex(coord);
-            // handle error
-            if (status === 'fail') {
-                this.setState(() => ({value: false, loading: false}));
-            } else {
+            try {
+                const { data } = await fetchPollutionIndex(coord);
                 const { current: { pollution }} = data;
+
                 let aqius = Math.floor(pollution.aqius);
 
                 this.setState({max: Math.round(aqius / 3), index: aqius, loading: false},() => this.addValue(aqius));
-            }
 
+            } catch(e) {
+                this.setState(() => ({value: false, loading: false}));
+            }
         } else {
             try {
                 let { value } = await fetchUVIndex(coord);
