@@ -117,18 +117,21 @@ describe('<UVandPollution />', () => {
         });
     });
 
-    it('should render message when UV index api fetch fails', () => {
+    it('should render message when Pollution index api fetch fails', () => {
         let wrapper = shallow(<UVandPollution {...props.pollution}/>);
         const button = wrapper.find('button');
+
         // edit mock to reject
-        uvAndPollutionApi.fetchUVIndex = jest.fn(() => {
+        uvAndPollutionApi.fetchPollutionIndex = jest.fn(() => {
             return new Promise((resolve, reject) => reject(errorMessage));
         });
 
+        const promise = uvAndPollutionApi.fetchPollutionIndex();
         button.simulate('click');
-        const promise = uvAndPollutionApi.fetchUVIndex();
 
-        return promise.then(() => expect(wrapper.state('loading')).toBe(false)); 
+        return promise.then().catch(() => {
+            expect(wrapper.state('loading')).toBe(false);
+        });
     });
 
 });
