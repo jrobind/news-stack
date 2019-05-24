@@ -53,20 +53,20 @@ class UVandPollution extends Component {
 
                 let aqius = Math.floor(pollution.aqius);
 
-                this.setState({max: Math.round(aqius / 3), index: aqius, loading: false},() => this.addValue(aqius));
+                this.setState({ max: Math.round(aqius / 3), index: aqius, loading: false },() => this.addValue(aqius));
 
             } catch(e) {
-                this.setState(() => ({value: false, loading: false}));
+                this.setState(() => ({ value: false, loading: false }));
             }
         } else {
             try {
                 let { value } = await fetchUVIndex(coord);
 
                 value = value > 12 ? 12 : Math.floor(value);
-                this.setState({max: Math.round(value * 8.3), index: value, loading: false},() => this.addValue(value));
+                this.setState({ max: Math.round(value * 8.3), index: value, loading: false },() => this.addValue());
 
             } catch(e) {
-                this.setState(() => ({value: false}));
+                this.setState(() => ({ value: false, loading: false }));
             }
         }
     }
@@ -110,7 +110,12 @@ class UVandPollution extends Component {
                                         strokeColor="#6c8790"
                                     />
                                 </div> 
-                            : <div className={styles.noData}>No data available</div> : null
+                            : <div 
+                                className={styles.noData}
+                                data-testid='no-data-message'
+                              >
+                                No data available
+                              </div> : null
                     }
 
                     {!clicked && 
