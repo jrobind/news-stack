@@ -19,11 +19,6 @@ class Search extends Component {
         
         this.handleChange = this.handleChange.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-    }
-
-    onKeyDown(e) {
-        console.log(e);
     }
     
     handleChange(address) {
