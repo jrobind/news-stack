@@ -4,6 +4,7 @@ import UVandPollution from '../app/components/UVandPollution';
 import { apiMockUVData, apiMockPollutionData, apiMockData, errorMessage } from '../testHelpers/mockData';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
 import * as uvAndPollutionApi from '../app/utils/api';
+import { rejects } from 'assert';
 
 // props
 
@@ -117,24 +118,38 @@ describe('<UVandPollution />', () => {
         });
     });
 
-    it('should render message when Pollution index api fetch fails', async () => {
+    it('should render message when Pollution index api fetch fails', () => {
         let wrapper = mount(<UVandPollution {...props.pollution}/>);
         const button = wrapper.find('button');
 
-        // edit mock to reject
+        // edit mock to throw error
         uvAndPollutionApi.fetchPollutionIndex = jest.fn(() => {
-            return new Promise((resolve) => resolve(''));
+            throw new Error();
         });
 
         button.simulate('click');
-        const promise = await uvAndPollutionApi.fetchPollutionIndex();
 
         expect(wrapper.state('loading')).toBe(false);
         expect(wrapper.state('value')).toBe(false);
-        expect(promise).toBe('');
+        expect(
+            wrapper.find('[data-testid="no-data-message"]')
+                .text())
+                .toEqual('No data available');
+        
+    });
 
-        wrapper.update();
+    it('should render message when UV index api fetch fails', () => {
+        let wrapper = mount(<UVandPollution {...props.uv}/>);
+        const button = wrapper.find('button');
 
+        // edit mock to throw error
+        uvAndPollutionApi.fetchUVIndex = jest.fn(() => {
+            throw new Error();
+        });
+
+        button.simulate('click');
+
+        expect(wrapper.state('value')).toBe(false);
         expect(
             wrapper.find('[data-testid="no-data-message"]')
                 .text())
