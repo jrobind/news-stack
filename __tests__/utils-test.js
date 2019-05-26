@@ -1,4 +1,7 @@
 import UVandPollutionClassification from '../app/utils/UVPollutionClassification';
+import LocalStorageMock from '../testHelpers/mockLocalStorage';
+
+global.localStorage = new LocalStorageMock;
 
 describe('UVandPollutionClassification', () => {
 
@@ -29,5 +32,14 @@ describe('UVandPollutionClassification', () => {
        expect(value_4).toMatchObject({color: 'rgba(229, 0, 0, 1)', text: 'Very high'});
        expect(value_5).toMatchObject({color: 'rgba(153, 0, 0, 1)', text: 'Extreme'});
     });
+
+    it('should clear data on mock local storage api', () => {
+        const mockData = { weather: { forecast: [] } };
+        localStorage.setItem('weather', mockData);
+
+        expect(localStorage.getItem('weather')).toEqual(mockData);
+        localStorage.clear();
+        expect(localStorage.getItem('weather')).toEqual(null);
+     });
 
 });
