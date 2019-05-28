@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Forecast from '../app/components/Forecast';
+import Loading from '../app/components/Loading';
 import ForecastSelect from '../app/components/ForecastSelect';
 import { apiMockData, getLatLngData } from '../testHelpers/mockData.js';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
@@ -107,6 +108,16 @@ describe('<Forecast />', () => {
         ).at(0).find('span').at(0);
         
         expect(min.text()).toEqual('5');
+    });
+
+    it('should render loading component when forecast is not available', () => {
+        const props = {
+            forecast: [],
+            coord: getLatLngData
+        };  
+        const wrapper = mount(<Forecast {...props} />);
+
+        expect(wrapper.find(Loading)).toHaveLength(1);
     });
     
 });

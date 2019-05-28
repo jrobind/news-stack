@@ -56,7 +56,7 @@ class Forecast extends Component {
         const { coord } = this.props;
         const { forecast, storedForecast: { forecast: { forecastday } } } = this.state;
 
-        if (forecast) {
+        if (forecast.length) {
             return (
                 <div 
                     className={styles.container}
