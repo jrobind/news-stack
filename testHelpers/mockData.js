@@ -78,6 +78,45 @@ export const apiMockData = {
             },
             tempState: "avgtemp_c",
             tempStateVal: 11
+        },
+        {
+            date: '2019-02-27',
+            day: {
+                condition: { text: "Patchy rain possible", icon: "//cdn.apixu.com/weather/64x64/day/176.png" },
+                humidity: 40,
+                wind_mph: 5.1,
+                maxtemp_c: 18,
+                mintemp_c: 11,
+                avgtemp_c: 14
+            },
+            tempState: "avgtemp_c",
+            tempStateVal: 14
+        },
+        {
+            date: '2019-02-28',
+            day: {
+                condition: { text: "Moderate rain at times", icon: "//cdn.apixu.com/weather/64x64/day/299.png" },
+                humidity: 49,
+                wind_mph: 8.6,
+                maxtemp_c: 16,
+                mintemp_c: 12,
+                avgtemp_c: 14
+            },
+            tempState: "avgtemp_c",
+            tempStateVal: 14
+        },
+        {
+            date: '2019-02-29',
+            day: {
+                condition: { text: "Patchy rain possible", icon: "//cdn.apixu.com/weather/64x64/day/176.png" },
+                humidity: 32,
+                wind_mph: 5.9,
+                maxtemp_c: 10,
+                mintemp_c: 8,
+                avgtemp_c: 9
+            },
+            tempState: "avgtemp_c",
+            tempStateVal: 9
         }]
     }
 }
