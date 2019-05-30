@@ -7,6 +7,7 @@ import Forecast from '../app/components/Forecast';
 import UVandPollution from '../app/components/UVandPollution';
 import LocalStorageMock from '../testHelpers/mockLocalStorage';
 import { apiMockData } from '../testHelpers/mockData';
+import storage from '../app/utils/storage';
 
 // mock for localStorage api
 global.localStorage = new LocalStorageMock;
@@ -65,6 +66,17 @@ describe('<DashboardContainer/>', () => {
         );
 
         expect(wrapper.find('[data-testid="dashboard-container"]')).toHaveLength(1);
+    });
+
+    it('should alter forecast from 6 day to 5 day', () => {
+        const wrapper = mount(
+            <MemoryRouter>
+                <DashboardContainer />
+            </MemoryRouter>
+        );
+
+        expect(wrapper.find(Forecast).prop('forecast').length).toEqual(5);
+        expect(storage.getStorage('weather').forecast.forecastday.length).toEqual(5);
     });
 
     it('should update state with weather api data once component mounts', () => {
