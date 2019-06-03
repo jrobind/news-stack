@@ -89,7 +89,7 @@ describe('<DashboardContainer/>', () => {
         ).find(DashboardContainer).dive();
 
         const formattedMockData = apiMockData;
-        formattedMockData.forecast.forecastday = formattedMockData.forecast.forecastday;
+        formattedMockData.forecast.forecastday = formattedMockData.forecast.forecastday.slice(1);
        
         expect(wrapper.state('name')).toBe('Lodz');
         expect(wrapper.state('country')).toBe('Poland');
