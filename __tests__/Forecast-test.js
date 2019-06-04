@@ -40,7 +40,7 @@ describe('<Forecast />', () => {
     it('should render a forecast-wrapper data-testid attribute', () => {
         const wrapper = shallow(<Forecast {...props} />);
         
-        expect(wrapper.find('[data-testid="forecast-wrapper"]')).toHaveLength(3);
+        expect(wrapper.find('[data-testid="forecast-wrapper"]')).toHaveLength(6);
     });
 
     it('should render current weather conditions', () => {
@@ -72,7 +72,7 @@ describe('<Forecast />', () => {
     it('should render <ForecastSelect /> component for days other than today', () => {
         const wrapper = shallow(<Forecast {...props} />);
 
-        expect(wrapper.find(ForecastSelect)).toHaveLength(3);
+        expect(wrapper.find(ForecastSelect)).toHaveLength(6);
     });
 
     it('should render a new value when temperature is toggled to minimum temperature', () => {
