@@ -1,5 +1,4 @@
 @import '../utils/variables';
-@import '../base/base';
 
 .container {
     flex-basis: 75%;
@@ -8,6 +7,13 @@
     margin: 15px 10px 15px 0;
     display: flex;
     flex-direction: column;
+
+    @media screen
+        and (min-width: 320px) 
+        and (max-width: 659px)
+        and (orientation:landscape) {
+        min-height: 300px;
+    }
 
     @media screen and (max-width: 1250px) {
         margin-bottom: 0;
