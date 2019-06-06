@@ -37,11 +37,13 @@ uvAndPollutionApi.fetchPollutionIndex = jest.fn(() => {
 
 beforeAll(() => {
     setupLocalStorageWeatherData();
+    jest.setTimeout(10000);
 });
 
 beforeEach(() => {
     uvAndPollutionApi.fetchUVIndex.mockClear();
     uvAndPollutionApi.fetchPollutionIndex.mockClear();
+    jest.useFakeTimers();
 });
 
 // tests
@@ -75,12 +77,18 @@ describe('<UVandPollution />', () => {
     it('it should call fetchUVIndex after button click', () => {
         const wrapper = shallow(<UVandPollution {...props.uv}/>);
         const button = wrapper.find('button');
+        const promise = uvAndPollutionApi.fetchUVIndex();
 
         button.simulate('click');
 
-        expect(wrapper.state('clicked')).toBe(true);
-        expect(uvAndPollutionApi.fetchUVIndex).toHaveBeenCalled();
-        expect(uvAndPollutionApi.fetchUVIndex).toHaveBeenCalledTimes(1);
+        return promise.then(() => {
+            jest.runAllTimers();
+
+            expect(wrapper.state('clicked')).toBe(true);
+            expect(wrapper.state('value')).toEqual(50);
+            expect(uvAndPollutionApi.fetchUVIndex).toHaveBeenCalled();
+            expect(uvAndPollutionApi.fetchUVIndex).toHaveBeenCalledTimes(2);
+        });
     });
 
     it('it should update state UV index value and max value after button click', () => {
@@ -91,7 +99,10 @@ describe('<UVandPollution />', () => {
         button.simulate('click');
         // testing async action so we need to acccess mock api promise using a .then() and run tests within
         return promise.then(() => {
+            jest.runAllTimers();
+
             expect(wrapper.update().state('index')).toBe(6);
+            expect(wrapper.state('value')).toEqual(50);
             expect(Math.round(wrapper.update().state('max'))).toBe(50);
         });
     });
@@ -113,7 +124,10 @@ describe('<UVandPollution />', () => {
         button.simulate('click');
 
         return promise.then(() => {
+            jest.runAllTimers();
+
             expect(wrapper.state('index')).toBe(111);
+            expect(wrapper.state('value')).toEqual(37);
             expect(Math.round(wrapper.update().state('max'))).toBe(37);
         });
     });
