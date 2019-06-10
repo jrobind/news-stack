@@ -71,14 +71,10 @@ class Search extends Component {
                         return (
                             <div className={styles.autocompleteRoot}>
 
-                                {!loading ? 
-                                    <div>
-                                        <input 
-                                            {...getInputProps({autoFocus: true, placeholder:"Paris, London, Rome..."})}
-                                            id="searchInput"
-                                        />
-                                        <label htmlFor="searchInput" hidden >Search</label> 
-                                    </div>: 
+                                {!loading ? <input 
+                                    aria-label="Enter search text"
+                                    {...getInputProps({autoFocus: true, placeholder:"Paris, London, Rome..."})}
+                                /> : 
                                 <Loading />}
 
                                 {suggestions.length > 0 && <div className={styles.autocompleteDropdownContainer} styles={{display: suggestions.length ? 'inline' : 'none'}}>
