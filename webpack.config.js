@@ -30,7 +30,9 @@ module.exports = {
             template: 'public/index.html',
             inject: false
         }), 
-        new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin({
+            analyzerPort: 4000
+        })
     ],
     mode: 'development'
 } 
