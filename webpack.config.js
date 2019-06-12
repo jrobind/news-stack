@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: ['babel-polyfill', './app/index.jsx'],
@@ -29,9 +28,6 @@ module.exports = {
         new htmlWebpackPlugin({
             template: 'public/index.html',
             inject: false
-        }), 
-        new BundleAnalyzerPlugin({
-            analyzerPort: 4000
         })
     ],
     mode: 'development'
