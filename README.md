@@ -6,5 +6,6 @@ You can see Weather-101 in action at https://weather-101.netlify.com
 
 ## TODO
 
-* Fix broken tests & improve test coverage
+* Improve performance  
+* Conduct cross-browser testing
 
