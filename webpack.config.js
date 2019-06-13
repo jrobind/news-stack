@@ -28,7 +28,8 @@ module.exports = {
         new htmlWebpackPlugin({
             template: 'public/index.html',
             inject: false
-        })
+        }),
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ],
     mode: 'development'
 } 
