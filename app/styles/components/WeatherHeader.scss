@@ -23,6 +23,10 @@
     h2 {
         color: $primaryDashBlue;
     }
+
+    @media screen and (max-width: $xsmallBp) {
+        flex-wrap: wrap;
+    }
 }
 
 .placeInfo, .coordinates {
@@ -49,6 +53,10 @@
     @media screen and (max-width: $largeBp) {
         border-right: 1px solid $primaryDashBlue; 
     }
+
+    @media screen and (max-width: $xsmallBp) {
+        width: 45%;
+    }
 }
 
 .placeInfo p {
@@ -72,7 +80,8 @@
     position: relative;
 
     @media screen and (max-width: $xsmallBp) {
-        display: none;
+        order: 1;
+        border-bottom: 1px solid $primaryDashBlue;
     }
 
     @media screen and (max-width: $largeBp) {
@@ -105,6 +114,10 @@
         align-items: center;
         color: $secondaryDashBlue;
         margin-top: 25px;
+
+        img {
+            padding-top: 7px;
+        }
 
         @media screen and (max-width: $largeBp) {
             margin-top: 15px;
@@ -149,14 +162,14 @@
         }
     }
 
-    .temperature h2 {
-        @media screen and (max-width: $largeBp) {
-            display: none;
+    .temperature {
+        @media screen and (max-width: $xsmallBp) {
+            padding-bottom: 7px;
         }
     }
 
-    .temperature, .currently {
-        @media screen and (max-width: $xsmallBp) {
+    .temperature h2 {
+        @media screen and (max-width: $largeBp) {
             display: none;
         }
     }
@@ -174,6 +187,7 @@
 
     @media screen and (max-width: $xsmallBp) {
         border-left: 1px solid $primaryDashBlue;
+        width: 45%;
     }
 }
 
