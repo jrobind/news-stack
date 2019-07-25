@@ -18,7 +18,7 @@ export const fetchUVIndex = async ({ lat, lon }) => {
 
 export const fetchPollutionIndex = async ({ lat, lon }) => {
 	try {
-		const pollutionIndex = await fetch(`https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=NQWFi7DBJzeXq6m3t`);
+		const pollutionIndex = await fetch(`https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=b57c97ee-8ac2-4792-8e1e-ac8d19d94dde`);
 		return pollutionIndex.json();
 	} catch(e) {
 		throw e;
