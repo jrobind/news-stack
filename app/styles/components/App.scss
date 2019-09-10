@@ -2,7 +2,7 @@
 
 html,
 body,
-#app,
+:global(#app),
 .appContainer {
     height: 100%;
 
