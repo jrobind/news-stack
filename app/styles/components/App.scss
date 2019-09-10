@@ -1,9 +1,16 @@
 @import '../utils/variables';
 
-body {
-    font-family: $fontStack;
-}
-
+html,
+body,
+#app,
 .appContainer {
     height: 100%;
+
+    @media screen and (max-width: 1250px) {
+        height: auto;
+    }
+}
+
+body {
+    font-family: $fontStack;
 }
