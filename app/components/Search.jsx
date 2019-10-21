@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import Heading from './Header';
 import Loading from './Loading';
 import getWeather from '../utils/api';
 import storage from '../utils/storage';
@@ -60,6 +61,7 @@ class Search extends Component {
                 className={styles.container}
                 data-testid='container'
             >
+                <Heading/>
                 <div className={styles.filler}></div>
                 <PlacesAutocomplete
                     value={this.state.address}
