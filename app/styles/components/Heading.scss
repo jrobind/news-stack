@@ -1,0 +1,22 @@
+.headingWrapper {
+    position: fixed;
+    top: 0;
+}
+
+.headingWrapper .headingLinks a:last-of-type img {
+    width: 180px;
+}
+
+.headingWrapper .headingLinks a:last-of-type {
+    margin-left: 5px;
+}
+
+.headingWrapper .headingLinks a:first-of-type img {
+    width: 23px;
+}
+
+.headingWrapper .headingLinks {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
