@@ -2,10 +2,5 @@
 
 Weather-101 is a React weather application displaying current weather, forecasts, and weather data.
 
-You can see Weather-101 in action at https://weather-101.netlify.com
-
-## TODO
-
-* Improve performance  
-* Conduct cross-browser testing
+~~You can see Weather-101 in action at https://weather-101.netlify.com~~ Currently rebuilding – watch this space!
 
