@@ -35,7 +35,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
-    "moment": "2.22.2",
+    "moment": "2.29.2",
     "npm": "^6.9.0",
     "prop-types": "15.6.1",
     "rc-progress": "2.2.5",
